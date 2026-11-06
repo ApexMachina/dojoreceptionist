@@ -11,7 +11,16 @@
 <title>Dojo Receptionist · Missed calls answered for Lane County shops</title>
 <meta name="description" content="An honest AI receptionist that answers your shop's missed and after-hours calls and texts you a summary. Set up by Jeremy, a Veneta dad and Marine vet. Founders pricing: first week free, then $129/month, no contract.">
 <meta name="theme-color" content="#0a0d18">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0d18'/%3E%3Crect x='3' y='3' width='58' height='58' rx='10' fill='none' stroke='%23e8b53b' stroke-width='3'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23e8b53b'%3ED%3Ctspan fill='%23e0425a'%3ER%3C/tspan%3E%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:title" content="Dojo Receptionist · Missed calls answered for Lane County shops">
+<meta property="og:description" content="An honest AI receptionist that answers your shop's missed and after-hours calls and texts you a summary. Set up by Jeremy, a Veneta dad and Marine vet. Founders pricing: first week free, then $129/month, no contract.">
+<meta property="og:image" content="https://dojoreceptionist.com/assets/og-share.png">
+<meta property="og:url" content="https://dojoreceptionist.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dojoreceptionist.com/assets/og-share.png">
 <style>
 :root{--bg:#0a0d18;--n1:#101830;--n2:#16213f;--line:#2c3c6b;--cr:#c62a42;--cr2:#ff6b80;--gold:#e8b53b;--gold2:#f6d27a;--ink:#f1f3fa;--mute:#b4bdd3}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -52,6 +61,7 @@ ol.steps span{font-size:15px;color:#d6dbea}
 .trade{background:var(--n1);border:2px solid var(--line);border-left:6px solid var(--cr);border-radius:6px;padding:15px;margin-top:14px;box-shadow:5px 5px 0 #000}
 .trade h3{font-size:20px;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:9px}
 .trade h3 small{font:800 11px -apple-system,Segoe UI,Roboto,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#120d00;background:var(--gold);padding:3px 7px;border-radius:3px}
+.trade h3 .ticon{width:44px;height:44px;flex:none;display:block}
 .sit{margin-top:8px;font-size:16px;font-style:italic;color:#fff}
 .sit::before{content:"Caller: ";font-style:normal;font-weight:800;color:var(--cr2);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
 .does{margin-top:8px;font-size:15px;color:var(--mute)}
@@ -120,45 +130,45 @@ footer p+p{margin-top:6px;color:var(--mute);font-size:13px}
  <h2 class="disp">Calls Lane County shops miss</h2>
  <p class="lead">Made-up callers, written the way calls come in around Lane County. The shop is made up; the voice and the questions are real. Ask about hours, stock or prices, or leave a message, just as a customer would.</p>
 
- <div class="trade"><h3 class="disp">Restaurant <small>Hear it live</small></h3>
+ <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/restaurant.svg" alt="" width="44" height="44">Restaurant <small>Hear it live</small></h3>
   <p class="sit">"Fern Hollow Family Diner? Can I call in a to-go order for four, and do you have the room for a party Saturday?"</p>
   <p class="does"><b>The AI:</b> takes the to-go order and reads back their name and number. For a party or banquet it gets the date and headcount. It answers hours. You confirm.</p>
   <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 
- <div class="trade"><h3 class="disp">Auto repair <small>Hear it live</small></h3>
+ <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/auto-repair.svg" alt="" width="44" height="44">Auto repair <small>Hear it live</small></h3>
   <p class="sit">"Check-engine light came on driving in from Noti. Can you look at it today?"</p>
   <p class="does"><b>The AI:</b> gets year, make and model, what the car's doing, whether it's drivable, and when they can bring it in, then texts you while you're still under the lift.</p>
   <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 
- <div class="trade"><h3 class="disp">Plumbing <small>Hear it live</small></h3>
+ <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/plumbing.svg" alt="" width="44" height="44">Plumbing <small>Hear it live</small></h3>
   <p class="sit">"Water heater's leaking all over the garage out in Elmira, and it's Saturday morning."</p>
   <p class="does"><b>The AI:</b> asks if the water's shut off, how bad it is, the address, and when they can be reached, and marks it urgent in your text.</p>
   <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 
- <div class="trade"><h3 class="disp">Electrical <small>Hear it live</small></h3>
+ <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/electrical.svg" alt="" width="44" height="44">Electrical <small>Hear it live</small></h3>
   <p class="sit">"Half the house went dark in the windstorm out by Crow, and the breaker won't reset."</p>
   <p class="does"><b>The AI:</b> asks which rooms are out, whether there's a burning smell, and the address, and flags it urgent if it sounds unsafe. You decide who goes out.</p>
   <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 
- <div class="trade"><h3 class="disp">HVAC <small>Hear it live</small></h3>
+ <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/hvac.svg" alt="" width="44" height="44">HVAC <small>Hear it live</small></h3>
   <p class="sit">"Furnace quit on the first cold Willamette Valley night, and we've got kids in the house."</p>
   <p class="does"><b>The AI:</b> asks what kind of system, whether there's any heat at all, the address, and how soon they need you, even when it's 10 p.m. and you're off the clock.</p>
   <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 
- <div class="trade"><h3 class="disp">Salon</h3>
+ <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/salon.svg" alt="" width="44" height="44">Salon</h3>
   <p class="sit">"Can I get a cut and color before my sister's wedding in Eugene this Saturday?"</p>
   <p class="does"><b>The AI:</b> takes their name, the service, the days that work, and a callback number. It never books the chair; you confirm.</p>
   <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 
- <div class="trade"><h3 class="disp">Barber <small>Hear it live</small></h3>
+ <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/barber.svg" alt="" width="44" height="44">Barber <small>Hear it live</small></h3>
   <p class="sit">"Got time for a fade at Copper Pine before my interview in Springfield tomorrow morning?"</p>
   <p class="does"><b>The AI:</b> takes their name, the cut, the days that work, and a callback number while you finish the client in the chair. It never books the chair; you confirm.</p>
   <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 
- <div class="trade"><h3 class="disp">Pet grooming</h3>
-  <p class="sit">"My dog rolled in something awful out by Fern Ridge. Any chance you've got a bath this week?"</p>
+ <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/pet-grooming.svg" alt="" width="44" height="44">Pet grooming <small>Hear it live</small></h3>
+  <p class="sit">"My dog rolled in something awful out by Fern Ridge. Any chance Muddy Paws has a bath this week?"</p>
   <p class="does"><b>The AI:</b> gets the dog's breed and size, the service, the days that work, and a callback number. No price quotes over the phone; you set the appointment.</p>
-  <div class="soon">Hear it soon</div></div>
+  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 </section>
 
 <section id="price">
@@ -213,6 +223,19 @@ footer p+p{margin-top:6px;color:var(--mute);font-size:13px}
  <details><summary>Will callers know they're talking to an AI?</summary><p>Yes. I set it up so it tells every caller it's an AI assistant and that the call may be recorded. It never quotes prices and never books a job without you.</p></details>
  <details><summary>Is recording calls legal in Oregon?</summary><p>For phone calls, Oregon generally allows recording when one party consents (ORS 165.540), and the AI announces the possible recording on every call anyway. This is not legal advice; check with your own advisor if you're unsure.</p></details>
  <details><summary>Do I keep my phone number?</summary><p>Yes. Nothing changes for your customers. I walk you through the forwarding myself, and you can turn it off anytime.</p></details>
+</section>
+
+<section id="owner-faq">
+ <h2 class="disp">Owner FAQ</h2>
+ <details><summary>Is it a robot?</summary><p>It's an AI receptionist, and it says so at the start of every call. It doesn't pretend to be a person.</p></details>
+ <details><summary>Will my customers hate it?</summary><p>It only picks up the calls you miss, so your regulars still reach you the way they do now. Callers get a quick, polite answer instead of voicemail. Call the demo and judge for yourself.</p></details>
+ <details><summary>What does it say when it answers?</summary><p>It greets callers with your shop's name, tells them it's an AI and that the call may be recorded, and asks how it can help.</p></details>
+ <details><summary>What if someone asks for a price?</summary><p>It won't make one up. It never quotes prices or books jobs on its own. It takes the caller's name, number and reason so you can call back with the real answer.</p></details>
+ <details><summary>What happens to the message?</summary><p>You get a written summary of each call with the caller's name, number and reason, so you can call them back.</p></details>
+ <details><summary>Can I hear it first?</summary><p>Yes. Call the live demo at <a href="tel:+15418330643">541-833-0643</a> and try to trip it up.</p></details>
+ <details><summary>What does it cost?</summary><p>Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</p></details>
+ <details><summary>Can I cancel?</summary><p>Yes. There's no contract. Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll turn it off.</p></details>
+ <details><summary>What if my trade isn't listed?</summary><p>Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a>. I'm Jeremy, a Marine vet and local dad in Veneta, and I set each one up myself for the way your shop gets calls.</p></details>
 </section>
 </main>
 
