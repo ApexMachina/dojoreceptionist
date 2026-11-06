@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>What Missed Calls Cost Your Shop | Dojo Receptionist, Lane County OR</title>
 <meta name="description" content="Type in your own numbers and see what missed calls may cost your Lane County shop. AI receptionist by Jeremy Alvarado, Veneta, Oregon.">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:title" content="What Missed Calls Cost Your Shop | Dojo Receptionist, Lane County OR">
+<meta property="og:description" content="Type in your own numbers and see what missed calls may cost your Lane County shop. AI receptionist by Jeremy Alvarado, Veneta, Oregon.">
+<meta property="og:image" content="https://dojoreceptionist.com/assets/og-share.png">
+<meta property="og:url" content="https://dojoreceptionist.com/calculator/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dojoreceptionist.com/assets/og-share.png">
 <style>
 :root{--navy:#0b1730;--navy2:#13244a;--navy3:#1c3264;--gold:#e8b53b;--gold2:#f6d27a;--ink:#eef2fa;--mute:#a9b4cc;--line:#2a3f6e}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -22,10 +32,11 @@ h1 span{color:var(--gold)}
 h2{font-size:22px;font-weight:900;margin:30px 0 6px}
 h2 small{display:block;font-size:14px;font-weight:600;color:var(--mute);margin-top:3px}
 .step{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:900;font-size:15px;margin-right:8px;vertical-align:2px}
-.trades{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.trade{border:2px solid var(--line);background:var(--navy2);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.trades{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:12px}
+.trade{border:2px solid var(--line);background:var(--navy2);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
 .trade.on{border-color:var(--gold);background:var(--navy3)}
-.pick{all:unset;cursor:pointer;font-weight:800;font-size:17px;min-height:44px;display:flex;align-items:center}
+.pick{all:unset;cursor:pointer;font-weight:800;font-size:16px;min-height:44px;min-width:0;display:flex;flex-wrap:wrap;align-items:center;line-height:1.15}
+.pick .ticon{width:40px;height:40px;flex:none;margin-right:6px}
 .pick::before{content:"";width:20px;height:20px;border-radius:50%;border:2px solid var(--mute);margin-right:9px;flex:none}
 .trade.on .pick::before{border-color:var(--gold);background:radial-gradient(var(--gold) 45%,transparent 50%)}
 .demo{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:8px;background:var(--gold);color:var(--navy);font-weight:800;font-size:14px;line-height:1.25;text-decoration:none;text-align:center;padding:8px 6px}
@@ -59,7 +70,7 @@ ul.list li.no::before{content:"✕";color:#ff8a7a}
 .blank{margin-top:10px;font-size:17px;font-weight:700}
 .blank span{display:inline-block;min-width:170px;border-bottom:2px solid var(--mute)}
 footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
-@media(min-width:560px){h1{font-size:44px}.trades{grid-template-columns:1fr 1fr 1fr}}
+@media(min-width:560px){h1{font-size:44px}.trades{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -75,17 +86,17 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 <main class="wrap">
 <h2><span class="step">1</span>Pick your trade <small>Then hear it as your customers will.</small></h2>
 <div class="trades" id="trades">
- <div class="trade" data-t="dispensary"><button class="pick" type="button">Dispensary</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301m6p9fbbyetprh73ngb4dbxge" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="restaurant"><button class="pick" type="button">Restaurant</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="auto repair" data-job="400"><button class="pick" type="button">Auto repair</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="electrical"><button class="pick" type="button">Electrical</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="plumbing"><button class="pick" type="button">Plumbing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="HVAC"><button class="pick" type="button">HVAC</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade on" data-t="towing"><button class="pick" type="button">Towing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6pzx3qzevna1rrc3hvqhac2" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="salon"><button class="pick" type="button">Salon</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="barber"><button class="pick" type="button">Barber</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="tattoo"><button class="pick" type="button">Tattoo</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2501m6q781ctf86t83xt1s8ftp7w" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="pet grooming"><button class="pick" type="button">Pet grooming</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="dispensary"><button class="pick" type="button"><img class="ticon" src="/assets/icons/dispensary.svg" alt="" width="40" height="40">Dispensary</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301m6p9fbbyetprh73ngb4dbxge" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="restaurant"><button class="pick" type="button"><img class="ticon" src="/assets/icons/restaurant.svg" alt="" width="40" height="40">Restaurant</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="auto repair" data-job="400"><button class="pick" type="button"><img class="ticon" src="/assets/icons/auto-repair.svg" alt="" width="40" height="40">Auto repair</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="electrical"><button class="pick" type="button"><img class="ticon" src="/assets/icons/electrical.svg" alt="" width="40" height="40">Electrical</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="plumbing"><button class="pick" type="button"><img class="ticon" src="/assets/icons/plumbing.svg" alt="" width="40" height="40">Plumbing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="HVAC"><button class="pick" type="button"><img class="ticon" src="/assets/icons/hvac.svg" alt="" width="40" height="40">HVAC</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade on" data-t="towing"><button class="pick" type="button"><img class="ticon" src="/assets/icons/towing.svg" alt="" width="40" height="40">Towing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6pzx3qzevna1rrc3hvqhac2" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="salon"><button class="pick" type="button"><img class="ticon" src="/assets/icons/salon.svg" alt="" width="40" height="40">Salon</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="barber"><button class="pick" type="button"><img class="ticon" src="/assets/icons/barber.svg" alt="" width="40" height="40">Barber</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="tattoo"><button class="pick" type="button"><img class="ticon" src="/assets/icons/tattoo.svg" alt="" width="40" height="40">Tattoo</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2501m6q781ctf86t83xt1s8ftp7w" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="pet grooming"><button class="pick" type="button"><img class="ticon" src="/assets/icons/pet-grooming.svg" alt="" width="40" height="40">Pet grooming</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw" target="_blank" rel="noopener">Hear it as your customers will</a></div>
 </div>
 <p style="font-size:13px;color:var(--mute);margin-top:8px">The shops are made up. The voice and the questions are real. Ask about hours, stock or prices, or leave a message, just as a customer would.</p>
 
