@@ -76,6 +76,7 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 <h2><span class="step">1</span>Pick your trade <small>Then hear it as your customers will.</small></h2>
 <div class="trades" id="trades">
  <div class="trade on" data-t="dispensary"><button class="pick" type="button">Dispensary</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301m6p9fbbyetprh73ngb4dbxge" target="_blank" rel="noopener">Hear it as your customers will</a></div>
+ <div class="trade" data-t="restaurant"><button class="pick" type="button">Restaurant</button><span class="demo alt">Hear it soon</span></div>
  <div class="trade" data-t="auto repair" data-job="400"><button class="pick" type="button">Auto repair</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p" target="_blank" rel="noopener">Hear it as your customers will</a></div>
  <div class="trade" data-t="electrical"><button class="pick" type="button">Electrical</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3" target="_blank" rel="noopener">Hear it as your customers will</a></div>
  <div class="trade" data-t="plumbing"><button class="pick" type="button">Plumbing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx" target="_blank" rel="noopener">Hear it as your customers will</a></div>
@@ -157,6 +158,15 @@ var PRESETS={
   straight:DISP_STRAIGHT,
   extra:"Answers questions about hours, menu, stock, deals and directions",
   never:"Never gives medical advice and never takes phone sales"},
+ restaurant:{day:10,miss:30,book:20,ticket:20,booked:"ordered or booked",verb:"order or book",result:"Orders",
+  dayHint:"Incoming calls on a typical day. 10 is an estimate for a small-town cafe. Slang's restaurant phone report averages about 1,220 calls a month, roughly 40 a day.",
+  missHint:"Conservative. Slang, citing Reachify, puts unanswered restaurant calls around 43%. Slang's own report also finds about 14% of calls after hours and about 12% while another call is already going.",
+  bookHint:"Of those missed callers, how many would have ordered or booked? 20% is an estimate.",
+  ticketHint:"Toast's casual full-service range is about $15 to $30 a person. $20 is toward the low end, for one guest.",
+  lede:"These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who'd order or book is an estimate.",
+  straight:"the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It answers hours, the menu, specials, and directions. Takeout, catering, and large parties are a message. It never takes payment.",
+  extra:"Answers hours, the menu, specials, and directions. Takeout, catering, and a large party are a message for you.",
+  never:"Never takes payment. You confirm the order or the table."},
  salon:{day:8,miss:30,book:20,ticket:43,booked:"booked",verb:"book",result:"Appointments",
   dayHint:"Incoming calls on a typical day. 8 is an estimate for a small shop.",
   missHint:"Conservative. Zenoti reports about 37% of salon and spa calls go unanswered.",
