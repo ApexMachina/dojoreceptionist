@@ -81,8 +81,10 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
  <div class="trade" data-t="plumbing"><button class="pick" type="button">Plumbing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx" target="_blank" rel="noopener">▶ Hear plumbing demo</a></div>
  <div class="trade" data-t="HVAC"><button class="pick" type="button">HVAC</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75" target="_blank" rel="noopener">▶ Hear HVAC demo</a></div>
  <div class="trade" data-t="towing"><button class="pick" type="button">Towing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6pzx3qzevna1rrc3hvqhac2" target="_blank" rel="noopener">▶ Hear towing demo</a></div>
- <div class="trade" data-t="salon/barber"><button class="pick" type="button">Salon / barber</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">▶ Hear salon demo</a></div>
+ <div class="trade" data-t="salon"><button class="pick" type="button">Salon</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">▶ Hear salon demo</a></div>
+ <div class="trade" data-t="barber"><button class="pick" type="button">Barber</button><span class="demo alt">Demo coming soon</span></div>
  <div class="trade" data-t="tattoo"><button class="pick" type="button">Tattoo</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2501m6q781ctf86t83xt1s8ftp7w" target="_blank" rel="noopener">▶ Hear tattoo demo</a></div>
+ <div class="trade" data-t="pet grooming"><button class="pick" type="button">Pet grooming</button><span class="demo alt">Demo coming soon</span></div>
 </div>
 <p style="font-size:13px;color:var(--mute);margin-top:8px">Demo shops are made up. The voice, questions and summary are the real thing.</p>
 
@@ -93,10 +95,10 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 <div class="field"><label for="pct">Missed callers who would've booked<i>Of those missed calls, how many were real jobs you'd have won?</i></label><div class="in"><input id="pct" type="number" inputmode="decimal" min="0" max="100" step="5" value="25"><span class="r">%</span></div></div>
 </div>
 <div id="disp-fields">
-<div class="field"><label for="calls-day">Calls per day<i>Incoming calls on a typical day.</i></label><div class="in"><input id="calls-day" type="number" inputmode="decimal" min="0" step="1" value="12"><span class="r">/day</span></div></div>
-<div class="field"><label for="miss">Percent of calls missed<i>A conservative starting point. 411 Locals/Numa report about 62% of small business calls go unanswered.</i></label><div class="in"><input id="miss" type="number" inputmode="decimal" min="0" max="100" step="5" value="30"><span class="r">%</span></div></div>
-<div class="field"><label for="buy">Missed callers who would've bought<i>Of those missed callers, how many would have bought? The 20% starting point is an estimate.</i></label><div class="in"><input id="buy" type="number" inputmode="decimal" min="0" max="100" step="5" value="20"><span class="r">%</span></div></div>
-<div class="field"><label for="ticket">Average ticket<i>Flowhub Oregon median order. Headset's US average basket is about $47.</i></label><div class="in"><span>$</span><input id="ticket" type="number" inputmode="decimal" min="0" step="1" value="46"></div></div>
+<div class="field"><label for="calls-day">Calls per day<i id="hint-day">Incoming calls on a typical day.</i></label><div class="in"><input id="calls-day" type="number" inputmode="decimal" min="0" step="1" value="12"><span class="r">/day</span></div></div>
+<div class="field"><label for="miss">Percent of calls missed<i id="hint-miss">A conservative starting point. 411 Locals/Numa report about 62% of small business calls go unanswered.</i></label><div class="in"><input id="miss" type="number" inputmode="decimal" min="0" max="100" step="5" value="30"><span class="r">%</span></div></div>
+<div class="field"><label for="buy"><span id="label-buy">Missed callers who would've bought</span><i id="hint-buy">Of those missed callers, how many would have bought? The 20% starting point is an estimate.</i></label><div class="in"><input id="buy" type="number" inputmode="decimal" min="0" max="100" step="5" value="20"><span class="r">%</span></div></div>
+<div class="field"><label for="ticket">Average ticket<i id="hint-ticket">Flowhub Oregon median order. Headset's US average basket is about $47.</i></label><div class="in"><span>$</span><input id="ticket" type="number" inputmode="decimal" min="0" step="1" value="46"></div></div>
 </div>
 
 <div class="result" aria-live="polite">
@@ -141,32 +143,77 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 var W=52/12, $=function(i){return document.getElementById(i)};
 var trade="dispensary";
 var STD_LEDE="Pick your trade, type in three numbers you know better than anyone, and see your own estimate. No industry averages, no guesses from me.";
-var DISP_LEDE="These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who would've bought is an estimate.";
+var APPT_LEDE="These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who'd book is an estimate.";
 var STD_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices or books jobs without you. It takes the message; you make the call.";
 var DISP_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It answers questions about hours, menu, stock, deals and directions. It never gives medical advice and never takes phone sales. It takes the message; you make the call.";
+var BOOK_HINT="Of those missed callers, how many would have booked? 20% is an estimate.";
+var PRESETS={
+ dispensary:{day:12,miss:30,book:20,ticket:46,booked:"bought",verb:"buy",result:"Purchases",
+  dayHint:"Incoming calls on a typical day.",
+  missHint:"A conservative starting point. 411 Locals/Numa report about 62% of small business calls go unanswered.",
+  bookHint:"Of those missed callers, how many would have bought? The 20% starting point is an estimate.",
+  ticketHint:"Flowhub Oregon median order. Headset's US average basket is about $47.",
+  lede:"These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who would've bought is an estimate.",
+  straight:DISP_STRAIGHT,
+  extra:"Answers questions about hours, menu, stock, deals and directions",
+  never:"Never gives medical advice and never takes phone sales"},
+ salon:{day:8,miss:30,book:20,ticket:43,booked:"booked",verb:"book",result:"Appointments",
+  dayHint:"Incoming calls on a typical day. 8 is an estimate for a small shop.",
+  missHint:"Conservative. Zenoti reports about 37% of salon and spa calls go unanswered.",
+  bookHint:BOOK_HINT,
+  ticketHint:"Zenoti's 2024 benchmark: $43 average ticket at an average-earning salon.",
+  lede:APPT_LEDE,straight:STD_STRAIGHT,
+  extra:"Asks the service and which days work. It never books the chair.",
+  never:"Never quotes a price or books the chair without you"},
+ barber:{day:6,miss:30,book:20,ticket:31,booked:"booked",verb:"book",result:"Appointments",
+  dayHint:"Incoming calls on a typical day. 6 is an estimate. A lot of clients walk in.",
+  missHint:"30% is an estimate, kept under Zenoti's 37% salon-and-spa unanswered rate.",
+  bookHint:BOOK_HINT,
+  ticketHint:"Zenoti's 2024 benchmark: $31 at an average-earning barbershop. SQUIRE's 2026 U.S. average cut is $43.",
+  lede:APPT_LEDE,straight:STD_STRAIGHT,
+  extra:"Asks the cut and which days work. It never books the chair.",
+  never:"Never quotes a price or books the chair without you"},
+ "pet grooming":{day:5,miss:30,book:20,ticket:75,booked:"booked",verb:"book",result:"Appointments",
+  dayHint:"Incoming calls on a typical day. 5 is an estimate for a small grooming shop.",
+  missHint:"A conservative estimate. 411 Locals/Numa report about 62% of small business calls go unanswered.",
+  bookHint:BOOK_HINT,
+  ticketHint:"Gingr uses $75 as the average ticket in its dog-grooming example.",
+  lede:APPT_LEDE,straight:STD_STRAIGHT,
+  extra:"Asks the pet's breed, size, and service. It never quotes a price or books the appointment.",
+  never:"Never quotes a price or books the appointment without you"}
+};
 function money(n){return "$"+Math.round(n).toLocaleString("en-US")}
 function num(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0}
 function tidy(n){var x=Math.round(n*100)/100;return x===Math.round(x)?String(Math.round(x)):String(x)}
+function applyPreset(p){
+ $("calls-day").value=p.day; $("miss").value=p.miss; $("buy").value=p.book; $("ticket").value=p.ticket;
+}
 function calc(){
- var d=trade==="dispensary";
+ var p=PRESETS[trade], d=!!p;
  $("std-fields").hidden=d; $("disp-fields").hidden=!d;
  $("does-menu").hidden=!d;
- $("does-never").textContent=d?"Never gives medical advice and never takes phone sales":"Never quotes prices or books a job without you";
- $("straight-body").textContent=d?DISP_STRAIGHT:STD_STRAIGHT;
- $("lede").textContent=d?DISP_LEDE:STD_LEDE;
- $("lost-label").textContent=d?"Purchases lost per month":"Jobs lost per month";
- $("be-label").textContent=d?"Purchases a month to cover $129":"Jobs a month to cover $129";
+ $("does-never").textContent=d?p.never:"Never quotes prices or books a job without you";
+ $("straight-body").textContent=d?p.straight:STD_STRAIGHT;
+ $("lede").textContent=d?p.lede:STD_LEDE;
+ $("lost-label").textContent=(d?p.result:"Jobs")+" lost per month";
+ $("be-label").textContent=(d?p.result:"Jobs")+" a month to cover $129";
  $("tname").textContent=trade;
- var c,j,p,jobs,mo,yr,be,math;
+ if(d){
+  $("does-menu").textContent=p.extra;
+  $("label-buy").textContent="Missed callers who would've "+p.booked;
+  $("hint-day").textContent=p.dayHint; $("hint-miss").textContent=p.missHint;
+  $("hint-buy").textContent=p.bookHint; $("hint-ticket").textContent=p.ticketHint;
+ }
+ var c,j,pct,jobs,mo,yr,be,math;
  if(d){
   var perDay=num("calls-day"), miss=Math.min(num("miss"),100)/100;
-  p=Math.min(num("buy"),100)/100; j=num("ticket");
-  c=perDay*miss*7; jobs=c*W*p; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
-  math="<b>The math, out in the open:</b> "+tidy(perDay)+" calls/day × "+Math.round(miss*100)+"% missed × 7 days = "+tidy(c)+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(p*100)+"% who'd buy × "+money(j)+" average ticket = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. First year with us: $199 + 12 × $129 = $1,747.";
+  pct=Math.min(num("buy"),100)/100; j=num("ticket");
+  c=perDay*miss*7; jobs=c*W*pct; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
+  math="<b>The math, out in the open:</b> "+tidy(perDay)+" calls/day × "+Math.round(miss*100)+"% missed × 7 days = "+tidy(c)+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd "+p.verb+" × "+money(j)+" average ticket = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. First year with us: $199 + 12 × $129 = $1,747.";
  }else{
-  c=num("calls"); j=num("job"); p=Math.min(num("pct"),100)/100;
-  jobs=c*W*p; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
-  math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(p*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. First year with us: $199 + 12 × $129 = $1,747.";
+  c=num("calls"); j=num("job"); pct=Math.min(num("pct"),100)/100;
+  jobs=c*W*pct; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
+  math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. First year with us: $199 + 12 × $129 = $1,747.";
  }
  $("mo").textContent=money(mo); $("yr").textContent=money(yr);
  $("jobs").textContent=jobs.toFixed(1); $("be").textContent=j>0?be.toFixed(1):"–";
@@ -181,7 +228,7 @@ var cards=document.querySelectorAll(".trade");
 cards.forEach(function(el){el.querySelector(".pick").addEventListener("click",function(){
  var next=el.getAttribute("data-t"), changed=next!==trade;
  cards.forEach(function(x){x.classList.remove("on")}); el.classList.add("on"); trade=next;
- if(changed&&trade==="dispensary"){$("calls-day").value="12";$("miss").value="30";$("buy").value="20";$("ticket").value="46"}
+ if(changed&&PRESETS[trade])applyPreset(PRESETS[trade]);
  calc();
 })});
 ["calls","job","pct","calls-day","miss","buy","ticket"].forEach(function(i){$(i).addEventListener("input",calc)});
