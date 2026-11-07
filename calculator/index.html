@@ -121,10 +121,10 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
  <div class="row"><span id="be-label">Jobs a month to cover $129</span><b id="be">0.4</b></div>
  <div class="verdict" id="verdict">By your numbers, missed calls cost about 12.6× the $129 monthly price. The free week will tell you if your numbers hold up.</div>
 </div>
-<div class="math" id="math"><b>The math, out in the open:</b> 5 missed calls/week × 4.33 weeks/month (52 weeks ÷ 12) × 25% who'd book × $300 per job = <b>$1,625/month</b>. × 12 = <b>$19,500/year</b>. First year for a founding shop: 12 × $129 = $1,548. The $199 setup fee is waived.</div>
+<div class="math" id="math"><b>The math, out in the open:</b> 5 missed calls/week × 4.33 weeks/month (52 weeks ÷ 12) × 25% who'd book × $300 per job = <b>$1,625/month</b>. × 12 = <b>$19,500/year</b>. Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</div>
 
 <h2><span class="step">3</span>What it costs <small>Founders pricing. No contract.</small></h2>
-<p style="font-size:15px;color:var(--mute);margin-top:8px">Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</p>
+<p style="font-size:15px;color:var(--mute);margin-top:8px">Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</p>
 <div class="price">
  <div><b>Free</b><span>first week</span></div>
  <div><b>$0</b><span>setup fee waived</span></div>
@@ -138,7 +138,7 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
  <li>Gets the caller's name and reads back their number</li>
  <li>Gets the address or city, what they need, and how urgent</li>
  <li id="does-menu" hidden>Answers questions about hours, menu, stock, deals and directions</li>
- <li>Emails you a summary and transcript so you can call back</li>
+ <li>Texts and emails you a summary and transcript so you can call back</li>
  <li class="no" id="does-never">Never quotes prices or books a job without you</li>
 </ul>
 
@@ -231,11 +231,11 @@ function calc(){
   var perDay=num("calls-day"), miss=Math.min(num("miss"),100)/100;
   pct=Math.min(num("buy"),100)/100; j=num("ticket");
   c=perDay*miss*7; jobs=c*W*pct; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
-  math="<b>The math, out in the open:</b> "+tidy(perDay)+" calls/day × "+Math.round(miss*100)+"% missed × 7 days = "+tidy(c)+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd "+p.verb+" × "+money(j)+" average ticket = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. First year for a founding shop: 12 × $129 = $1,548. The $199 setup fee is waived.";
+  math="<b>The math, out in the open:</b> "+tidy(perDay)+" calls/day × "+Math.round(miss*100)+"% missed × 7 days = "+tidy(c)+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd "+p.verb+" × "+money(j)+" average ticket = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.";
  }else{
   c=num("calls"); j=num("job"); pct=Math.min(num("pct"),100)/100;
   jobs=c*W*pct; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
-  math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. First year for a founding shop: 12 × $129 = $1,548. The $199 setup fee is waived.";
+  math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.";
  }
  $("mo").textContent=money(mo); $("yr").textContent=money(yr);
  $("jobs").textContent=jobs.toFixed(1); $("be").textContent=j>0?be.toFixed(1):"–";
