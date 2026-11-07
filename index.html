@@ -241,8 +241,57 @@ footer p+p{margin-top:6px;color:var(--mute);font-size:13px}
    if(t.featured)featured.appendChild(renderCard(t));
    stage.appendChild(renderCard(t));
   });
-  pick.value="restaurant";
-  show("restaurant");
+  /* Email links use these ids. Aliases cover the longer slugs. */
+  var ALIASES={
+   "auto-repair":"auto",
+   "exterior-cleaning":"exterior",
+   "tree-service":"tree",
+   "septic-service":"septic",
+   "well-and-pump":"well",
+   "well-pump":"well",
+   "chimney-sweep":"chimney",
+   "pet-grooming":"pet"
+  };
+  function canon(raw){
+   var key=String(raw||"").replace(/^\s+|\s+$/g,"").toLowerCase();
+   if(!key) return "";
+   if(ALIASES[key]) key=ALIASES[key];
+   for(var i=0;i<TRADES.length;i++) if(TRADES[i].id===key) return key;
+   return "";
+  }
+  function linkedTrade(){
+   var q=null;
+   try{ q=new URLSearchParams(window.location.search).get("trade"); }catch(e){ q=null; }
+   if(q!=null && String(q).replace(/^\s+|\s+$/g,"")!=="") return canon(q)||"restaurant";
+   var hash=(window.location.hash||"").replace(/^#/,"");
+   var m=/^trade-(.+)$/i.exec(hash);
+   if(m){
+    var fromHash="";
+    try{ fromHash=decodeURIComponent(m[1]); }catch(e2){ fromHash=m[1]; }
+    return canon(fromHash)||"restaurant";
+   }
+   return "restaurant";
+  }
+  function fromLink(){
+   var q=null;
+   try{ q=new URLSearchParams(window.location.search).get("trade"); }catch(e){ q=null; }
+   if(q!=null && String(q).replace(/^\s+|\s+$/g,"")!=="") return true;
+   return /^#trade-/i.test(window.location.hash||"");
+  }
+  var initial=linkedTrade();
+  pick.value=initial;
+  show(initial);
+  function focusExample(){
+   var el=document.querySelector(".tradepick");
+   if(el&&el.scrollIntoView) el.scrollIntoView({block:"start"});
+  }
+  if(fromLink()){
+   focusExample();
+   window.addEventListener("load",function(){
+    focusExample();
+    if(window.requestAnimationFrame) requestAnimationFrame(focusExample);
+   });
+  }
   pick.addEventListener("change",function(){show(pick.value)});
  })();
  </script>
