@@ -32,13 +32,10 @@ h1 span{color:var(--gold)}
 h2{font-size:22px;font-weight:900;margin:30px 0 6px}
 h2 small{display:block;font-size:14px;font-weight:600;color:var(--mute);margin-top:3px}
 .step{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:900;font-size:15px;margin-right:8px;vertical-align:2px}
-.trades{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:12px}
-.trade{border:2px solid var(--line);background:var(--navy2);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.trade.on{border-color:var(--gold);background:var(--navy3)}
-.pick{all:unset;cursor:pointer;font-weight:800;font-size:16px;min-height:44px;min-width:0;display:flex;flex-wrap:wrap;align-items:center;line-height:1.15}
-.pick .ticon{width:40px;height:40px;flex:none;margin-right:6px}
-.pick::before{content:"";width:20px;height:20px;border-radius:50%;border:2px solid var(--mute);margin-right:9px;flex:none}
-.trade.on .pick::before{border-color:var(--gold);background:radial-gradient(var(--gold) 45%,transparent 50%)}
+.trade-select{display:block;width:100%;min-height:54px;margin-top:12px;padding:0 46px 0 14px;font:800 16px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:var(--navy2);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M3 6l5 5 5-5' fill='none' stroke='%23e8b53b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");background-repeat:no-repeat;background-position:right 14px center;border:2px solid var(--gold);border-radius:12px;cursor:pointer;appearance:none;-webkit-appearance:none}
+.trade-select:focus{outline:3px solid var(--gold2);outline-offset:2px}
+.trade-select option{color:#120d00;background:#fff}
+#demo-slot{margin-top:10px;min-height:48px}
 .demo{display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:8px;background:var(--gold);color:var(--navy);font-weight:800;font-size:14px;line-height:1.25;text-decoration:none;text-align:center;padding:8px 6px}
 .demo.alt{background:transparent;color:var(--gold2);border:2px dashed var(--line);font-weight:700;font-size:13.5px}
 .field{margin-top:14px}
@@ -70,7 +67,7 @@ ul.list li.no::before{content:"✕";color:#ff8a7a}
 .blank{margin-top:10px;font-size:17px;font-weight:700}
 .blank span{display:inline-block;min-width:170px;border-bottom:2px solid var(--mute)}
 footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font-size:13px;color:var(--mute)}
-@media(min-width:560px){h1{font-size:44px}.trades{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)}}
+@media(min-width:560px){h1{font-size:44px}}
 </style>
 </head>
 <body>
@@ -84,26 +81,9 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 </header>
 
 <main class="wrap">
-<h2><span class="step">1</span>Pick your trade <small>Then hear it as your customers will.</small></h2>
-<div class="trades" id="trades">
- <div class="trade" data-t="dispensary"><button class="pick" type="button"><img class="ticon" src="/assets/icons/dispensary.svg" alt="" width="40" height="40">Dispensary</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301m6p9fbbyetprh73ngb4dbxge" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="restaurant"><button class="pick" type="button"><img class="ticon" src="/assets/icons/restaurant.svg" alt="" width="40" height="40">Restaurant</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="auto repair" data-job="400"><button class="pick" type="button"><img class="ticon" src="/assets/icons/auto-repair.svg" alt="" width="40" height="40">Auto repair</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="electrical"><button class="pick" type="button"><img class="ticon" src="/assets/icons/electrical.svg" alt="" width="40" height="40">Electrical</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="plumbing"><button class="pick" type="button"><img class="ticon" src="/assets/icons/plumbing.svg" alt="" width="40" height="40">Plumbing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="HVAC"><button class="pick" type="button"><img class="ticon" src="/assets/icons/hvac.svg" alt="" width="40" height="40">HVAC</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade on" data-t="towing"><button class="pick" type="button"><img class="ticon" src="/assets/icons/towing.svg" alt="" width="40" height="40">Towing</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6pzx3qzevna1rrc3hvqhac2" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="salon"><button class="pick" type="button"><img class="ticon" src="/assets/icons/salon.svg" alt="" width="40" height="40">Salon</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="barber"><button class="pick" type="button"><img class="ticon" src="/assets/icons/barber.svg" alt="" width="40" height="40">Barber</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="tattoo"><button class="pick" type="button"><img class="ticon" src="/assets/icons/tattoo.svg" alt="" width="40" height="40">Tattoo</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2501m6q781ctf86t83xt1s8ftp7w" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="pet grooming"><button class="pick" type="button"><img class="ticon" src="/assets/icons/pet-grooming.svg" alt="" width="40" height="40">Pet grooming</button><a class="demo" href="https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw" target="_blank" rel="noopener">Hear it as your customers will</a></div>
- <div class="trade" data-t="exterior cleaning"><button class="pick" type="button"><img class="ticon" src="/assets/icons/exterior-cleaning.svg" alt="" width="40" height="40">Exterior cleaning</button><span class="demo alt">Hear it soon</span></div>
- <div class="trade" data-t="tree service"><button class="pick" type="button"><img class="ticon" src="/assets/icons/tree-service.svg" alt="" width="40" height="40">Tree service</button><span class="demo alt">Hear it soon</span></div>
- <div class="trade" data-t="septic service"><button class="pick" type="button"><img class="ticon" src="/assets/icons/septic.svg" alt="" width="40" height="40">Septic service</button><span class="demo alt">Hear it soon</span></div>
- <div class="trade" data-t="well and pump"><button class="pick" type="button"><img class="ticon" src="/assets/icons/well-pump.svg" alt="" width="40" height="40">Well and pump</button><span class="demo alt">Hear it soon</span></div>
- <div class="trade" data-t="fencing"><button class="pick" type="button"><img class="ticon" src="/assets/icons/fencing.svg" alt="" width="40" height="40">Fencing</button><span class="demo alt">Hear it soon</span></div>
- <div class="trade" data-t="chimney sweep"><button class="pick" type="button"><img class="ticon" src="/assets/icons/chimney-sweep.svg" alt="" width="40" height="40">Chimney sweep</button><span class="demo alt">Hear it soon</span></div>
-</div>
+<h2 id="pick-heading"><span class="step">1</span>Pick your trade <small>Then hear it as your customers will.</small></h2>
+<select id="trade-pick" class="trade-select" aria-labelledby="pick-heading"></select>
+<div id="demo-slot"></div>
 <p style="font-size:13px;color:var(--mute);margin-top:8px">The shops are made up. The voice and the questions are real. Ask about hours, stock or prices, or leave a message, just as a customer would.</p>
 
 <h2><span class="step">2</span>Type in your numbers <small>Your best honest guess. Nothing leaves this page.</small></h2>
@@ -127,14 +107,14 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
  <div class="row"><span id="be-label">Jobs a month to cover $129</span><b id="be">0.4</b></div>
  <div class="verdict" id="verdict">By your numbers, missed calls cost about 12.6× the $129 monthly price. The free week will tell you if your numbers hold up.</div>
 </div>
-<div class="math" id="math"><b>The math, out in the open:</b> 5 missed calls/week × 4.33 weeks/month (52 weeks ÷ 12) × 25% who'd book × $300 per job = <b>$1,625/month</b>. × 12 = <b>$19,500/year</b>. Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</div>
+<div class="math" id="math"><b>The math, out in the open:</b> 5 missed calls/week × 4.33 weeks/month (52 weeks ÷ 12) × 25% who'd book × $300 per job = <b>$1,625/month</b>. × 12 = <b>$19,500/year</b>. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</div>
 
-<h2><span class="step">3</span>What it costs <small>Founders pricing. No contract.</small></h2>
-<p style="font-size:15px;color:var(--mute);margin-top:8px">Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</p>
+<h2><span class="step">3</span>What it costs</h2>
+<p style="font-size:15px;color:var(--mute);margin-top:8px">Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</p>
 <div class="price">
  <div><b>Free</b><span>first week</span></div>
  <div><b>$0</b><span>setup fee waived</span></div>
- <div><b>$129</b><span>per month, no contract</span></div>
+ <div><b>$129</b><span>/mo, no contract</span></div>
 </div>
 
 <h2>What the AI does on a missed call</h2>
@@ -237,11 +217,11 @@ function calc(){
   var perDay=num("calls-day"), miss=Math.min(num("miss"),100)/100;
   pct=Math.min(num("buy"),100)/100; j=num("ticket");
   c=perDay*miss*7; jobs=c*W*pct; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
-  math="<b>The math, out in the open:</b> "+tidy(perDay)+" calls/day × "+Math.round(miss*100)+"% missed × 7 days = "+tidy(c)+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd "+p.verb+" × "+money(j)+" average ticket = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.";
+  math="<b>The math, out in the open:</b> "+tidy(perDay)+" calls/day × "+Math.round(miss*100)+"% missed × 7 days = "+tidy(c)+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd "+p.verb+" × "+money(j)+" average ticket = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.";
  }else{
   c=num("calls"); j=num("job"); pct=Math.min(num("pct"),100)/100;
   jobs=c*W*pct; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
-  math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.";
+  math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.";
  }
  $("mo").textContent=money(mo); $("yr").textContent=money(yr);
  $("jobs").textContent=jobs.toFixed(1); $("be").textContent=j>0?be.toFixed(1):"–";
@@ -252,13 +232,56 @@ function calc(){
  $("verdict").textContent=v;
  $("math").innerHTML=math;
 }
-var cards=document.querySelectorAll(".trade");
-cards.forEach(function(el){el.querySelector(".pick").addEventListener("click",function(){
- var next=el.getAttribute("data-t"), changed=next!==trade;
- cards.forEach(function(x){x.classList.remove("on")}); el.classList.add("on"); trade=next;
+/* Add a calculator trade by appending one object. t must match a PRESETS key when that trade has one. */
+var TRADES=[
+ {t:"dispensary",name:"Dispensary",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_5301m6p9fbbyetprh73ngb4dbxge"},
+ {t:"restaurant",name:"Restaurant",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs"},
+ {t:"auto repair",name:"Auto repair",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p"},
+ {t:"electrical",name:"Electrical",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3"},
+ {t:"plumbing",name:"Plumbing",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx"},
+ {t:"HVAC",name:"HVAC",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75"},
+ {t:"towing",name:"Towing",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6pzx3qzevna1rrc3hvqhac2"},
+ {t:"salon",name:"Salon",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb"},
+ {t:"barber",name:"Barber",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb"},
+ {t:"tattoo",name:"Tattoo",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_2501m6q781ctf86t83xt1s8ftp7w"},
+ {t:"pet grooming",name:"Pet grooming",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw"},
+ {t:"exterior cleaning",name:"Exterior cleaning"},
+ {t:"tree service",name:"Tree service"},
+ {t:"septic service",name:"Septic service"},
+ {t:"well and pump",name:"Well and pump"},
+ {t:"fencing",name:"Fencing"},
+ {t:"chimney sweep",name:"Chimney sweep"}
+];
+var pick=$("trade-pick"), slot=$("demo-slot");
+TRADES.forEach(function(item){
+ var opt=document.createElement("option");
+ opt.value=item.t;opt.textContent=item.name;
+ if(item.t===trade)opt.selected=true;
+ pick.appendChild(opt);
+});
+function showDemo(){
+ var item=null;
+ TRADES.forEach(function(x){if(x.t===trade)item=x});
+ while(slot.firstChild)slot.removeChild(slot.firstChild);
+ if(item&&item.demo){
+  var a=document.createElement("a");
+  a.className="demo";a.href=item.demo;a.target="_blank";a.rel="noopener";
+  a.textContent="Hear it as your customers will";
+  slot.appendChild(a);
+ }else{
+  var s=document.createElement("span");
+  s.className="demo alt";s.textContent="Hear it soon";
+  slot.appendChild(s);
+ }
+}
+pick.addEventListener("change",function(){
+ var next=pick.value, changed=next!==trade;
+ trade=next;
  if(changed&&PRESETS[trade])applyPreset(PRESETS[trade]);
+ showDemo();
  calc();
-})});
+});
+showDemo();
 ["calls","job","pct","calls-day","miss","buy","ticket"].forEach(function(i){$(i).addEventListener("input",calc)});
 calc();
 })();

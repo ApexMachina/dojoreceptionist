@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
   Dojo Receptionist · dojoreceptionist.com · v2 (2026-11-05)
-  Single file: inline CSS, no scripts, no outside fonts/images, no tracking.
+  Single file: inline CSS, one small script for the trade picker, no outside fonts/images, no tracking.
   Previous version: old/index-v1.html. Hero copy options: copy-options.md.
 -->
 <html lang="en">
@@ -9,14 +9,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dojo Receptionist · Missed calls answered for Lane County shops</title>
-<meta name="description" content="An honest AI receptionist that answers your shop's missed and after-hours calls and emails you a summary. Set up by Jeremy, a Veneta dad and Marine vet. Founders pricing: first week free, then $129/month, no contract.">
+<meta name="description" content="An honest AI receptionist that answers your shop's missed and after-hours calls and emails you a summary. Set up by Jeremy, a Veneta dad and Marine vet.">
 <meta name="theme-color" content="#0a0d18">
 <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:title" content="Dojo Receptionist · Missed calls answered for Lane County shops">
-<meta property="og:description" content="An honest AI receptionist that answers your shop's missed and after-hours calls and emails you a summary. Set up by Jeremy, a Veneta dad and Marine vet. Founders pricing: first week free, then $129/month, no contract.">
+<meta property="og:description" content="An honest AI receptionist that answers your shop's missed and after-hours calls and emails you a summary. Set up by Jeremy, a Veneta dad and Marine vet.">
 <meta property="og:image" content="https://dojoreceptionist.com/assets/og-share.png">
 <meta property="og:url" content="https://dojoreceptionist.com/">
 <meta name="twitter:card" content="summary_large_image">
@@ -68,6 +68,15 @@ ol.steps span{font-size:15px;color:#d6dbea}
 .does b{color:var(--gold2);font-weight:800}
 .trade .btn{margin-top:12px;min-height:48px;font-size:16px}
 .soon{display:flex;align-items:center;justify-content:center;min-height:48px;margin-top:12px;border:2px dashed var(--line);border-radius:6px;color:var(--gold2);font-weight:800;font-size:15px}
+.tradepick{margin-top:22px}
+.tradepick label{display:block;font-weight:800;font-size:16px}
+.tradepick label span{display:block;margin-top:3px;font-weight:500;font-size:14px;color:var(--mute)}
+.trade-select{display:block;width:100%;min-height:54px;margin-top:8px;padding:0 46px 0 14px;font:800 16px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:var(--n1);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M3 6l5 5 5-5' fill='none' stroke='%23e8b53b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");background-repeat:no-repeat;background-position:right 14px center;border:2px solid var(--gold);border-radius:6px;box-shadow:4px 4px 0 #000;cursor:pointer;appearance:none;-webkit-appearance:none}
+.trade-select:focus{outline:3px solid var(--gold2);outline-offset:2px}
+.trade-select option{color:#120d00;background:#fff}
+.stage{display:grid;margin-top:14px;padding-bottom:6px}
+.stage .trade{grid-area:1/1;margin-top:0;visibility:hidden}
+.stage .trade.on{visibility:visible;z-index:1}
 .price{position:relative;background:linear-gradient(160deg,var(--n2),var(--n1));border:3px solid var(--gold);border-radius:6px;padding:20px 16px;margin-top:22px;box-shadow:6px 6px 0 var(--cr)}
 .price .amt{font:700 54px/1 Georgia,serif;color:var(--gold)}
 .loss{font:700 68px/0.95 Georgia,"DejaVu Serif","Times New Roman",serif;color:var(--gold);margin:8px 0 2px;letter-spacing:-.02em}
@@ -130,86 +139,118 @@ footer p+p{margin-top:6px;color:var(--mute);font-size:13px}
  <h2 class="disp">Calls Lane County shops miss</h2>
  <p class="lead">Made-up callers, written the way calls come in around Lane County. The shop is made up; the voice and the questions are real. Ask about hours, stock or prices, or leave a message, just as a customer would.</p>
 
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/restaurant.svg" alt="" width="44" height="44">Restaurant <small>Hear it live</small></h3>
-  <p class="sit">"Fern Hollow Family Diner? Can I call in a to-go order for four, and do you have the room for a party Saturday?"</p>
-  <p class="does"><b>The AI:</b> takes the to-go order and reads back their name and number. For a party or banquet it gets the date and headcount. It answers hours. You confirm.</p>
-  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs" target="_blank" rel="noopener">Hear it as your customers will</a></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/auto-repair.svg" alt="" width="44" height="44">Auto repair <small>Hear it live</small></h3>
-  <p class="sit">"Check-engine light came on driving in from Noti. Can you look at it today?"</p>
-  <p class="does"><b>The AI:</b> gets year, make and model, what the car's doing, whether it's drivable, and when they can bring it in, then emails you while you're still under the lift.</p>
-  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p" target="_blank" rel="noopener">Hear it as your customers will</a></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/plumbing.svg" alt="" width="44" height="44">Plumbing <small>Hear it live</small></h3>
-  <p class="sit">"Water heater's leaking all over the garage out in Elmira, and it's Saturday morning."</p>
-  <p class="does"><b>The AI:</b> asks if the water's shut off, how bad it is, the address, and when they can be reached, and marks it urgent in your email summary.</p>
-  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx" target="_blank" rel="noopener">Hear it as your customers will</a></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/electrical.svg" alt="" width="44" height="44">Electrical <small>Hear it live</small></h3>
-  <p class="sit">"Half the house went dark in the windstorm out by Crow, and the breaker won't reset."</p>
-  <p class="does"><b>The AI:</b> asks which rooms are out, whether there's a burning smell, and the address, and flags it urgent if it sounds unsafe. You decide who goes out.</p>
-  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3" target="_blank" rel="noopener">Hear it as your customers will</a></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/hvac.svg" alt="" width="44" height="44">HVAC <small>Hear it live</small></h3>
-  <p class="sit">"Furnace quit on the first cold Willamette Valley night, and we've got kids in the house."</p>
-  <p class="does"><b>The AI:</b> asks what kind of system, whether there's any heat at all, the address, and how soon they need you, and flags no-heat or no-AC as urgent in the email summary, even when it's 10 p.m. and you're off the clock.</p>
-  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75" target="_blank" rel="noopener">Hear it as your customers will</a></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/salon.svg" alt="" width="44" height="44">Salon</h3>
-  <p class="sit">"Can I get a cut and color before my sister's wedding in Eugene this Saturday?"</p>
-  <p class="does"><b>The AI:</b> takes their name, the service, the days that work, and a callback number. It never books the chair; you confirm.</p>
-  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/barber.svg" alt="" width="44" height="44">Barber <small>Hear it live</small></h3>
-  <p class="sit">"Got time for a fade at Copper Pine before my interview in Springfield tomorrow morning?"</p>
-  <p class="does"><b>The AI:</b> takes their name, the cut, the days that work, and a callback number while you finish the client in the chair. It never books the chair; you confirm.</p>
-  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb" target="_blank" rel="noopener">Hear it as your customers will</a></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/pet-grooming.svg" alt="" width="44" height="44">Pet grooming <small>Hear it live</small></h3>
-  <p class="sit">"My dog rolled in something awful out by Fern Ridge. Any chance Muddy Paws has a bath this week?"</p>
-  <p class="does"><b>The AI:</b> gets the dog's breed and size, the service, the days that work, and a callback number. No price quotes over the phone; you set the appointment.</p>
-  <a class="btn g" href="https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw" target="_blank" rel="noopener">Hear it as your customers will</a></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/exterior-cleaning.svg" alt="" width="44" height="44">Exterior cleaning</h3>
-  <p class="sit">"The roof's gone green out past Elmira, and the gutters are packed. Can you soft wash it before the rain?"</p>
-  <p class="does">You're on a ladder or running the pressure washer, with no hand free for the phone. Miss it, and that homeowner may call the next crew.</p>
-  <p class="does"><b>The AI:</b> gets the address and whether they need the roof, the gutters, the house, or the driveway, then emails you a summary. It never quotes a price. You call back when you're on the ground.</p>
-  <div class="soon">Hear it soon</div></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/tree-service.svg" alt="" width="44" height="44">Tree service</h3>
-  <p class="sit">"A fir came down on the house out by Crow. Can somebody come look?"</p>
-  <p class="does">You're in the tree or beside a running saw, with no hand free for the phone. A homeowner with a tree down may already be calling the next crew.</p>
-  <p class="does"><b>The AI:</b> gets the address and whether a tree is on the house. A tree on a house is flagged URGENT in the email summary. It never quotes the job. You decide who goes out.</p>
-  <div class="soon">Hear it soon</div></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/septic.svg" alt="" width="44" height="44">Septic service</h3>
-  <p class="sit">"The tank's backing up into the yard out in Noti, and the bathroom won't drain."</p>
-  <p class="does">You're on the pump hose or down in a hole, with no hand free for the phone. A backed-up house wants a person to call them back, and they may try the next truck.</p>
-  <p class="does"><b>The AI:</b> gets the address and whether it's a routine pump or a backup. A backup is flagged URGENT in the email summary. It never quotes a price. You decide who goes out.</p>
-  <div class="soon">Hear it soon</div></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/well-pump.svg" alt="" width="44" height="44">Well and pump</h3>
-  <p class="sit">"No water this morning at the place past Veneta. The pump hums and quits."</p>
-  <p class="does">You're out on a gravel road with both hands on a pump. A house with no water may call the next shop if nobody answers.</p>
-  <p class="does"><b>The AI:</b> gets the address, what the pump is doing, and a callback number, then emails you a summary. It never quotes a price. You call back from the truck.</p>
-  <div class="soon">Hear it soon</div></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/fencing.svg" alt="" width="44" height="44">Fencing</h3>
-  <p class="sit">"We need fence along the pasture out by Fern Ridge. Can you come look?"</p>
-  <p class="does">You're setting posts or up a ladder with the wire, and the phone is in the truck. Miss that call and the whole fence job may go to the next crew.</p>
-  <p class="does"><b>The AI:</b> gets the address, about how much fence, and a callback number, then emails you a summary. It never quotes a price. You call back when the tools are down.</p>
-  <div class="soon">Hear it soon</div></div>
-
- <div class="trade"><h3 class="disp"><img class="ticon" src="/assets/icons/chimney-sweep.svg" alt="" width="44" height="44">Chimney sweep</h3>
-  <p class="sit">"First cold night's coming, and the chimney hasn't been swept. Can you fit us in before we light the stove?"</p>
-  <p class="does">You're on the roof or working the flue, with no hand free for the phone. Folks ready to heat the house may call the next sweep if nobody answers.</p>
-  <p class="does"><b>The AI:</b> gets the address, whether it's a sweep or a repair question, and a callback number, then emails you a summary. It never quotes a price and never books a day. You call back when you're off the roof.</p>
-  <div class="soon">Hear it soon</div></div>
+ <div id="featured-trades"></div>
+ <div class="tradepick">
+  <label for="trade-pick">Pick a trade<span>The example below changes to that shop.</span></label>
+  <select id="trade-pick" class="trade-select"></select>
+ </div>
+ <div class="stage" id="trade-stage"></div>
+ <script>
+ (function(){
+  /* Add a trade by appending one object. featured cards are the four shown above the picker. */
+  var TRADES=[
+   {id:"plumbing",name:"Plumbing",featured:true,icon:"/assets/icons/plumbing.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx",
+    sit:"\"Water heater's leaking all over the garage out in Elmira, and it's Saturday morning.\"",
+    does:"asks if the water's shut off, how bad it is, the address, and when they can be reached, and marks it urgent in your email summary."},
+   {id:"hvac",name:"HVAC",featured:true,icon:"/assets/icons/hvac.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75",
+    sit:"\"Furnace quit on the first cold Willamette Valley night, and we've got kids in the house.\"",
+    does:"asks what kind of system, whether there's any heat at all, the address, and how soon they need you, and flags no-heat or no-AC as urgent in the email summary, even when it's 10 p.m. and you're off the clock."},
+   {id:"auto",name:"Auto repair",featured:true,icon:"/assets/icons/auto-repair.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p",
+    sit:"\"Check-engine light came on driving in from Noti. Can you look at it today?\"",
+    does:"gets year, make and model, what the car's doing, whether it's drivable, and when they can bring it in, then emails you while you're still under the lift."},
+   {id:"electrical",name:"Electrical",featured:true,icon:"/assets/icons/electrical.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3",
+    sit:"\"Half the house went dark in the windstorm out by Crow, and the breaker won't reset.\"",
+    does:"asks which rooms are out, whether there's a burning smell, and the address, and flags it urgent if it sounds unsafe. You decide who goes out."},
+   {id:"restaurant",name:"Restaurant",icon:"/assets/icons/restaurant.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs",
+    sit:"\"Fern Hollow Family Diner? Can I call in a to-go order for four, and do you have the room for a party Saturday?\"",
+    does:"takes the to-go order and reads back their name and number. For a party or banquet it gets the date and headcount. It answers hours. You confirm."},
+   {id:"salon",name:"Salon",icon:"/assets/icons/salon.svg",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb",
+    sit:"\"Can I get a cut and color before my sister's wedding in Eugene this Saturday?\"",
+    does:"takes their name, the service, the days that work, and a callback number. It never books the chair; you confirm."},
+   {id:"barber",name:"Barber",icon:"/assets/icons/barber.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb",
+    sit:"\"Got time for a fade at Copper Pine before my interview in Springfield tomorrow morning?\"",
+    does:"takes their name, the cut, the days that work, and a callback number while you finish the client in the chair. It never books the chair; you confirm."},
+   {id:"pet",name:"Pet grooming",icon:"/assets/icons/pet-grooming.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw",
+    sit:"\"My dog rolled in something awful out by Fern Ridge. Any chance Muddy Paws has a bath this week?\"",
+    does:"gets the dog's breed and size, the service, the days that work, and a callback number. No price quotes over the phone; you set the appointment."},
+   {id:"exterior",name:"Exterior cleaning",icon:"/assets/icons/exterior-cleaning.svg",
+    sit:"\"The roof's gone green out past Elmira, and the gutters are packed. Can you soft wash it before the rain?\"",
+    notes:["You're on a ladder or running the pressure washer, with no hand free for the phone. Miss it, and that homeowner may call the next crew."],
+    does:"gets the address and whether they need the roof, the gutters, the house, or the driveway, then emails you a summary. It never quotes a price. You call back when you're on the ground."},
+   {id:"tree",name:"Tree service",icon:"/assets/icons/tree-service.svg",
+    sit:"\"A fir came down on the house out by Crow. Can somebody come look?\"",
+    notes:["You're in the tree or beside a running saw, with no hand free for the phone. A homeowner with a tree down may already be calling the next crew."],
+    does:"gets the address and whether a tree is on the house. A tree on a house is flagged URGENT in the email summary. It never quotes the job. You decide who goes out."},
+   {id:"septic",name:"Septic service",icon:"/assets/icons/septic.svg",
+    sit:"\"The tank's backing up into the yard out in Noti, and the bathroom won't drain.\"",
+    notes:["You're on the pump hose or down in a hole, with no hand free for the phone. A backed-up house wants a person to call them back, and they may try the next truck."],
+    does:"gets the address and whether it's a routine pump or a backup. A backup is flagged URGENT in the email summary. It never quotes a price. You decide who goes out."},
+   {id:"well",name:"Well and pump",icon:"/assets/icons/well-pump.svg",
+    sit:"\"No water this morning at the place past Veneta. The pump hums and quits.\"",
+    notes:["You're out on a gravel road with both hands on a pump. A house with no water may call the next shop if nobody answers."],
+    does:"gets the address, what the pump is doing, and a callback number, then emails you a summary. It never quotes a price. You call back from the truck."},
+   {id:"fencing",name:"Fencing",icon:"/assets/icons/fencing.svg",
+    sit:"\"We need fence along the pasture out by Fern Ridge. Can you come look?\"",
+    notes:["You're setting posts or up a ladder with the wire, and the phone is in the truck. Miss that call and the whole fence job may go to the next crew."],
+    does:"gets the address, about how much fence, and a callback number, then emails you a summary. It never quotes a price. You call back when the tools are down."},
+   {id:"chimney",name:"Chimney sweep",icon:"/assets/icons/chimney-sweep.svg",
+    sit:"\"First cold night's coming, and the chimney hasn't been swept. Can you fit us in before we light the stove?\"",
+    notes:["You're on the roof or working the flue, with no hand free for the phone. Folks ready to heat the house may call the next sweep if nobody answers."],
+    does:"gets the address, whether it's a sweep or a repair question, and a callback number, then emails you a summary. It never quotes a price and never books a day. You call back when you're off the roof."}
+  ];
+  var featured=document.getElementById("featured-trades");
+  var stage=document.getElementById("trade-stage");
+  var pick=document.getElementById("trade-pick");
+  function node(tag,cls,text){var n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=text;return n}
+  function renderCard(t){
+   var card=node("div","trade");
+   card.setAttribute("data-trade",t.id);
+   var h=node("h3","disp");
+   var img=document.createElement("img");
+   img.className="ticon";img.src=t.icon;img.alt="";img.width=44;img.height=44;
+   h.appendChild(img);
+   h.appendChild(document.createTextNode(t.name));
+   if(t.badge)h.appendChild(node("small",null,"Hear it live"));
+   card.appendChild(h);
+   card.appendChild(node("p","sit",t.sit));
+   (t.notes||[]).forEach(function(note){card.appendChild(node("p","does",note))});
+   var does=node("p","does");
+   does.appendChild(node("b",null,"The AI:"));
+   does.appendChild(document.createTextNode(" "+t.does));
+   card.appendChild(does);
+   if(t.demo){
+    var a=node("a","btn g","Hear it as your customers will");
+    a.href=t.demo;a.target="_blank";a.rel="noopener";
+    card.appendChild(a);
+   }else card.appendChild(node("div","soon","Hear it soon"));
+   return card;
+  }
+  function show(id){
+   var cards=stage.querySelectorAll(".trade");
+   cards.forEach(function(card){
+    var on=card.getAttribute("data-trade")===id;
+    card.classList.toggle("on",on);
+    card.setAttribute("aria-hidden",on?"false":"true");
+    if(on)card.removeAttribute("inert");else card.setAttribute("inert","");
+   });
+  }
+  TRADES.forEach(function(t){
+   var opt=document.createElement("option");
+   opt.value=t.id;opt.textContent=t.name;
+   pick.appendChild(opt);
+   if(t.featured)featured.appendChild(renderCard(t));
+   stage.appendChild(renderCard(t));
+  });
+  pick.value="restaurant";
+  show("restaurant");
+  pick.addEventListener("change",function(){show(pick.value)});
+ })();
+ </script>
 </section>
 
 <section id="price">
  <h2 class="disp">One plan, set up by a neighbor</h2>
- <p class="lead">Standard price is $199 setup + $129/mo, no contract. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</p>
+ <p class="lead">Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</p>
  <div class="price">
   <span class="burst">Founders</span>
   <div class="amt">$129<small> /mo</small></div>
