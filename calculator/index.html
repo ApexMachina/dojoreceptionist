@@ -61,7 +61,7 @@ input{flex:1;min-width:0;border:0;outline:0;font-size:24px;font-weight:800;paddi
 ul.list{list-style:none;margin-top:10px}
 ul.list li{padding:9px 0 9px 30px;position:relative;border-bottom:1px solid var(--line);font-size:16px}
 ul.list li::before{content:"✓";position:absolute;left:4px;top:8px;color:var(--gold);font-weight:900}
-ul.list li.no::before{content:"✕";color:#ff8a7a}
+ul.list li.no::before{content:"✕";color:#f6d27a}
 .me{margin-top:12px;background:var(--navy2);border-left:5px solid var(--gold);border-radius:8px;padding:14px 15px;font-size:16px}
 .cta{display:flex;align-items:center;justify-content:center;min-height:56px;border-radius:12px;background:var(--gold);color:var(--navy);font-weight:900;font-size:19px;text-decoration:none;margin-top:14px}
 .blank{margin-top:10px;font-size:17px;font-weight:700}
@@ -76,7 +76,7 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 <span class="tag">Lane County shops · Your numbers</span>
 <h1>What missed calls <span>cost your shop</span></h1>
 <p class="lede" id="lede">Pick your trade, type in three numbers you know better than anyone, and see your own estimate. No industry averages, no guesses from me.</p>
-<p class="ai"><b>Straight talk:</b> <span id="straight-body">the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices or books jobs without you. It takes the message; you make the call.</span></p>
+<p class="ai"><b>Straight talk:</b> <span id="straight-body">the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices, never diagnoses and never takes payment. It takes the message; you make the call.</span></p>
 </div>
 </header>
 
@@ -84,7 +84,7 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 <h2 id="pick-heading"><span class="step">1</span>Pick your trade <small>Then hear it as your customers will.</small></h2>
 <select id="trade-pick" class="trade-select" aria-labelledby="pick-heading"></select>
 <div id="demo-slot"></div>
-<p style="font-size:13px;color:var(--mute);margin-top:8px">The shops are made up. The voice and the questions are real. Ask about hours, stock or prices, or leave a message, just as a customer would.</p>
+<p style="font-size:13px;color:var(--mute);margin-top:8px">The shops are made up. The voice and the questions are real. Ask about hours or services, ask what something costs and hear how it handles that, or leave a message, just as a customer would.</p>
 
 <h2><span class="step">2</span>Type in your numbers <small>Your best honest guess. Nothing leaves this page.</small></h2>
 <div id="std-fields">
@@ -107,25 +107,31 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
  <div class="row"><span id="be-label">Jobs a month to cover $129</span><b id="be">0.4</b></div>
  <div class="verdict" id="verdict">By your numbers, missed calls cost about 12.6× the $129 monthly price. The free week will tell you if your numbers hold up.</div>
 </div>
-<div class="math" id="math"><b>The math, out in the open:</b> 5 missed calls/week × 4.33 weeks/month (52 weeks ÷ 12) × 25% who'd book × $300 per job = <b>$1,625/month</b>. × 12 = <b>$19,500/year</b>. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</div>
+<div class="math" id="math"><b>The math, out in the open:</b> 5 missed calls/week × 4.33 weeks/month (52 weeks ÷ 12) × 25% who'd book × $300 per job = <b>$1,625/month</b>. × 12 = <b>$19,500/year</b>. $129/mo. No setup fee, no minimum. First week free.</div>
 
 <h2><span class="step">3</span>What it costs</h2>
-<p style="font-size:15px;color:var(--mute);margin-top:8px">Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.</p>
+<p style="font-size:15px;color:var(--mute);margin-top:8px">$129/mo. No setup fee, no minimum. First week free.</p>
 <div class="price">
  <div><b>Free</b><span>first week</span></div>
- <div><b>$0</b><span>setup fee waived</span></div>
- <div><b>$129</b><span>/mo, no contract</span></div>
+ <div><b>$0</b><span>setup fee</span></div>
+ <div><b>$129</b><span>/mo, no minimum</span></div>
 </div>
+<ul class="list">
+ <li>150 calls a month. Spam, robocalls and hang-ups under 15 seconds don't count.</li>
+ <li>No overage charges, ever. If you run over two months in a row, I'll call you to talk it through.</li>
+ <li>Free pause for up to 3 months a year. One text or email starts it, your calls forward straight back to your shop, and there's no restart fee.</li>
+ <li>Cancel the same day, with no last-month charge.</li>
+</ul>
 
 <h2>What the AI does on a missed call</h2>
 <ul class="list">
  <li>Answers in your shop's name and says it's an AI assistant</li>
  <li>Says the call may be recorded</li>
  <li>Gets the caller's name and reads back their number</li>
- <li>Gets the address or city, what they need, and how urgent</li>
- <li id="does-menu" hidden>Answers questions about hours, menu, stock, deals and directions</li>
- <li>Emails you a summary and transcript so you can call back. Text summaries are coming soon.</li>
- <li class="no" id="does-never">Never quotes prices or books a job without you</li>
+ <li>Gets the address or city and what they need</li>
+ <li id="does-menu" hidden>Answers hours and directions and explains the 21-and-over rule</li>
+ <li>Emails you a summary and transcript so you can call back.</li>
+ <li class="no" id="does-never">Never quotes prices, never diagnoses, never takes payment</li>
 </ul>
 
 <h2>Who sets it up</h2>
@@ -143,8 +149,8 @@ var W=52/12, $=function(i){return document.getElementById(i)};
 var trade="towing";
 var STD_LEDE="Pick your trade, type in three numbers you know better than anyone, and see your own estimate. No industry averages, no guesses from me.";
 var APPT_LEDE="These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who'd book is an estimate.";
-var STD_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices or books jobs without you. It takes the message; you make the call.";
-var DISP_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It answers questions about hours, menu, stock, deals and directions. It never gives medical advice and never takes phone sales. It takes the message; you make the call.";
+var STD_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices, never diagnoses and never takes payment. It takes the message; you make the call.";
+var DISP_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It answers hours and directions and explains the 21-and-over rule. It never quotes prices, never gives medical advice and never takes payment. It takes the message; you make the call.";
 var BOOK_HINT="Of those missed callers, how many would have booked? 20% is an estimate.";
 var PRESETS={
  dispensary:{day:12,miss:30,book:20,ticket:46,booked:"bought",verb:"buy",result:"Purchases",
@@ -154,11 +160,11 @@ var PRESETS={
   ticketHint:"Flowhub Oregon median order. Headset's US average basket is about $47.",
   lede:"These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who would've bought is an estimate.",
   straight:DISP_STRAIGHT,
-  extra:"Answers questions about hours, menu, stock, deals and directions",
-  never:"Never gives medical advice and never takes phone sales"},
+  extra:"Answers hours and directions and explains the 21-and-over rule",
+  never:"Never quotes prices, never gives medical advice, never takes payment"},
  restaurant:{day:10,miss:30,book:20,ticket:20,booked:"ordered or booked",verb:"order or book",result:"Orders",
-  dayHint:"Incoming calls on a typical day. 10 is an estimate for a small-town cafe. Slang's restaurant phone report averages about 1,220 calls a month, roughly 40 a day.",
-  missHint:"Conservative. Slang, citing Reachify, puts unanswered restaurant calls around 43%. Slang's own report also finds about 14% of calls after hours and about 12% while another call is already going.",
+  dayHint:"Incoming calls on a typical day. 10 is an estimate for a small-town cafe.",
+  missHint:"A conservative starting point you can change.",
   bookHint:"Of those missed callers, how many would have ordered or booked? 20% is an estimate.",
   ticketHint:"Toast's casual full-service range is about $15 to $30 a person. $20 is toward the low end, for one guest.",
   lede:"These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who'd order or book is an estimate.",
@@ -171,24 +177,24 @@ var PRESETS={
   bookHint:BOOK_HINT,
   ticketHint:"Zenoti's 2024 benchmark: $43 average ticket at an average-earning salon.",
   lede:APPT_LEDE,straight:STD_STRAIGHT,
-  extra:"Asks the service and which days work. It never books the chair.",
-  never:"Never quotes a price or books the chair without you"},
+  extra:"Asks the service and which days work. You confirm every booking.",
+  never:"Never quotes a price or takes payment. You confirm every booking."},
  barber:{day:6,miss:30,book:20,ticket:31,booked:"booked",verb:"book",result:"Appointments",
   dayHint:"Incoming calls on a typical day. 6 is an estimate. A lot of clients walk in.",
   missHint:"30% is an estimate, kept under Zenoti's 37% salon-and-spa unanswered rate.",
   bookHint:BOOK_HINT,
-  ticketHint:"Zenoti's 2024 benchmark: $31 at an average-earning barbershop. SQUIRE's 2026 U.S. average cut is $43.",
+  ticketHint:"Zenoti's 2024 benchmark: $31 at an average-earning barbershop.",
   lede:APPT_LEDE,straight:STD_STRAIGHT,
-  extra:"Asks the cut and which days work. It never books the chair.",
-  never:"Never quotes a price or books the chair without you"},
+  extra:"Asks the cut and which days work. You confirm every booking.",
+  never:"Never quotes a price or takes payment. You confirm every booking."},
  "pet grooming":{day:5,miss:30,book:20,ticket:75,booked:"booked",verb:"book",result:"Appointments",
   dayHint:"Incoming calls on a typical day. 5 is an estimate for a small grooming shop.",
   missHint:"A conservative estimate. 411 Locals/Numa report about 62% of small business calls go unanswered.",
   bookHint:BOOK_HINT,
   ticketHint:"Gingr uses $75 as the average ticket in its dog-grooming example.",
   lede:APPT_LEDE,straight:STD_STRAIGHT,
-  extra:"Asks the pet's breed, size, and service. It never quotes a price or books the appointment.",
-  never:"Never quotes a price or books the appointment without you"}
+  extra:"Asks the pet's breed, size, and service. It never quotes a price. You confirm every booking.",
+  never:"Never quotes a price or takes payment. You confirm every booking."}
 };
 function money(n){return "$"+Math.round(n).toLocaleString("en-US")}
 function num(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0}
@@ -200,7 +206,7 @@ function calc(){
  var p=PRESETS[trade], d=!!p;
  $("std-fields").hidden=d; $("disp-fields").hidden=!d;
  $("does-menu").hidden=!d;
- $("does-never").textContent=d?p.never:"Never quotes prices or books a job without you";
+ $("does-never").textContent=d?p.never:"Never quotes prices, never diagnoses, never takes payment";
  $("straight-body").textContent=d?p.straight:STD_STRAIGHT;
  $("lede").textContent=d?p.lede:STD_LEDE;
  $("lost-label").textContent=(d?p.result:"Jobs")+" lost per month";
@@ -217,11 +223,11 @@ function calc(){
   var perDay=num("calls-day"), miss=Math.min(num("miss"),100)/100;
   pct=Math.min(num("buy"),100)/100; j=num("ticket");
   c=perDay*miss*7; jobs=c*W*pct; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
-  math="<b>The math, out in the open:</b> "+tidy(perDay)+" calls/day × "+Math.round(miss*100)+"% missed × 7 days = "+tidy(c)+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd "+p.verb+" × "+money(j)+" average ticket = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.";
+  math="<b>The math, out in the open:</b> "+tidy(perDay)+" calls/day × "+Math.round(miss*100)+"% missed × 7 days = "+tidy(c)+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd "+p.verb+" × "+money(j)+" average ticket = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. $129/mo. No setup fee, no minimum. First week free.";
  }else{
   c=num("calls"); j=num("job"); pct=Math.min(num("pct"),100)/100;
   jobs=c*W*pct; mo=jobs*j; yr=mo*12; be=j>0?129/j:0;
-  math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. Founders pricing is for our first founding shops: first week free, setup fee waived ($199 value), then $129/mo, no contract.";
+  math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W.toFixed(2)+" weeks/month (52 weeks ÷ 12) × "+Math.round(pct*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. $129/mo. No setup fee, no minimum. First week free.";
  }
  $("mo").textContent=money(mo); $("yr").textContent=money(yr);
  $("jobs").textContent=jobs.toFixed(1); $("be").textContent=j>0?be.toFixed(1):"–";
@@ -234,7 +240,7 @@ function calc(){
 }
 /* Add a calculator trade by appending one object. t must match a PRESETS key when that trade has one. */
 var TRADES=[
- {t:"dispensary",name:"Dispensary",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_5301m6p9fbbyetprh73ngb4dbxge"},
+ {t:"dispensary",name:"Dispensary",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6601m732qh8ted69rqzd4qq1kxm5"},
  {t:"restaurant",name:"Restaurant",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs"},
  {t:"auto repair",name:"Auto repair",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p"},
  {t:"electrical",name:"Electrical",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3"},
