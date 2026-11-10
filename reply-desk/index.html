@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Offline safety: this page may not load or contact anything outside itself. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Review Replies">
+<meta name="theme-color" content="#0B1F3A">
+<meta name="format-detection" content="telephone=no">
+<title>Review Replies · Dojo Receptionist</title>
+<link id="touchIcon" rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%230B1F3A'/%3E%3Cpath d='M38 44h104a12 12 0 0 1 12 12v56a12 12 0 0 1-12 12H84l-28 22v-22H38a12 12 0 0 1-12-12V56a12 12 0 0 1 12-12z' fill='%23D4AF37'/%3E%3Cpath d='M90 58l8.8 17.8 19.7 2.9-14.2 13.9 3.4 19.6L90 102.9l-17.7 9.3 3.4-19.6-14.2-13.9 19.7-2.9z' fill='%230B1F3A'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%230B1F3A'/%3E%3Cpath d='M38 44h104a12 12 0 0 1 12 12v56a12 12 0 0 1-12 12H84l-28 22v-22H38a12 12 0 0 1-12-12V56a12 12 0 0 1 12-12z' fill='%23D4AF37'/%3E%3Cpath d='M90 58l8.8 17.8 19.7 2.9-14.2 13.9 3.4 19.6L90 102.9l-17.7 9.3 3.4-19.6-14.2-13.9 19.7-2.9z' fill='%230B1F3A'/%3E%3C/svg%3E">
+<style>
+:root{
+  --navy:#0B1F3A; --navy2:#12294B; --navy3:#1B3760; --line:#2A4670;
+  --gold:#D4AF37; --gold2:#F0CF5C; --white:#FFFFFF; --muted:#B9C6DA;
+  --bad:#FF8A80; --ok:#7EE2A8; --warnbg:#3A2A0B;
+  --r:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--navy);color:var(--white)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:1.45;
+  padding-bottom:calc(84px + env(safe-area-inset-bottom));-webkit-text-size-adjust:100%}
+header{position:sticky;top:0;z-index:5;background:var(--navy);padding:calc(10px + env(safe-area-inset-top)) 16px 10px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+.mark{width:36px;height:36px;border-radius:9px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex:none}
+.brand{font-weight:700;font-size:18px;letter-spacing:.2px}
+.brand small{display:block;font-weight:500;font-size:13px;color:var(--gold);letter-spacing:1.2px;text-transform:uppercase}
+main{padding:14px 16px 24px;max-width:560px;margin:0 auto}
+h1{font-size:24px;margin:4px 0 12px}
+h2{font-size:19px;margin:20px 0 8px;color:var(--gold)}
+label,.lbl{display:block;font-weight:600;font-size:16px;margin:16px 0 6px}
+.hint{font-size:14px;color:var(--muted);margin:4px 0 0}
+input[type=text],input[type=tel],input[type=password],input[type=month],select,textarea{
+  width:100%;min-height:48px;font-size:17px;font-family:inherit;color:var(--white);background:var(--navy2);
+  border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;outline:none;-webkit-appearance:none;appearance:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px;background-size:6px 6px;background-repeat:no-repeat;padding-right:38px}
+textarea{min-height:120px;resize:vertical;line-height:1.45}
+::placeholder{color:#7F93B3}
+button{font-family:inherit;font-size:17px;font-weight:650;min-height:48px;min-width:44px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--navy3);color:var(--white);padding:10px 16px;cursor:pointer}
+button:active{transform:scale(.98)}
+button.primary{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+button.primary:disabled{background:#6B5D2C;border-color:#6B5D2C;color:#2A2A2A}
+button.ghost{background:transparent}
+button.danger{background:transparent;border-color:#7A3B3B;color:var(--bad)}
+button.block{width:100%}
+.row{display:flex;gap:10px}
+.row>*{flex:1}
+.stars{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.stars button{min-height:60px;font-size:20px;padding:4px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.stars button span{font-size:12px;color:var(--muted);font-weight:600}
+.stars button.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.stars button.on span{color:var(--navy)}
+.seg{display:flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{flex:1;border:0;border-radius:0;background:var(--navy2);min-height:46px}
+.seg button+button{border-left:1.5px solid var(--line)}
+.seg button.on{background:var(--gold);color:var(--navy)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{min-height:44px;border-radius:22px;padding:8px 14px;font-size:16px;font-weight:600;background:var(--navy2);border:1.5px solid var(--line);color:var(--white);text-align:left}
+.chip.on{border-color:var(--gold);color:var(--gold2)}
+.chip.bad{border-color:#7A3B3B;color:var(--bad)}
+.card{background:var(--navy2);border:1.5px solid var(--line);border-radius:var(--r);padding:14px;margin:14px 0}
+.card{scroll-margin-top:90px}
+.card h3{margin:0 0 8px;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
+.card textarea{background:var(--navy);min-height:170px}
+.warn{background:var(--warnbg);border:1.5px solid #8A6A1C;color:#FFE08A;border-radius:12px;padding:10px 12px;font-size:15px;margin-top:10px}
+.err{background:#3A1418;border:1.5px solid #7A3B3B;color:#FFC2BC;border-radius:12px;padding:10px 12px;font-size:15px;margin-top:10px}
+.okline{color:var(--ok);font-size:14px;margin-top:8px}
+.hidden{display:none!important}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#081830;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+nav button{background:transparent;border:0;min-height:56px;font-size:14px;font-weight:600;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px}
+nav button svg{width:24px;height:24px}
+nav button.on{color:var(--gold)}
+.shopitem{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.shopitem .meta{font-size:14px;color:var(--muted)}
+.shopitem .name{font-weight:700;font-size:18px}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.stat div{background:var(--navy2);border:1.5px solid var(--line);border-radius:var(--r);padding:14px;text-align:center}
+.stat b{display:block;font-size:34px;color:var(--gold);line-height:1.1}
+.stat span{font-size:14px;color:var(--muted)}
+.logitem{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border-top:1px solid var(--line);padding:12px 0}
+.logitem>div{flex:1;min-width:0}
+.logitem button{flex:none;padding:10px 16px}
+.logitem p{margin:2px 0 0;font-size:15px;color:var(--muted)}
+.toast{font-size:16px;position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--gold);color:var(--navy);font-weight:700;padding:12px 18px;border-radius:24px;z-index:20;max-width:90%;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px}
+.switch input{width:52px;height:32px;-webkit-appearance:none;appearance:none;background:var(--line);border-radius:16px;position:relative;flex:none;cursor:pointer}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:#fff;transition:left .15s}
+.switch input:checked{background:var(--gold)}
+.switch input:checked::after{left:23px}
+.placeholder-tag{display:inline-block;background:#5A1E1E;color:#FFC2BC;font-size:12px;font-weight:800;letter-spacing:1px;padding:3px 8px;border-radius:6px;margin-bottom:6px}
+.empty{color:var(--muted);text-align:center;padding:20px 8px}
+</style>
+</head>
+<body>
+<header>
+  <div class="mark" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#0B1F3A"/><path d="M12 6.6l1.3 2.6 2.9.4-2.1 2 .5 2.9-2.6-1.4-2.6 1.4.5-2.9-2.1-2 2.9-.4z" fill="#D4AF37"/></svg>
+  </div>
+  <div class="brand"><small>Dojo Receptionist</small>Review Replies</div>
+</header>
+
+<main>
+<!-- ============ REPLY VIEW ============ -->
+<section id="view-reply">
+  <div id="noShops" class="card hidden">
+    <h3>Start here</h3>
+    <p style="margin:0 0 12px">Add a shop first. Its owner name, tone, phone and sign-off shape every reply.</p>
+    <button class="primary block" data-goto="shops" data-newshop="1">Add a shop</button>
+  </div>
+  <div id="replyForm">
+    <label for="shopSel">Shop</label>
+    <select id="shopSel"></select>
+
+    <label for="review">Paste the review</label>
+    <textarea id="review" placeholder="Paste the Google review here…"></textarea>
+
+    <div class="lbl">Star rating <span style="color:var(--gold)">*</span></div>
+    <div class="stars" id="stars" role="radiogroup" aria-label="Star rating">
+      <button type="button" data-star="1" role="radio">1★<span>Poor</span></button>
+      <button type="button" data-star="2" role="radio">2★<span>Fair</span></button>
+      <button type="button" data-star="3" role="radio">3★<span>OK</span></button>
+      <button type="button" data-star="4" role="radio">4★<span>Good</span></button>
+      <button type="button" data-star="5" role="radio">5★<span>Great</span></button>
+    </div>
+
+    <label for="reviewer">Reviewer's first name <span class="hint" style="display:inline">(optional)</span></label>
+    <input type="text" id="reviewer" autocomplete="off" autocapitalize="words" placeholder="e.g. Jordan">
+
+    <div class="lbl">Reply language</div>
+    <div class="seg" id="langSeg">
+      <button type="button" data-lang="auto" class="on">Auto</button>
+      <button type="button" data-lang="en">English</button>
+      <button type="button" data-lang="es">Español</button>
+    </div>
+    <p class="hint" id="langNote">Paste a review to detect its language.</p>
+
+    <label for="detail">Detail to mention</label>
+    <p class="hint" style="margin-top:-2px">Tap one from the review, or type your own. Every reply names it.</p>
+    <div class="chips" id="chips"></div>
+    <input type="text" id="detail" autocomplete="off" placeholder="e.g. the brake job" style="margin-top:10px">
+    <div id="detailWarn" class="warn hidden"></div>
+
+    <div id="genErr" class="err hidden"></div>
+    <div class="row" style="margin-top:18px">
+      <button class="primary" id="genBtn" style="flex:2">Generate 2 replies</button>
+      <button id="shuffleBtn" class="hidden" aria-label="Shuffle wording">⟳ Shuffle</button>
+    </div>
+    <div id="results"></div>
+  </div>
+</section>
+
+<!-- ============ SHOPS VIEW ============ -->
+<section id="view-shops" class="hidden">
+  <h1>Your shops</h1>
+  <div id="shopList"></div>
+  <button class="primary block" id="addShopBtn" style="margin-top:6px">+ Add a shop</button>
+
+  <form id="shopForm" class="card hidden" autocomplete="off" onsubmit="return false">
+    <h3 id="shopFormTitle">New shop</h3>
+    <input type="hidden" id="f_id">
+    <label for="f_name">Shop name *</label>
+    <input type="text" id="f_name" placeholder="e.g. Ridgeline Auto Care">
+    <label for="f_owner">Owner first name *</label>
+    <input type="text" id="f_owner" autocapitalize="words" placeholder="e.g. Dave">
+    <label for="f_tone">Tone</label>
+    <select id="f_tone"><option value="friendly">Friendly</option><option value="formal">Formal</option><option value="playful">Playful</option></select>
+    <label for="f_signoff">Sign-off *</label>
+    <input type="text" id="f_signoff" placeholder="— Maria, owner">
+    <label for="f_phone">Shop phone *</label>
+    <input type="tel" id="f_phone" placeholder="(541) 555-0100">
+    <p class="hint">Used in every 1–3★ reply to invite a call.</p>
+    <label for="f_lang">Language preference</label>
+    <select id="f_lang"><option value="auto">Auto (match the review)</option><option value="en">Always English</option><option value="es">Always Spanish</option></select>
+    <label for="f_keywords">Things we do <span class="hint" style="display:inline">(optional, commas)</span></label>
+    <input type="text" id="f_keywords" placeholder="brakes, oil change, fade">
+    <label for="f_avoid">Words to avoid <span class="hint" style="display:inline">(optional, commas)</span></label>
+    <input type="text" id="f_avoid" placeholder="cheap, guys">
+    <div id="shopErr" class="err hidden"></div>
+    <div class="row" style="margin-top:16px">
+      <button type="button" class="ghost" id="cancelShop">Cancel</button>
+      <button type="button" class="primary" id="saveShop">Save shop</button>
+    </div>
+  </form>
+
+  <h2>Backup</h2>
+  <p class="hint" style="margin-top:0">Your shops and history live only on this phone. Safari can clear them, so save a backup now and then.</p>
+  <div class="row" style="margin-top:10px">
+    <button id="exportBtn">Export JSON</button>
+    <button id="importBtn">Import JSON</button>
+  </div>
+  <button class="ghost block" id="copyBackupBtn" style="margin-top:10px">Copy backup as text</button>
+  <input type="file" id="importFile" accept="application/json,.json,text/plain" class="hidden">
+  <details style="margin-top:10px"><summary style="min-height:44px;line-height:44px;color:var(--muted)">Paste a backup instead</summary>
+    <textarea id="importText" placeholder="Paste backup JSON here"></textarea>
+    <button class="block" id="importTextBtn" style="margin-top:8px">Import pasted backup</button>
+  </details>
+</section>
+
+<!-- ============ STATS VIEW ============ -->
+<section id="view-stats" class="hidden">
+  <h1>Monthly stats</h1>
+  <label for="statShop">Shop</label>
+  <select id="statShop"></select>
+  <label for="statMonth">Month</label>
+  <input type="month" id="statMonth">
+  <div class="stat">
+    <div><b id="statCount">0</b><span>reviews answered</span></div>
+    <div><b id="statAvg">–</b><span>star average</span></div>
+  </div>
+  <h2>Posted replies</h2>
+  <div id="logList"></div>
+</section>
+
+<!-- ============ SETTINGS VIEW ============ -->
+<section id="view-settings" class="hidden">
+  <h1>Settings</h1>
+  <div class="card">
+    <h3>Reply engine</h3>
+    <p style="margin:0">Template mode is on. Replies are written on this phone from built-in templates. No internet needed.</p>
+  </div>
+  <div class="card">
+    <span class="placeholder-tag">PLACEHOLDER</span>
+    <h3 style="text-transform:none;letter-spacing:0;font-size:17px">AI polish (optional): paste a free-tier API key</h3>
+    <div class="switch"><span>Turn on AI polish (Google Gemini free tier)</span><input type="checkbox" id="aiToggle" aria-label="Turn on AI polish"></div>
+    <div id="aiBox" class="hidden">
+      <label for="aiKey">Gemini API key</label>
+      <input type="password" id="aiKey" autocomplete="off" placeholder="Paste key (stays on this phone)">
+      <p class="hint">PLACEHOLDER: not active yet. Even with a key, this version sends nothing anywhere. The key is kept only in this phone's storage.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Danger zone</h3>
+    <button class="danger block" id="wipeBtn">Erase all data on this phone</button>
+  </div>
+  <p class="hint" style="text-align:center">Review Replies v1.0 · Works offline · Data stays on this device</p>
+</section>
+</main>
+
+<nav id="tabs">
+  <button data-tab="reply" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>Reply</button>
+  <button data-tab="shops"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10l2-6h14l2 6M4 10v10h16V10M3 10h18"/></svg>Shops</button>
+  <button data-tab="stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Stats</button>
+  <button data-tab="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>Settings</button>
+</nav>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+/* =====================================================================
+   Review Replies — Dojo Receptionist
+   Single file, offline. All data in localStorage on this device.
+   ===================================================================== */
+
+/* ---------------- storage ---------------- */
+const K = {shops:'drr.shops', log:'drr.log', settings:'drr.settings'};
+const mem = {};
+function load(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return mem[k] !== undefined ? mem[k] : d; } }
+function save(k, v){ mem[k] = v; try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){ toast('Could not save on this phone (storage full or private mode).'); } }
+let shops = load(K.shops, []);
+let postLog = load(K.log, []);
+let settings = Object.assign({aiEnabled:false, aiKey:''}, load(K.settings, {}));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+/* ---------------- text helpers ---------------- */
+const norm = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const splitList = s => (s || '').split(',').map(x => x.trim()).filter(Boolean);
+// word-boundary test on accent-stripped lowercase text
+function hasTerm(text, term){
+  const t = norm(term).trim(); if(!t) return false;
+  const pre = /^[a-z0-9]/.test(t) ? '(^|[^a-z0-9])' : '';
+  const post = /[a-z0-9]$/.test(t) ? '(?=$|[^a-z0-9])' : '';
+  return new RegExp(pre + reEsc(t) + post).test(norm(text));
+}
+
+/* ---------------- language detection ---------------- */
+const EN_SW = 'the and is was were my i to of for with they very it you this that but not have had he she we our got did are be at on so just me an in great good best service recommend highly would will'.split(' ');
+const ES_SW = 'el la los las y es fue mi mis muy de que con por para me no pero una un del al lo se le su sus todo nos excelente servicio gracias muy bien recomiendo atencion hizo esta este quedo uñas siempre'.split(' ');
+function detectLang(text){
+  const words = norm(text).match(/[a-zñ]+/g) || [];
+  let en = 0, es = 0;
+  const enS = new Set(EN_SW), esS = new Set(ES_SW.map(norm));
+  for(const w of words){ if(enS.has(w)) en++; if(esS.has(w)) es++; }
+  if(/[ñ¿¡]/i.test(text)) es += 2;
+  es += ((text || '').match(/[áéíóú]/gi) || []).length * 0.5;
+  if(!words.length) return null;
+  return es > en ? 'es' : 'en';
+}
+
+/* ---------------- detail extraction (no AI) ---------------- */
+const DET = new Set(['the','my','our','your','his','her','el','la','los','las','mi','mis','nuestro','nuestra','nuestros','nuestras']);
+const INDEF = {a:'the', an:'the', un:'el', una:'la', unos:'los', unas:'las'};
+const STOP = new Set(('a an the and or but so to of for in on at by with from as is was were are be been being it its this that these those there here '+
+ 'i me my we our you your he she they them his her their very really so too just also not no yes all any some more most much many '+
+ 'did do does done had has have got get gets made make took take came come went go said told asked waited wait '+
+ 'back out up down over again then than when while after before because since until about into only even still '+
+ 'great good best nice amazing awesome excellent terrible bad worst horrible ok okay fine super highly definitely '+
+ 'el la los las y o pero de del al en con por para que es fue era son estaba estuvo muy mas menos lo le les se su sus mi mis me nos '+
+ 'un una unos unas este esta esto ese esa como cuando donde porque pues ya tambien solo todo toda todos todas hizo hicieron dio '+
+ 'excelente bueno buena malo mala mejor peor muy super bien mal nada nunca siempre otra otro vez dias dia').split(' '));
+const GENERIC = new Set(['best','worst','time','way','day','end','same','other','first','last','place','thing','things','one','lot',
+  'mejor','peor','vez','verdad','cosa','cosas','lugar','dia','dias','rato','hora','horas']);
+const VERBISH = new Set(['fixed','did','was','helped','took','made','is','got','went','explained','handled','hizo','atendio','fue','me','nos','arreglo','ayudo','explico','was','gave']);
+
+function tokenize(text){
+  // tokens with sentence-start flag
+  const out = []; const re = /([A-Za-zÀ-ÿñÑ'’]+)|([.!?\n]+)|([,;:()"“”]+)/g; let m, start = true;
+  while((m = re.exec(text))){
+    if(m[1]) { out.push({w:m[1], n:norm(m[1]).replace(/[’']/g,''), start, i:m.index}); start = false; }
+    else if(m[2]) { out.push({p:'.'}); start = true; }
+    else out.push({p:','});
+  }
+  return out;
+}
+function phraseText(toks){
+  return toks.map((t, k) => {
+    if(k === 0 && INDEF[t.n]) return INDEF[t.n];
+    return t.w;
+  }).join(' ');
+}
+function extractDetails(review, shop){
+  const toks = tokenize(review || '');
+  const cands = [];
+  const add = (text, score, kind) => {
+    text = text.replace(/\s+/g, ' ').trim(); if(!text || text.length < 3) return;
+    const key = norm(text).replace(/^(the|my|our|el|la|los|las|mi|mis) /, '');
+    const ex = cands.find(c => c.key === key || c.key.includes(key) && kind !== 'name' && c.kind !== 'name' && c.score >= score);
+    if(ex){ if(score > ex.score){ ex.score = score; ex.text = text; } return; }
+    cands.push({text, score, kind, key});
+  };
+  const words = toks.map((t, i) => ({...t, idx:i})).filter(t => t.w);
+  // 1) shop keyword matches (with leading determiner and, for Spanish, a trailing adjective)
+  const kws = splitList(shop && shop.keywords).map(k => norm(k).split(/\s+/));
+  for(const kw of kws){
+    for(let i = 0; i < toks.length; i++){
+      let ok = true;
+      for(let j = 0; j < kw.length; j++){ const t = toks[i+j]; if(!t || !t.w || !(t.n === kw[j] || (j === kw.length-1 && t.n.startsWith(kw[j]) && t.n.length - kw[j].length <= 2))) { ok = false; break; } }
+      if(!ok) continue;
+      let s = i, e = i + kw.length - 1;
+      // walk left over adjectives up to a determiner (max 3 words)
+      for(let b = 1; b <= 3; b++){
+        const t = toks[i-b]; if(!t || !t.w) break;
+        if(DET.has(t.n) || INDEF[t.n]) { s = i - b; break; }
+        if(STOP.has(t.n)) break;
+      }
+      // Spanish-style trailing adjective (precioso, perfecta…) — only when phrase starts with a Spanish determiner
+      const nx = toks[e+1];
+      const sp = toks[s] && ['el','la','los','las','mi','mis','un','una','unos','unas','nuestro','nuestra'].includes(toks[s].n);
+      if(sp && nx && nx.w && !STOP.has(nx.n) && nx.n.length >= 4 && /(o|a|os|as|e|es|al|ble)$/.test(nx.n)) e = e + 1;
+      add(phraseText(toks.slice(s, e+1)), 100 + (e - s), 'keyword');
+    }
+  }
+  // 2) staff names: capitalized words
+  for(let k = 0; k < words.length; k++){
+    const t = words[k];
+    if(!/^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+$/.test(t.w) || t.w.length < 3) continue;
+    if(STOP.has(t.n) || GENERIC.has(t.n)) continue;
+    if(shop && norm(shop.name).split(/\s+/).includes(t.n)) continue;
+    if(shop && norm(shop.owner) === t.n) continue;
+    const lowerElsewhere = words.some(o => o.w === t.w.toLowerCase());
+    if(lowerElsewhere) continue;
+    if(t.start){ const nx = words[k+1]; if(!(nx && (VERBISH.has(nx.n) || nx.n === 'and' || nx.n === 'y'))) continue; }
+    add(t.w, 80, 'name');
+  }
+  // 3) noun-ish phrases after determiners
+  for(let i = 0; i < toks.length; i++){
+    const t = toks[i]; if(!t.w || !DET.has(t.n)) continue;
+    const ph = [t];
+    for(let j = i + 1; j < toks.length && ph.length < 4; j++){
+      const u = toks[j]; if(!u.w || STOP.has(u.n) || DET.has(u.n)) break;
+      ph.push(u);
+    }
+    const content = ph.slice(1);
+    if(!content.length || content.every(c => GENERIC.has(c.n) || c.n.length < 3)) continue;
+    add(phraseText(ph), 50 + content.length * 3, 'phrase');
+  }
+  // penalise anything that contains a banned phrase so it never becomes the default
+  for(const c of cands){ if(bannedHits(c.text, shop).length) { c.score -= 1000; c.banned = true; } }
+  cands.sort((a, b) => b.score - a.score);
+  return cands.slice(0, 8).map(c => ({text:c.text, kind:c.kind, banned:!!c.banned}));
+}
+// The reviewer writes "my car"; the shop replies "your car".
+function povSwap(detail, lang){
+  const map = lang === 'es'
+    ? {mi:'su', mis:'sus', nuestro:'su', nuestra:'su', nuestros:'sus', nuestras:'sus'}
+    : {my:'your', our:'your', me:'you', mine:'yours'};
+  return detail.trim().replace(/[A-Za-zÀ-ÿñÑ]+/g, w => {
+    const r = map[w.toLowerCase()]; if(!r) return w;
+    return w[0] === w[0].toUpperCase() && w.length > 1 ? r[0].toUpperCase() + r.slice(1) : r;
+  }).replace(/[.!?,;:]+$/, '');
+}
+
+/* ---------------- hard-rule scanners ---------------- */
+const BANNED = [
+  // English
+  'discount','discounts','discounted','coupon','coupons','free','freebie','freebies','% off','percent off','gift card','gift cards',
+  'giftcard','promo','promos','promotion','promo code','voucher','vouchers','complimentary','on the house','store credit','refund','refunds',
+  'reward','rewards','in exchange for','incentive','half off','half price','bogo',
+  // Spanish (accents are stripped before matching, so cupón == cupon)
+  'descuento','descuentos','cupon','cupones','gratis','gratuito','gratuita','regalo','regalos','tarjeta de regalo','promocion','promociones',
+  'oferta','ofertas','rebaja','rebajas','reembolso','a cambio de','de cortesia','obsequio','premio'
+];
+const BLAME = [
+  'actually','you failed','our records show','our records indicate','records show','you should have','you didn\'t','you didnt','you did not',
+  'your fault','to be fair','in fact','however you','however, you','as you know','as stated','clearly','you misunderstood','misunderstanding on your',
+  'policy clearly','no-show','unfortunately you',
+  'sin embargo usted','sin embargo, usted','en realidad','de hecho','nuestros registros','segun nuestros registros','su culpa','usted debio',
+  'usted deberia','deberia haber','usted fallo','usted no','claramente','como usted sabe','malentendido de su parte'
+];
+function bannedHits(text, shop){
+  const hits = BANNED.filter(b => hasTerm(text, b));
+  const avoid = splitList(shop && shop.avoid).filter(a => hasTerm(text, a)).map(a => 'avoid: ' + a);
+  return hits.concat(avoid);
+}
+const blameHits = text => BLAME.filter(b => hasTerm(text, b));
+
+// Validate one finished reply against every rule. Returns a list of problems (empty = passes).
+function validateReply(text, ctx){
+  const p = []; const n = norm(text);
+  if(!/(^|[^a-z])(thank|thanks|grateful)|gracias|agradec/.test(n)) p.push('missing thank-you');
+  if(!ctx.detailOut || !n.includes(norm(ctx.detailOut))) p.push('missing the review detail');
+  const b = bannedHits(text, ctx.shop); if(b.length) p.push('banned wording: ' + b.join(', '));
+  if(ctx.signoff && !text.includes(ctx.signoff)) p.push('missing sign-off');
+  if(ctx.stars <= 3){
+    const bl = blameHits(text); if(bl.length) p.push('blame wording: ' + bl.join(', '));
+    if(!(ctx.shop.phone && text.includes(ctx.shop.phone))) p.push('missing call-us phone');
+    if(!hasTerm(text, ctx.shop.owner)) p.push('missing owner name');
+    if(!/sorry|apolog|regret|lament|disculp|siento|sentimos/.test(n)) p.push('missing apology');
+  }
+  return p;
+}
+
+/* ---------------- template banks: tone × sentiment × language ----------------
+   Tokens: {N} → ", Name" or ""   {N,} → ", Name," or ""   {D} detail   {S} shop   {O} owner   {P} phone
+   pos = 4–5★ (thanks, detail, invite back) · neg = 1–3★ (thanks, apology + detail, call invite with phone + owner)
+   Rules: never "free", never blame, Spanish uses usted / neutral forms (no tú).                                   */
+const T = {
+ en:{
+  friendly:{
+   pos:{o:["Thank you so much{N}!","Thanks a ton for the kind words{N}!","Thank you{N,} for taking the time to leave this review!","We really appreciate you{N}, and thanks for the great review!"],
+        d:["It means a lot to hear about {D}.","We loved reading what you said about {D}.","Hearing that {D} stood out made our day.","Your shout-out about {D} put a big smile on the whole team."],
+        c:["We can't wait to see you again at {S}!","Come back and see us anytime.","See you next time, we'll be here whenever you need us.","Hope to see you again soon at {S}!"]},
+   neg:{o:["Thank you{N,} for letting us know, and I'm really sorry about your visit.","Thanks for sharing this{N}, and I'm sorry we didn't get it right.","Thank you for taking the time to write this{N}.","Thank you for the honest feedback{N}, and please accept my apology."],
+        d:["I'm sorry to hear about {D}; that's not the experience we want for anyone.","What you shared about {D} matters to us, and I'm sorry it fell short.","I apologize that your experience with {D} wasn't what you expected.","I want to look into {D} personally, and I'm sorry for the frustration."],
+        c:["Please give us a call at {P} and ask for {O}. I'd like to make this right.","If you're open to it, call the shop at {P} and ask for me, {O}, so we can talk it through.","I'd really like to hear more, so please call {P} and ask for {O}.","Could you give me a call at {P}? Just ask for {O} and I'll help you personally."]}},
+  formal:{
+   pos:{o:["Thank you{N,} for your kind review.","Thank you very much for taking the time to share your experience{N}.","We sincerely appreciate your review{N}, and thank you for choosing {S}.","Thank you{N,} for your thoughtful feedback."],
+        d:["We are especially pleased to read your comments about {D}.","Your remarks regarding {D} are greatly appreciated by our entire team.","It is gratifying to know that {D} met your expectations.","We will be sure to share your words about {D} with the team."],
+        c:["We look forward to welcoming you back.","We would be glad to serve you again at {S}.","We hope to have the pleasure of seeing you again soon.","Please do not hesitate to visit us again whenever you need us."]},
+   neg:{o:["Thank you{N,} for bringing this to our attention, and please accept my sincere apologies.","Thank you for your feedback{N}. I apologize that your visit fell short of our standards.","Thank you{N,} for sharing your experience; I am sorry it was not a positive one.","Thank you for your candid review{N}."],
+        d:["I am sorry to learn about {D}.","Please accept my apologies regarding {D}; that is not the level of service we intend to provide.","I sincerely regret that your experience with {D} did not meet your expectations.","Your comments about {D} are important to me, and I apologize for the inconvenience."],
+        c:["I would welcome the opportunity to speak with you directly; please call {P} and ask for {O}.","Please contact us at {P} and ask for {O} so that we may address this properly.","Kindly call the shop at {P} and ask for {O}; I would like to resolve this with you personally.","I invite you to call {P} and ask for {O} at your convenience."]}},
+  playful:{
+   pos:{o:["Wow{N}, thank you!","Thanks a million{N}!","You just made our week{N}. Thank you!","Thank you{N}! This review is going straight on the fridge."],
+        d:["Your shout-out about {D} has us grinning ear to ear.","We're doing a little happy dance over what you said about {D}.","Hearing about {D} is exactly the kind of news we live for.","Love that {D} got a mention!"],
+        c:["Swing by {S} again soon!","Come back anytime, we'll keep the good stuff coming.","Can't wait for round two!","See you next time at {S}!"]},
+   neg:{o:["Thank you{N,} for telling it like it is, and I'm sorry we missed the mark.","Thanks for the honest review{N}. I'm sorry this one went sideways.","Thank you{N}; this isn't the visit we want for anyone, and I'm sorry.","Thank you for sharing this{N}, and I'm sorry we dropped the ball."],
+        d:["I'm sorry about {D}, and it's on us to look into it.","What you said about {D} is exactly what I need to hear, and I apologize.","I apologize for how things went with {D}.","Your note about {D} deserves a real answer, and I'm sorry it happened."],
+        c:["Give us a ring at {P} and ask for {O}. I'd love the chance to make it right.","Call {P} and ask for {O}; I'll personally look into this with you.","Please ring the shop at {P} and ask for {O} so we can sort it out together.","I'd love to chat, so call {P} and ask for {O} anytime."]}}
+ },
+ es:{
+  friendly:{
+   pos:{o:["¡Muchísimas gracias{N}!","¡Gracias{N,} por esta reseña tan bonita!","¡Qué alegría leer esto{N}! Gracias de corazón.","¡Mil gracias por sus palabras{N}!"],
+        d:["Nos encantó leer lo que comparte sobre {D}.","Nos hace muy felices saber que {D} fue de su agrado.","Su comentario sobre {D} nos alegró el día.","Todo el equipo celebra lo que dice sobre {D}."],
+        c:["¡Le esperamos pronto en {S}!","¡Hasta la próxima visita!","Aquí estaremos para su próxima cita.","¡Nos vemos pronto!"]},
+   neg:{o:["Gracias{N,} por contarnos, y lo siento mucho.","Muchas gracias por su sinceridad{N}; de verdad lamento que su visita no saliera bien.","Gracias por escribirnos{N}. Siento mucho que no haya sido una buena experiencia.","Agradezco mucho sus comentarios{N}, y le pido una disculpa."],
+        d:["Lamento mucho lo que pasó con {D}.","Lo que menciona sobre {D} es importante para nosotros, y lo sentimos.","Siento que {D} no haya sido como esperaba.","Quiero revisar personalmente lo ocurrido con {D}; disculpe las molestias."],
+        c:["¿Nos puede llamar al {P} y preguntar por {O}? Me encantaría arreglarlo.","Por favor llame al {P} y pregunte por {O} para platicarlo.","Me gustaría escucharle: llame al {P} y pregunte por {O}.","Estamos al {P}; pregunte por {O} y con gusto le atendemos."]}},
+  formal:{
+   pos:{o:["Muchas gracias{N,} por su amable reseña.","Le agradecemos sinceramente que haya compartido su experiencia{N}.","Gracias{N,} por elegir {S} y por sus generosas palabras.","Agradecemos mucho su reseña{N}."],
+        d:["Nos alegra especialmente su comentario sobre {D}.","Compartiremos con todo el equipo sus palabras sobre {D}.","Es un honor saber que {D} cumplió con sus expectativas.","Valoramos mucho lo que menciona sobre {D}."],
+        c:["Será un placer atenderle nuevamente.","Esperamos darle la bienvenida de nuevo en {S} muy pronto.","Le esperamos en su próxima visita.","Quedamos a sus órdenes para su próxima cita."]},
+   neg:{o:["Gracias{N,} por hacernos saber su experiencia; le ofrezco una sincera disculpa.","Le agradezco que haya compartido su opinión{N}; lamento mucho que su visita no haya sido la esperada.","Muchas gracias por sus comentarios{N}; entiendo perfectamente su molestia.","Gracias{N,} por tomarse el tiempo de escribirnos; siento mucho que su experiencia no fuera positiva."],
+        d:["Lamento sinceramente lo sucedido con {D}.","Le pido disculpas por lo ocurrido con {D}; no es el servicio que deseamos ofrecer.","Siento mucho que su experiencia con {D} no cumpliera con sus expectativas.","Sus comentarios sobre {D} son muy importantes para mí, y le ofrezco mis disculpas."],
+        c:["Me gustaría hablar con usted personalmente; por favor llame al {P} y pregunte por {O}.","Le invito a comunicarse al {P} y preguntar por {O} para atenderle como merece.","Por favor, llámenos al {P} y pregunte por {O}; quisiera resolver esto con usted.","Con gusto le atenderé si nos llama al {P}; solo pregunte por {O}."]}},
+  playful:{
+   pos:{o:["¡Wow, gracias{N}!","¡Gracias mil{N}!","¡Nos alegró la semana{N}! Gracias.","¡Gracias{N}! Esta reseña va directo a nuestro muro de favoritos."],
+        d:["Lo que dice sobre {D} nos tiene sonriendo de oreja a oreja.","Estamos bailando de gusto con su comentario sobre {D}.","¡Nos encanta que {D} reciba una mención!","Leer sobre {D} es justo la noticia que nos gusta recibir."],
+        c:["¡Vuelva pronto a {S}!","¡Le esperamos para la segunda ronda!","¡Aquí estaremos para consentirle otra vez!","¡Hasta pronto en {S}!"]},
+   neg:{o:["Gracias{N,} por decirlo tal cual, y lo sentimos de verdad.","Gracias por la reseña honesta{N}; siento que esta vez no saliera bien.","Gracias por avisarnos{N}. Esta no es la visita que queremos para nadie, y lo siento.","Muchas gracias por contarnos{N}, y una disculpa sincera."],
+        d:["Lamento lo ocurrido con {D}; nos toca revisarlo.","Lo que comenta sobre {D} es justo lo que necesito saber, y le pido disculpas.","Le pido una disculpa por cómo salieron las cosas con {D}.","Su comentario sobre {D} merece una respuesta de verdad, y lo siento."],
+        c:["Llámenos al {P} y pregunte por {O}; quiero la oportunidad de arreglarlo.","Marque al {P}, pregunte por {O} y lo resolvemos juntos.","Con gusto lo platicamos: llame al {P} y pregunte por {O}.","Pregunte por {O} al {P}; quiero escucharle."]}}
+ }
+};
+
+function fill(tpl, v){
+  return tpl.replace(/\{N,\}/g, v.name ? ', ' + v.name + ',' : '')
+            .replace(/\{N\}/g, v.name ? ', ' + v.name : '')
+            .replace(/\{D\}/g, v.detail).replace(/\{S\}/g, v.shop).replace(/\{O\}/g, v.owner).replace(/\{P\}/g, v.phone);
+}
+const APOL = ['sorry','apolog','regret','lament','disculp','siento','sentimos'];
+const sameApology = (a, b) => APOL.some(x => norm(a).includes(x) && norm(b).includes(x));
+const cap1 = s => s.replace(/^([¡¿]?)(\p{Ll})/u, (m, a, b) => a + b.toUpperCase());
+
+/* Generate exactly two replies. seed changes the wording (shuffle).
+   Each candidate is checked by validateReply; failing combos are skipped. */
+function generateReplies(o){
+  const shop = o.shop, lang = o.lang === 'es' ? 'es' : 'en', stars = +o.stars;
+  if(!shop) throw new Error('Pick a shop first.');
+  if(!(stars >= 1 && stars <= 5)) throw new Error('Pick a star rating (1–5).');
+  const rawDetail = (o.detail || '').trim();
+  if(!rawDetail) throw new Error('Pick or type one detail from the review first.');
+  const dHits = bannedHits(rawDetail, shop).concat(stars <= 3 ? blameHits(rawDetail) : []);
+  if(dHits.length) throw new Error('The detail contains wording replies must never use (' + dHits.join(', ') + '). Pick or type a different detail.');
+  const tone = T[lang][shop.tone] ? shop.tone : 'friendly';
+  const bank = T[lang][tone][stars >= 4 ? 'pos' : 'neg'];
+  const detailOut = povSwap(rawDetail, lang);
+  const name = (o.reviewer || '').trim().split(/\s+/)[0] || '';
+  const signoff = (shop.signoff || '').trim();
+  const v = {name: name ? name[0].toUpperCase() + name.slice(1) : '', detail: detailOut, shop: shop.name, owner: shop.owner, phone: shop.phone};
+  const ctx = {shop, stars, detailOut, signoff};
+  const nO = bank.o.length, nD = bank.d.length, nC = bank.c.length;
+  const seed = Math.abs(o.seed | 0);
+  const build = (i, j, k) => cap1([fill(bank.o[i], v), fill(bank.d[j], v), fill(bank.c[k], v)].join(' ')) + (signoff ? '\n\n' + signoff : '');
+  const out = []; const used = {o:new Set(), d:new Set(), c:new Set()};
+  // walk combos starting at the seed; option B must use a different opener, detail line and closing than A
+  for(let t = 0; t < nO * nD * nC && out.length < 2; t++){
+    const i = (seed + t) % nO, j = (seed * 3 + t + Math.floor(t / nO)) % nD, k = (seed * 7 + t * 2 + Math.floor(t / (nO * nD))) % nC;
+    if(out.length === 1 && (used.o.has(i) || used.d.has(j) || used.c.has(k))) continue;
+    const text = build(i, j, k);
+    if(validateReply(text, ctx).length) continue;
+    if(sameApology(bank.o[i], bank.d[j])) continue; // avoid "Lamento… Lamento…" / "apologies… apologies…" in one reply
+    out.push({text, problems:[]}); used.o.add(i); used.d.add(j); used.c.add(k);
+  }
+  if(out.length < 2) throw new Error('Could not write two replies that pass every rule. Check the shop\'s words to avoid, or edit the detail.');
+  return {replies: out, ctx, lang, tone};
+}
+
+/* ---------------- Optional AI polish ----------------
+   PLACEHOLDER — not active. Nothing in this section makes a network request.
+   The page's Content-Security-Policy also sets connect-src 'none', so even a
+   stray request would be blocked. To activate later: add
+   https://generativelanguage.googleapis.com to connect-src, uncomment the fetch,
+   and ALWAYS re-run validateReply() on the AI's text before showing it.        */
+// PLACEHOLDER — not active
+const GEMINI_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent'; // PLACEHOLDER — not active
+async function aiPolish(text, ctx){ // PLACEHOLDER — not active
+  if(!settings.aiEnabled || !settings.aiKey) return text; // off by default: template text is returned untouched
+  /* PLACEHOLDER — not active
+  const prompt = 'Polish this Google review reply. Keep it 2-4 sentences, keep the thank-you, keep "' + ctx.detailOut +
+    '", keep the sign-off and any phone number exactly. Never offer discounts, freebies or anything in exchange. Never blame the reviewer.\n\n' + text;
+  const res = await fetch(GEMINI_ENDPOINT + '?key=' + encodeURIComponent(settings.aiKey), {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({contents:[{parts:[{text:prompt}]}]})
+  });
+  const j = await res.json();
+  const polished = j?.candidates?.[0]?.content?.parts?.[0]?.text || text;
+  return validateReply(polished, ctx).length ? text : polished;   // fall back to the safe template text
+  */
+  return text; // PLACEHOLDER — not active
+}
+
+/* expose the engine for tests */
+window.DRR = {detectLang, extractDetails, povSwap, generateReplies, validateReply, bannedHits, blameHits, T};
+
+/* =====================================================================
+   UI
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+const state = {stars:0, langMode:'auto', seed:0, last:null, autoDetail:'', detailDirty:false};
+let toastTimer;
+function toast(msg){ const t = $('toast'); t.textContent = msg; t.classList.remove('hidden'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.add('hidden'), 2200); }
+
+/* tabs */
+function showTab(name){
+  for(const v of ['reply','shops','stats','settings']) $('view-' + v).classList.toggle('hidden', v !== name);
+  document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === name));
+  if(name === 'stats') renderStats();
+  if(name === 'shops') renderShops();
+  if(name === 'reply') renderShopSelect();
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('#tabs button').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+document.querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => { showTab(b.dataset.goto); if(b.dataset.newshop) openShopForm(null); }));
+
+/* ---------- shops ---------- */
+function renderShopSelect(){
+  const sel = $('shopSel'), cur = sel.value || (load('drr.lastShop', '') || '');
+  sel.innerHTML = shops.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('');
+  if(shops.some(s => s.id === cur)) sel.value = cur;
+  $('noShops').classList.toggle('hidden', shops.length > 0);
+  $('replyForm').classList.toggle('hidden', shops.length === 0);
+  refreshDetection();
+}
+const currentShop = () => shops.find(s => s.id === $('shopSel').value) || shops[0];
+function renderShops(){
+  const L = $('shopList');
+  if(!shops.length){ L.innerHTML = '<div class="empty">No shops yet.</div>'; return; }
+  const toneName = {friendly:'Friendly', formal:'Formal', playful:'Playful'};
+  const langName = {auto:'Auto language', en:'English', es:'Spanish'};
+  L.innerHTML = shops.map(s => `<div class="card shopitem"><div><div class="name">${esc(s.name)}</div>
+    <div class="meta">${esc(s.owner)} · ${toneName[s.tone] || s.tone} · ${langName[s.lang] || 'Auto'}<br>${esc(s.phone)}</div></div>
+    <div style="display:flex;gap:8px;flex:none"><button data-edit="${s.id}">Edit</button><button class="danger" data-del="${s.id}" aria-label="Delete ${esc(s.name)}">Delete</button></div></div>`).join('');
+  L.querySelectorAll('[data-edit]').forEach(b => b.onclick = () => openShopForm(shops.find(s => s.id === b.dataset.edit)));
+  L.querySelectorAll('[data-del]').forEach(b => b.onclick = () => {
+    const s = shops.find(x => x.id === b.dataset.del);
+    if(!confirm('Delete "' + s.name + '"? Its posted history stays in backups but is hidden from stats.')) return;
+    shops = shops.filter(x => x.id !== s.id); save(K.shops, shops); renderShops(); toast('Shop deleted');
+  });
+}
+function openShopForm(s){
+  const f = $('shopForm'); f.classList.remove('hidden'); $('shopErr').classList.add('hidden');
+  $('shopFormTitle').textContent = s ? 'Edit shop' : 'New shop';
+  $('f_id').value = s ? s.id : '';
+  $('f_name').value = s ? s.name : ''; $('f_owner').value = s ? s.owner : ''; $('f_tone').value = s ? s.tone : 'friendly';
+  $('f_signoff').value = s ? s.signoff : ''; $('f_phone').value = s ? s.phone : ''; $('f_lang').value = s ? s.lang : 'auto';
+  $('f_keywords').value = s ? s.keywords : ''; $('f_avoid').value = s ? s.avoid : '';
+  f.scrollIntoView({behavior:'smooth', block:'start'});
+}
+$('addShopBtn').onclick = () => openShopForm(null);
+$('cancelShop').onclick = () => $('shopForm').classList.add('hidden');
+$('f_owner').addEventListener('input', () => { if(!$('f_signoff').dataset.touched) $('f_signoff').value = $('f_owner').value.trim() ? '— ' + $('f_owner').value.trim() + ', owner' : ''; });
+$('f_signoff').addEventListener('input', () => $('f_signoff').dataset.touched = '1');
+$('saveShop').onclick = () => {
+  const s = {id: $('f_id').value || uid(), name: $('f_name').value.trim(), owner: $('f_owner').value.trim(), tone: $('f_tone').value,
+    signoff: $('f_signoff').value.trim(), phone: $('f_phone').value.trim(), lang: $('f_lang').value,
+    keywords: $('f_keywords').value.trim(), avoid: $('f_avoid').value.trim()};
+  const miss = [];
+  if(!s.name) miss.push('shop name'); if(!s.owner) miss.push('owner first name'); if(!s.signoff) miss.push('sign-off'); if(!s.phone) miss.push('shop phone');
+  if(miss.length){ const e = $('shopErr'); e.textContent = 'Please add: ' + miss.join(', ') + '.'; e.classList.remove('hidden'); return; }
+  const sb = bannedHits(s.signoff, s); if(sb.length){ const e = $('shopErr'); e.textContent = 'The sign-off uses wording replies can\'t include (' + sb.join(', ') + ').'; e.classList.remove('hidden'); return; }
+  const i = shops.findIndex(x => x.id === s.id); if(i >= 0) shops[i] = s; else shops.push(s);
+  save(K.shops, shops); $('shopForm').classList.add('hidden'); delete $('f_signoff').dataset.touched;
+  renderShops(); renderShopSelect(); $('shopSel').value = s.id; toast('Shop saved');
+};
+
+/* ---------- backup ---------- */
+function backupJSON(){ return JSON.stringify({app:'dojo-review-replies', version:1, exportedAt:new Date().toISOString(), shops, log:postLog,
+  settings:{aiEnabled:settings.aiEnabled}}, null, 2); }
+$('exportBtn').onclick = () => {
+  const blob = new Blob([backupJSON()], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'review-replies-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  toast('Backup saved to Downloads / Files');
+};
+$('copyBackupBtn').onclick = async () => { await copyText(backupJSON()); toast('Backup copied. Paste it into Notes to keep it safe.'); };
+$('importBtn').onclick = () => $('importFile').click();
+$('importFile').onchange = e => { const f = e.target.files[0]; if(!f) return; const r = new FileReader(); r.onload = () => doImport(r.result); r.readAsText(f); e.target.value = ''; };
+$('importTextBtn').onclick = () => doImport($('importText').value);
+function doImport(txt){
+  let d; try{ d = JSON.parse(txt); }catch(e){ toast('That file is not a valid backup.'); return; }
+  if(!d || !Array.isArray(d.shops) || !Array.isArray(d.log)){ toast('That file is not a Review Replies backup.'); return; }
+  if((shops.length || postLog.length) && !confirm('Replace the shops and history on this phone with this backup (' + d.shops.length + ' shops, ' + d.log.length + ' replies)?')) return;
+  shops = d.shops; postLog = d.log; save(K.shops, shops); save(K.log, postLog);
+  renderShops(); renderShopSelect(); toast('Backup restored: ' + shops.length + ' shops, ' + postLog.length + ' replies');
+}
+
+/* ---------- reply form ---------- */
+$('shopSel').onchange = () => { clearResults(); save('drr.lastShop', $('shopSel').value); refreshDetection(); };
+document.querySelectorAll('#stars button').forEach(b => b.onclick = () => {
+  state.stars = +b.dataset.star; clearResults();
+  document.querySelectorAll('#stars button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-checked', x === b); });
+  $('genErr').classList.add('hidden');
+});
+document.querySelectorAll('#langSeg button').forEach(b => b.onclick = () => {
+  state.langMode = b.dataset.lang; clearResults();
+  document.querySelectorAll('#langSeg button').forEach(x => x.classList.toggle('on', x === b));
+  refreshDetection();
+});
+function replyLang(){
+  const shop = currentShop();
+  if(state.langMode !== 'auto') return state.langMode;
+  if(shop && shop.lang && shop.lang !== 'auto') return shop.lang;
+  return detectLang($('review').value) || 'en';
+}
+let detTimer;
+$('review').addEventListener('input', () => { clearResults(); clearTimeout(detTimer); detTimer = setTimeout(refreshDetection, 250); });
+function clearResults(){ $('results').innerHTML = ''; $('shuffleBtn').classList.add('hidden'); state.last = null; }
+function refreshDetection(){
+  const txt = $('review').value, shop = currentShop();
+  const det = detectLang(txt), L = replyLang();
+  const nm = {en:'English', es:'Spanish'};
+  let note;
+  if(!txt.trim()) note = 'Paste a review to detect its language.';
+  else if(state.langMode !== 'auto') note = 'Detected ' + nm[det] + '. Replying in ' + nm[L] + ' (your choice).';
+  else if(shop && shop.lang !== 'auto') note = 'Detected ' + nm[det] + '. Replying in ' + nm[L] + ' (shop setting).';
+  else note = 'Detected ' + nm[det] + '. Replying in ' + nm[L] + '.';
+  $('langNote').textContent = note;
+  const c = extractDetails(txt, shop);
+  const best = c.find(x => !x.banned);
+  if(!state.detailDirty || !$('detail').value.trim()){ $('detail').value = best ? best.text : ''; state.autoDetail = $('detail').value; state.detailDirty = false; }
+  $('chips').innerHTML = c.length ? c.map(x => `<button type="button" class="chip${x.banned ? ' bad' : ''}${x.text === $('detail').value ? ' on' : ''}">${esc(x.text)}${x.banned ? ' ⚠' : ''}</button>`).join('')
+    : (txt.trim() ? '<span class="hint">No details found. Type one below.</span>' : '');
+  $('chips').querySelectorAll('.chip').forEach((b, i) => b.onclick = () => { $('detail').value = c[i].text; state.detailDirty = true; checkDetail(); markChips(); });
+  checkDetail();
+}
+function markChips(){ $('chips').querySelectorAll('.chip').forEach(b => b.classList.toggle('on', b.textContent.replace(' ⚠', '') === $('detail').value)); }
+$('detail').addEventListener('input', () => { state.detailDirty = true; checkDetail(); markChips(); });
+function checkDetail(){
+  const d = $('detail').value, shop = currentShop(), w = $('detailWarn');
+  const hits = d ? bannedHits(d, shop).concat(state.stars && state.stars <= 3 ? blameHits(d) : []) : [];
+  if(hits.length){ w.textContent = '⚠ This detail contains "' + hits.join('", "') + '". Replies can never mention discounts, freebies, or that kind of wording. Pick a different detail.'; w.classList.remove('hidden'); }
+  else w.classList.add('hidden');
+  return hits.length === 0;
+}
+
+$('genBtn').onclick = () => run(false);
+$('shuffleBtn').onclick = () => run(true);
+function run(shuffle){
+  const e = $('genErr'); e.classList.add('hidden');
+  const fail = m => { clearResults(); e.textContent = m; e.classList.remove('hidden'); e.scrollIntoView({behavior:'smooth', block:'center'}); };
+  if(!$('review').value.trim()) return fail('Paste the review first.');
+  if(!state.stars) return fail('Pick the star rating (1–5) first.');
+  if(!$('detail').value.trim()) return fail('Pick a detail chip or type one detail from the review. Every reply has to mention one.');
+  if(!checkDetail()) return fail('The detail contains wording replies must never use. Pick or type a different detail.');
+  state.seed = shuffle ? state.seed + 1 + Math.floor(Math.random() * 3) : Math.floor(Math.random() * 1000);
+  let r;
+  try{ r = generateReplies({shop: currentShop(), lang: replyLang(), stars: state.stars, detail: $('detail').value, reviewer: $('reviewer').value, seed: state.seed}); }
+  catch(err){ return fail(err.message); }
+  state.last = r; renderResults(r); $('shuffleBtn').classList.remove('hidden');
+}
+function renderResults(r){
+  const R = $('results');
+  R.innerHTML = r.replies.map((x, i) => `<div class="card" data-i="${i}"><h3>Option ${'AB'[i]}</h3>
+    <textarea aria-label="Reply option ${'AB'[i]}">${esc(x.text)}</textarea>
+    <div class="okline">✓ Thanks · detail · ${r.ctx.stars <= 3 ? 'apology · call invite · ' : 'invite back · '}sign-off · no offers</div>
+    <div class="warn hidden"></div>
+    <div class="row" style="margin-top:12px"><button class="primary copy">Copy</button><button class="post">Mark as posted</button></div></div>`).join('');
+  R.querySelectorAll('.card').forEach(card => {
+    const ta = card.querySelector('textarea'), w = card.querySelector('.warn'), ok = card.querySelector('.okline');
+    const fit = () => { ta.style.height = 'auto'; ta.style.height = Math.max(170, ta.scrollHeight + 4) + 'px'; };
+    setTimeout(fit, 0);
+    ta.addEventListener('input', () => {
+      fit();
+      const p = validateReply(ta.value, r.ctx);
+      w.textContent = p.length ? '⚠ After your edit: ' + p.join('; ') + '.' : ''; w.classList.toggle('hidden', !p.length); ok.classList.toggle('hidden', !!p.length);
+    });
+    card.querySelector('.copy').onclick = async ev => {
+      const b = ev.currentTarget; const okc = await copyText(ta.value);
+      b.textContent = okc ? 'Copied ✓' : 'Select & copy'; if(!okc){ ta.focus(); ta.select(); }
+      setTimeout(() => b.textContent = 'Copy', 1800);
+    };
+    card.querySelector('.post').onclick = ev => {
+      const b = ev.currentTarget; if(b.dataset.done) return;
+      postLog.push({id: uid(), shopId: currentShop().id, stars: r.ctx.stars, lang: r.lang, at: new Date().toISOString(), text: ta.value});
+      save(K.log, postLog); b.dataset.done = '1'; b.textContent = 'Posted ✓'; toast('Logged. Undo anytime in Stats.');
+    };
+  });
+  R.querySelector('.card').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* clipboard with fallback for older iOS / non-secure pages */
+async function copyText(text){
+  try{ if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(text); return true; } }catch(e){}
+  try{
+    const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;font-size:16px'; document.body.appendChild(ta);
+    const range = document.createRange(); range.selectNodeContents(ta); const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+    ta.setSelectionRange(0, text.length); const ok = document.execCommand('copy'); ta.remove(); return ok;
+  }catch(e){ return false; }
+}
+
+/* ---------- stats ---------- */
+const monthKey = d => { const x = new Date(d); return x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0'); };
+function renderStats(){
+  const sel = $('statShop'), cur = sel.value;
+  sel.innerHTML = shops.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('');
+  if(shops.some(s => s.id === cur)) sel.value = cur; else if(currentShop()) sel.value = currentShop().id;
+  if(!$('statMonth').value) $('statMonth').value = monthKey(new Date());
+  const m = $('statMonth').value, sid = sel.value;
+  const rows = postLog.filter(x => x.shopId === sid && monthKey(x.at) === m).sort((a, b) => b.at.localeCompare(a.at));
+  $('statCount').textContent = rows.length;
+  $('statAvg').textContent = rows.length ? (rows.reduce((a, x) => a + x.stars, 0) / rows.length).toFixed(1) + '★' : '–';
+  const L = $('logList');
+  L.innerHTML = rows.length ? rows.map(x => `<div class="logitem"><div><b>${'★'.repeat(x.stars)}${'☆'.repeat(5 - x.stars)}</b> <span class="hint" style="display:inline">${new Date(x.at).toLocaleDateString(undefined, {month:'short', day:'numeric'})}</span>
+      <p>${esc(x.text.split('\n')[0].slice(0, 110))}${x.text.length > 110 ? '…' : ''}</p></div><button class="ghost" data-undo="${x.id}">Undo</button></div>`).join('')
+    : '<div class="empty">No replies posted this month.</div>';
+  L.querySelectorAll('[data-undo]').forEach(b => b.onclick = () => { postLog = postLog.filter(x => x.id !== b.dataset.undo); save(K.log, postLog); renderStats(); toast('Removed from log'); });
+}
+$('statShop').onchange = renderStats; $('statMonth').onchange = renderStats; $('statMonth').oninput = renderStats;
+
+/* ---------- settings ---------- */
+$('aiToggle').checked = !!settings.aiEnabled; $('aiKey').value = settings.aiKey || ''; $('aiBox').classList.toggle('hidden', !settings.aiEnabled);
+$('aiToggle').onchange = () => { settings.aiEnabled = $('aiToggle').checked; save(K.settings, settings); $('aiBox').classList.toggle('hidden', !settings.aiEnabled); };
+$('aiKey').oninput = () => { settings.aiKey = $('aiKey').value.trim(); save(K.settings, settings); };
+$('wipeBtn').onclick = () => {
+  if(!confirm('Erase every shop, posted reply and setting on this phone? Export a backup first if you might need it.')) return;
+  shops = []; postLog = []; settings = {aiEnabled:false, aiKey:''};
+  [K.shops, K.log, K.settings, 'drr.lastShop'].forEach(k => { try{ localStorage.removeItem(k); }catch(e){} });
+  $('aiToggle').checked = false; $('aiKey').value = ''; $('aiBox').classList.add('hidden'); toast('All data erased'); showTab('reply');
+};
+
+/* ---------- home-screen icon: iOS wants PNG, so draw the inline SVG to a PNG data URI ---------- */
+(function(){
+  try{
+    const img = new Image();
+    img.onload = () => { try{ const c = document.createElement('canvas'); c.width = c.height = 180; c.getContext('2d').drawImage(img, 0, 0, 180, 180);
+      $('touchIcon').href = c.toDataURL('image/png'); }catch(e){} };
+    img.src = $('touchIcon').getAttribute('href');
+  }catch(e){}
+})();
+
+renderShopSelect();
+</script>
+</body>
+</html>
