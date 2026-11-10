@@ -1,22 +1,22 @@
 <!doctype html>
 <!--
-  Dojo Receptionist · dojoreceptionist.com · v3.0 PREVIEW (2026-11-10)
-  Fidelity pass on top of main @ 20c5da5. Single file: inline CSS + inline SVG icon sprite,
+  Dojo Receptionist · dojoreceptionist.com · v3.1 UNIVERSAL (2026-11-10)
+  Location-neutral copy on top of v3 @ ca76fd1. Single file: inline CSS + inline SVG icon sprite,
   one small script (trade picker, same data and demo links as v2.1). No outside fonts, images or tracking.
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Dojo Receptionist · Missed calls answered for Lane County shops</title>
-<meta name="description" content="Bella, an honest AI receptionist, answers your shop's missed and after-hours calls and emails you who called and what they need. Set up at your counter by Jeremy, a Veneta dad and Marine vet.">
+<title>Dojo Receptionist · A missed call is someone else's customer</title>
+<meta name="description" content="A missed call is someone else's customer. Bella answers: an honest AI receptionist who takes the calls you miss and emails you who called and what they need. Set up for you personally by Jeremy, a Marine vet.">
 <meta name="theme-color" content="#0a0d18">
 <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta property="og:title" content="Dojo Receptionist · Missed calls answered for Lane County shops">
-<meta property="og:description" content="Bella answers the calls you miss, says she's an AI, and emails you who called and what they need. Set up at your counter by Jeremy, a Veneta dad and Marine vet.">
+<meta property="og:title" content="Dojo Receptionist · A missed call is someone else's customer">
+<meta property="og:description" content="A missed call is someone else's customer. Bella answers: she takes the calls you miss, says she's an AI, and emails you who called and what they need. Set up for you personally by Jeremy, a Marine vet.">
 <meta property="og:image" content="https://dojoreceptionist.com/assets/og-share.png">
 <meta property="og:url" content="https://dojoreceptionist.com/">
 <meta name="twitter:card" content="summary_large_image">
@@ -326,10 +326,10 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
 
   <div class="hero-grid">
    <div>
-    <p class="eyebrow">Owner-run shops · Lane County, OR</p>
-    <!-- SWAP-TEST: broke. Headline + "Bella" + Veneta setup line. -->
-    <h1>Under a truck when the phone rings?<em>Bella picks up.</em></h1>
-    <p class="sub">She answers the calls you miss, says she's an AI, and emails you who called and what they need. Jeremy, a Veneta dad and Marine vet, sets her up at your counter.</p>
+    <p class="eyebrow">Owner-run shops</p>
+    <!-- SWAP-TEST: broke. Headline ("A missed call is someone else's customer" / "Bella answers") + Marine vet setup line. -->
+    <h1>A missed call is someone else's customer.<em>Bella answers.</em></h1>
+    <p class="sub">She answers the calls you miss, says she's an AI, and emails you who called and what they need. Jeremy, a Marine vet, sets her up for you personally.</p>
     <div class="cta">
      <a class="btn g" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span>Call Bella: 541-833-0643<small>Demo line. Play your own customer.</small></span></a>
      <a class="btn o" href="#trades"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>Hear your trade's demo</a>
@@ -358,12 +358,12 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
   <h2 id="today-h">Right now you have three bad options.</h2>
  </div>
  <div class="grid three">
-  <div class="card bad"><h3><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-voicemail"/></svg></span>Voicemail</h3><p>The caller with a leaking water heater in Elmira hears a beep, and may dial the next number instead.</p></div>
+  <div class="card bad"><h3><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-voicemail"/></svg></span>Voicemail</h3><p>The caller with a leaking water heater hears a beep, and may dial the next number instead.</p></div>
   <div class="card bad"><h3><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-headset"/></svg></span>An answering service</h3><p>A script read from somewhere else, set up through an online portal you fill out yourself.</p></div>
   <div class="card bad"><h3><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-phone-off"/></svg></span>Let it ring</h3><p>You climb out from under the truck to a missed call, no name, and no idea what they needed.</p></div>
  </div>
- <!-- SWAP-TEST: broke ("Jeremy sets her up at your counter"). -->
- <div class="fourth"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg></span><p><b>Or Bella answers in your shop's name.</b>She gets the details and emails you. Jeremy sets her up at your counter, with your hours and your callers' questions.</p></div>
+ <!-- SWAP-TEST: broke ("Jeremy sets her up for you personally"). -->
+ <div class="fourth"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg></span><p><b>Or Bella answers in your shop's name.</b>She gets the details and emails you. Jeremy sets her up for you personally, with your hours and your callers' questions.</p></div>
 </section>
 
 <!-- ===== one call ===== -->
@@ -378,7 +378,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
    <ol class="call">
     <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg></span><div><b>Answers in the shop's name</b><p>Says it's an AI and that the call may be recorded.</p><span class="say"><i>AI</i>"Hi, thanks for calling Coast Range Heating &amp; Air (demo)! I'm the AI assistant, and this call may be recorded."</span></div></li>
     <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span><div><b>Gets the name and reads the number back</b><p>Digit by digit, then waits for a yes. Then the address and the best time to call back.</p></div></li>
-    <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg></span><div><b>Knows where you work</b><p>The caller said "Angels." It checked against the shop's towns.</p><span class="say"><i>AI</i>"Is the city Angels, or did you mean one of our service areas like Eugene, Springfield, Veneta, Elmira, or Fern Ridge?"</span></div></li>
+    <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg></span><div><b>Knows where you work</b><p>The caller said "Angels." It checked against the shop's towns.</p><span class="say"><i>AI</i>"Is the city Angels, or did you mean one of our service areas?"</span></div></li>
     <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg></span><div><b>Flags what's urgent</b><span class="say caller"><i>Caller</i>"I have an urgent no heat concern."</span><p style="margin-top:8px">The email went out with URGENT first in the subject line.</p></div></li>
     <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></span><div><b>Emails you, then you call</b><p>You call back with the real answer when your hands are free.</p></div></li>
    </ol>
@@ -389,7 +389,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
     <p class="eyebrow">What lands in your inbox</p>
     <h2>The summary email.</h2>
    </div>
-   <div class="mail" role="img" aria-label="Sample summary email. Subject: URGENT, no heat, small kids at home. Caller Dana in Veneta, callback number read back, call back any time after noon.">
+   <div class="mail" role="img" aria-label="Sample summary email. Subject: URGENT, no heat, small kids at home. Caller Dana, callback number read back, call back any time after noon.">
     <div class="mail-bar"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Inbox · 8:45 AM</div>
     <div class="mail-head">
      <p class="mail-subj"><span class="tag">URGENT</span>No heat, small kids at home</p>
@@ -400,12 +400,12 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
       <dt>Shop</dt><dd>Coast Range Heating &amp; Air</dd>
       <dt>Caller</dt><dd>Dana</dd>
       <dt>Callback</dt><dd>541-···-··42 (read back, confirmed)</dd>
-      <dt>Where</dt><dd>Veneta</dd>
+      <dt>Where</dt><dd>Address confirmed</dd>
       <dt>Reason</dt><dd>No heat</dd>
       <dt>Urgency</dt><dd>URGENT, small kids at home</dd>
       <dt>Call back</dt><dd>Afternoon, any time after noon</dd>
      </dl>
-     <p class="sum">Dana's furnace quit overnight and there are two small kids in the house. She confirmed her number and address in Veneta and asked for a call back any time after noon.</p>
+     <p class="sum">Dana's furnace quit overnight and there are two small kids in the house. She confirmed her number and address and asked for a call back any time after noon.</p>
      <p class="tx">Full call transcript below ↓</p>
     </div>
    </div>
@@ -418,8 +418,8 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
 <section id="trades" aria-labelledby="trades-h">
  <div class="sec-head">
   <p class="eyebrow">Hear it</p>
-  <!-- SWAP-TEST: broke (Elmira / Noti / Crow callers). -->
-  <h2 id="trades-h">Calls Lane County shops miss.</h2>
+  <!-- SWAP-TEST: broke (Saturday water heater, first cold night with kids, fir on the house). -->
+  <h2 id="trades-h">Calls owner-run shops miss.</h2>
   <p class="lead">Made-up shops, real voices. Tap "Hear it," allow the mic, and call it like a customer: ask the hours, ask for a price, or leave a message.</p>
  </div>
  <div class="featured" id="featured-trades"></div>
@@ -435,16 +435,16 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
   /* Same trades and demo links as v2.1. Add a trade by appending one object. */
   var TRADES=[
    {id:"plumbing",name:"Plumbing",featured:true,icon:"/assets/icons/plumbing.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx",
-    sit:"\"Water heater's leaking all over the garage out in Elmira, and it's Saturday morning.\"",
+    sit:"\"Water heater's leaking all over the garage, and it's Saturday morning.\"",
     does:"asks if the water's shut off, how bad it is, the address, and when they can be reached, then emails you."},
    {id:"hvac",name:"HVAC",featured:true,icon:"/assets/icons/hvac.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75",
-    sit:"\"Furnace quit on the first cold Willamette Valley night, and we've got kids in the house.\"",
+    sit:"\"Furnace quit on the first cold night, and we've got kids in the house.\"",
     does:"asks what kind of system, whether there's any heat, the address, and how soon, then emails you, even at 10 p.m."},
    {id:"auto",name:"Auto repair",featured:true,icon:"/assets/icons/auto-repair.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p",
-    sit:"\"Check-engine light came on driving in from Noti. Can you look at it today?\"",
+    sit:"\"Check-engine light came on on the way in. Can you look at it today?\"",
     does:"gets year, make and model, what it's doing, whether it's drivable, and when they can bring it in, while you're under the lift."},
    {id:"electrical",name:"Electrical",featured:true,icon:"/assets/icons/electrical.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3",
-    sit:"\"Half the house went dark in the windstorm out by Crow, and the breaker won't reset.\"",
+    sit:"\"Half the house went dark in the windstorm, and the breaker won't reset.\"",
     does:"asks which rooms are out, whether there's a burning smell, and the address. You decide who goes out."},
    {id:"dispensary",name:"Dispensary",featured:true,icon:"/assets/icons/dispensary.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6601m732qh8ted69rqzd4qq1kxm5",
     sit:"\"Cedar Hollow Cannabis? You still open tonight, and do I have to be 21?\"",
@@ -453,28 +453,28 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
     sit:"\"Fern Hollow Family Diner? Can I call in a to-go order for four, and do you have room for a party Saturday?\"",
     does:"takes the to-go order and reads back the name and number. For a party it gets the date and headcount. You confirm."},
    {id:"salon",name:"Salon",icon:"/assets/icons/salon.svg",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb",
-    sit:"\"Can I get a cut and color before my sister's wedding in Eugene this Saturday?\"",
+    sit:"\"Can I get a cut and color before my sister's wedding this Saturday?\"",
     does:"takes their name, the service, the days that work, and a callback number. You confirm every appointment."},
    {id:"barber",name:"Barber",icon:"/assets/icons/barber.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb",
-    sit:"\"Got time for a fade at Copper Pine before my interview in Springfield tomorrow morning?\"",
+    sit:"\"Got time for a fade at Copper Pine before my interview tomorrow morning?\"",
     does:"takes their name, the cut, the days that work, and a callback number while you finish the client in the chair. You confirm every appointment."},
    {id:"pet",name:"Pet grooming",icon:"/assets/icons/pet-grooming.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw",
-    sit:"\"My dog rolled in something awful out by Fern Ridge. Any chance Muddy Paws has a bath this week?\"",
+    sit:"\"My dog rolled in something awful. Any chance Muddy Paws has a bath this week?\"",
     does:"gets the breed and size, the service, the days that work, and a callback number. You set the appointment."},
    {id:"exterior",name:"Exterior cleaning",icon:"/assets/icons/exterior-cleaning.svg",
-    sit:"\"The roof's gone green out past Elmira, and the gutters are packed. Can you soft wash it before the rain?\"",
+    sit:"\"The roof's gone green, and the gutters are packed. Can you soft wash it before the rain?\"",
     does:"gets the address and whether it's the roof, gutters, house or driveway, then emails you. You call back from the ground."},
    {id:"tree",name:"Tree service",icon:"/assets/icons/tree-service.svg",
-    sit:"\"A fir came down on the house out by Crow. Can somebody come look?\"",
+    sit:"\"A fir came down on the house. Can somebody come look?\"",
     does:"gets the address and whether a tree is on the house, then emails you. You decide who goes out."},
    {id:"septic",name:"Septic service",icon:"/assets/icons/septic.svg",
-    sit:"\"The tank's backing up into the yard out in Noti, and the bathroom won't drain.\"",
+    sit:"\"The tank's backing up into the yard, and the bathroom won't drain.\"",
     does:"gets the address and whether it's a routine pump or a backup, then emails you. You decide who goes out."},
    {id:"well",name:"Well and pump",icon:"/assets/icons/well-pump.svg",
-    sit:"\"No water this morning at the place past Veneta. The pump hums and quits.\"",
+    sit:"\"No water this morning. The pump hums and quits.\"",
     does:"gets the address, what the pump is doing, and a callback number, then emails you. You call back from the truck."},
    {id:"fencing",name:"Fencing",icon:"/assets/icons/fencing.svg",
-    sit:"\"We need fence along the pasture out by Fern Ridge. Can you come look?\"",
+    sit:"\"We need fence along the pasture. Can you come look?\"",
     does:"gets the address, about how much fence, and a callback number, then emails you. You call back when the tools are down."},
    {id:"chimney",name:"Chimney sweep",icon:"/assets/icons/chimney-sweep.svg",
     sit:"\"First cold night's coming, and the chimney hasn't been swept. Can you fit us in before we light the stove?\"",
@@ -568,13 +568,13 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
 <section id="how" aria-labelledby="how-h">
  <div class="sec-head">
   <p class="eyebrow">How we start</p>
-  <!-- SWAP-TEST: broke (in person at your counter, Day 7 / Day 30 visits). -->
-  <h2 id="how-h">I set it up at your counter, not in a portal.</h2>
+  <!-- SWAP-TEST: broke (set up with you, not in a portal; Day 7 / Day 30 reports). -->
+  <h2 id="how-h">I set it up with you, not in a portal.</h2>
  </div>
  <ol class="steps">
   <li><b>Tell me about your shop</b><span>A short form or a call: your hours, your services, the questions callers always ask.</span></li>
-  <li><b>I come to your shop</b><span>I set the call forwarding on your phone myself. You keep your number. We don't stop until a test call lands in your inbox.</span></li>
-  <li><b>Day 7 and Day 30</b><span>I come back on Day 7 with a one-page report, and again on Day 30.</span></li>
+  <li><b>I set it up with you</b><span>I set the call forwarding on your phone myself. You keep your number. We don't stop until a test call lands in your inbox.</span></li>
+  <li><b>Day 7 and Day 30</b><span>You get a one-page report on Day 7, and again on Day 30.</span></li>
  </ol>
 </section>
 
@@ -584,7 +584,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
   <div>
    <div class="sec-head">
     <p class="eyebrow">Pricing</p>
-    <h2 id="price-h">One plan, set up by a neighbor.</h2>
+    <h2 id="price-h">One plan, set up personally.</h2>
     <p class="lead">One price. Everything below is included.</p>
    </div>
    <div class="math" id="math">
@@ -597,12 +597,12 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
     <summary>What one missed call can cost (public estimates)</summary>
     <div class="in">
      <ul class="cost">
-      <li><b>HVAC, full system in Oregon:</b> $22,487 average in 2025 among ServiceTitan shops; 75th percentile $32,761. <a href="https://www.servicetitan.com/toolbox/state-of-the-trades/trends/hvac-replacement-cost-by-state" target="_blank" rel="noopener">ServiceTitan, May 2026</a></li>
+      <li><b>HVAC, full system:</b> $22,487 average in 2025 among ServiceTitan shops in its state report; 75th percentile $32,761. <a href="https://www.servicetitan.com/toolbox/state-of-the-trades/trends/hvac-replacement-cost-by-state" target="_blank" rel="noopener">ServiceTitan, May 2026</a></li>
       <li><b>Plumbing:</b> typical repair about $341; water heater install $800–$2,000. <a href="https://www.angi.com/articles/plumber-cost.htm" target="_blank" rel="noopener">Angi, Oct 14, 2026</a></li>
       <li><b>Electrical panel replacement:</b> typically $518–$2,193. <a href="https://www.angi.com/articles/cost-replace-circuit-breaker-box.htm" target="_blank" rel="noopener">Angi, Oct 22, 2026</a></li>
-      <li><b>Septic pump-out in Oregon:</b> usually $300–$600. <a href="https://callapumper.com/guides/septic-pumping-cost/oregon/" target="_blank" rel="noopener">Call a Pumper, opened Nov 10, 2026</a></li>
+      <li><b>Septic pump-out:</b> usually $300–$600. <a href="https://callapumper.com/guides/septic-pumping-cost/oregon/" target="_blank" rel="noopener">Call a Pumper, opened Nov 10, 2026</a></li>
       <li><b>Tow:</b> no statewide rate. We'll use your hook-up and mileage prices.</li>
-      <li><b>Tree removal (one Eugene company's published ranges):</b> about $1,500 to $8,000+ by size. <a href="https://www.urbanarborcare.net/blog/tree-removal-cost-in-oregon-what-to-expect" target="_blank" rel="noopener">Urban Arbor Care, July 10, 2025</a></li>
+      <li><b>Tree removal:</b> about $1,500 to $8,000+ by size, from one company's published ranges. <a href="https://www.urbanarborcare.net/blog/tree-removal-cost-in-oregon-what-to-expect" target="_blank" rel="noopener">Urban Arbor Care, July 10, 2025</a></li>
       <li><b>Garage door:</b> typical repair $265; replacement $1,231. <a href="https://www.angi.com/articles/most-common-garage-door-repair-costs.htm" target="_blank" rel="noopener">Angi</a>, <a href="https://www.angi.com/articles/garage-door-replacement-cost.htm" target="_blank" rel="noopener">Angi</a> (2026)</li>
       <li><b>Appliance (refrigerator):</b> typical repair $275. <a href="https://www.angi.com/articles/how-much-does-refrigerator-repair-cost.htm" target="_blank" rel="noopener">Angi, Oct 15, 2026</a></li>
      </ul>
@@ -634,7 +634,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
    <p class="eyebrow">The guy who sets it up</p>
    <h2 id="who-h" style="margin-top:8px">Jeremy Alvarado</h2>
    <ul class="facts">
-    <li><svg class="i" aria-hidden="true"><use href="#i-home"/></svg>Local dad in Veneta</li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-home"/></svg>Dad</li>
     <li><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>U.S. Marine Corps, 2009–2015</li>
     <li><svg class="i" aria-hidden="true"><use href="#i-fist"/></svg>Martial arts, his whole life</li>
    </ul>
@@ -661,7 +661,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
   <details><summary>Will my customers hate it?</summary><p>It only picks up the calls you miss, so your regulars still reach you the way they do now. Instead of a full voicemail box, they get your shop's name, an honest "I'm an AI," and someone writing down what they need. Call Bella at <a href="tel:+15418330643">541-833-0643</a> and judge for yourself.</p></details>
   <details><summary>What if someone asks for a price?</summary><p>It won't make one up. It takes the caller's name, number and what they need, so you call back with the real answer.</p></details>
   <details><summary>How do I get the message?</summary><p>By email, right after the call: name, number (read back to the caller), where they are, what they need, and when to call back. Urgent calls say URGENT up front. Text alerts are coming soon. Demo calls don't send a summary; yours start once your shop is set up.</p></details>
-  <details><summary>Is recording calls legal in Oregon?</summary><p>For phone calls, Oregon generally allows recording when one party consents (ORS 165.540), and the AI announces the possible recording on every call anyway. This is not legal advice; check with your own advisor if you're unsure.</p></details>
+  <details><summary>Is recording calls legal?</summary><p>It depends on the state. Bella announces that the call may be recorded on every call, so that consent is asked for up front. This is not legal advice; check with your own advisor if you're unsure.</p></details>
   <details><summary>Do I keep my phone number?</summary><p>Yes. I set up the forwarding on your phone with you, and you can turn it off anytime.</p></details>
   <details><summary>Can I pause it for the slow season?</summary><p>Yes, free, for up to 3 months a year. One text or email starts it, your calls forward straight back to your shop, and there's no restart fee.</p></details>
   <details><summary>Can I cancel?</summary><p>Yes, the same day, with no last-month charge. Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll turn it off.</p></details>
@@ -683,7 +683,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
 </main>
 
 <footer><div class="wrap">
- <p><b style="color:var(--ink2)">Dojo Receptionist</b> · Veneta, Oregon, serving Lane County · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p>
+ <p><b style="color:var(--ink2)">Dojo Receptionist</b> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p>
  <p>Example callers and the shops in the demos are made up. Not legal advice.</p>
 </div></footer>
 
