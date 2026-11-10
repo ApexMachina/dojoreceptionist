@@ -1,221 +1,484 @@
 <!doctype html>
 <!--
-  Dojo Receptionist · dojoreceptionist.com · v2.1 (2026-11-10)
-  Single file: inline CSS, one small script for the trade picker, no outside fonts/images, no tracking.
-  Previous version: old/index-v1.html. Hero copy options: copy-options.md.
+  Dojo Receptionist · dojoreceptionist.com · v3.0 PREVIEW (2026-11-10)
+  Fidelity pass on top of main @ 20c5da5. Single file: inline CSS + inline SVG icon sprite,
+  one small script (trade picker, same data and demo links as v2.1). No outside fonts, images or tracking.
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Dojo Receptionist · Missed calls answered for Lane County shops</title>
-<meta name="description" content="An honest AI receptionist that answers your shop's missed and after-hours calls and emails you a summary. Set up by Jeremy, a Veneta dad and Marine vet.">
+<meta name="description" content="Bella, an honest AI receptionist, answers your shop's missed and after-hours calls and emails you who called and what they need. Set up at your counter by Jeremy, a Veneta dad and Marine vet.">
 <meta name="theme-color" content="#0a0d18">
 <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta property="og:title" content="Dojo Receptionist · Missed calls answered for Lane County shops">
-<meta property="og:description" content="An honest AI receptionist that answers your shop's missed and after-hours calls and emails you a summary. Set up by Jeremy, a Veneta dad and Marine vet.">
+<meta property="og:description" content="Bella answers the calls you miss, says she's an AI, and emails you who called and what they need. Set up at your counter by Jeremy, a Veneta dad and Marine vet.">
 <meta property="og:image" content="https://dojoreceptionist.com/assets/og-share.png">
 <meta property="og:url" content="https://dojoreceptionist.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dojoreceptionist.com/assets/og-share.png">
 <style>
-:root{--bg:#0a0d18;--n1:#101830;--n2:#16213f;--line:#2c3c6b;--gold:#e8b53b;--gold2:#f6d27a;--dark:#120d00;--ink:#f1f3fa;--mute:#b4bdd3}
+/* ---------- tokens ---------- */
+:root{
+ --bg:#0a0d18;--n1:#0f1730;--n2:#16213f;--n3:#1d2a4f;--line:#2a3966;
+ --gold:#e8b53b;--gold2:#f6d27a;--on-gold:#120d00;
+ --ink:#f3f5fb;--ink2:#d5dbea;--mute:#aeb8d0;
+ --paper:#ffffff;--paper-ink:#1b2233;--paper-mute:#5a6378;--paper-line:#e3e7ef;
+ /* type scale 1.25, base 17px */
+ --t-xs:.8125rem;--t-s:.9375rem;--t-m:1.0625rem;--t-l:1.3125rem;--t-xl:1.625rem;--t-2xl:2.0625rem;--t-3xl:2.5625rem;
+ --sp1:4px;--sp2:8px;--sp3:12px;--sp4:16px;--sp5:24px;--sp6:32px;--sp7:48px;--sp8:64px;
+ --r:10px;--bar-h:76px;
+ --serif:Georgia,"DejaVu Serif","Times New Roman",serif;
+ --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;font-size:17px;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(rgba(232,181,59,.07) 1px,transparent 1.4px) 0 0/9px 9px;z-index:0}
-main,header,footer{position:relative;z-index:1}
-a{color:var(--gold2)}
-.wrap{max-width:680px;margin:0 auto;padding:0 18px}
-.disp{font-family:Georgia,"DejaVu Serif","Times New Roman",serif}
-.bar{display:flex;align-items:center;gap:10px;padding:14px 0}
-.bar svg{flex:none}
-.bar b{font-size:17px;letter-spacing:.06em;text-transform:uppercase}
-.bar b span{color:var(--gold)}
-.hero{padding:6px 0 30px;background:linear-gradient(180deg,#151d3a 0%,var(--bg) 100%);border-bottom:4px solid var(--gold);box-shadow:0 4px 0 #000}
-.kick{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:var(--dark);padding:6px 10px;transform:skew(-8deg);border:2px solid #000;box-shadow:3px 3px 0 #000}
-h1{font-size:33px;line-height:1.1;font-weight:700;margin:18px 0 12px;text-shadow:3px 3px 0 #000}
-h1 em{display:block;font-style:normal;color:var(--gold);font-size:.7em;margin-top:8px}
-.sub{color:#d6dbea;font-size:17px}
-.btns{display:flex;flex-direction:column;gap:10px;margin-top:20px}
-.btn{display:flex;align-items:center;justify-content:center;min-height:54px;border-radius:6px;font-weight:900;font-size:18px;text-decoration:none;text-align:center;padding:8px 14px;border:3px solid #000;box-shadow:4px 4px 0 #000}
-.btn.g{background:var(--gold);color:#120d00}
-.btn.r{background:var(--n2);color:var(--gold2);border-color:var(--gold)}
-.btn.o{background:transparent;color:var(--gold2);border-color:var(--gold);box-shadow:4px 4px 0 #000}
-.honest{margin-top:20px;padding:13px 14px;border:2px solid var(--gold);border-radius:6px;background:rgba(232,181,59,.07);font-size:15px}
-.honest b{color:var(--gold2)}
-section{padding:34px 0 6px}
-h2{font-size:27px;line-height:1.15;font-weight:700;margin-bottom:6px;text-shadow:2px 2px 0 #000}
-h2::after{content:"";display:block;width:64px;height:5px;margin-top:9px;background:linear-gradient(90deg,var(--gold) 0 60%,var(--gold2) 60%);transform:skew(-20deg)}
-.lead{color:var(--mute);font-size:16px;margin-top:8px}
-.panel{background:var(--n1);border:2px solid var(--line);border-radius:6px;padding:16px;margin-top:14px;box-shadow:5px 5px 0 #000}
-.panel p+p{margin-top:10px}
-ol.steps{list-style:none;counter-reset:s;margin-top:14px}
-ol.steps li{counter-increment:s;position:relative;padding:14px 14px 14px 64px;margin-bottom:12px;background:var(--n1);border:2px solid var(--line);border-radius:6px;box-shadow:5px 5px 0 #000}
-ol.steps li::before{content:counter(s);position:absolute;left:12px;top:13px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--gold);color:var(--dark);font:700 21px Georgia,serif;border:2px solid #000;transform:rotate(-6deg);box-shadow:2px 2px 0 #000}
-ol.steps b{display:block;font-size:17px;color:var(--gold2)}
-ol.steps span{font-size:15px;color:#d6dbea}
-.trade{background:var(--n1);border:2px solid var(--line);border-left:6px solid var(--gold);border-radius:6px;padding:15px;margin-top:14px;box-shadow:5px 5px 0 #000}
-.trade h3{font-size:20px;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:9px}
-.trade h3 small{font:800 11px -apple-system,Segoe UI,Roboto,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#120d00;background:var(--gold);padding:3px 7px;border-radius:3px}
-.trade h3 .ticon{width:44px;height:44px;flex:none;display:block}
-.sit{margin-top:8px;font-size:16px;font-style:italic;color:#fff}
-.sit::before{content:"Caller: ";font-style:normal;font-weight:800;color:var(--gold2);font-size:13px;letter-spacing:.06em;text-transform:uppercase}
-.does{margin-top:8px;font-size:15px;color:var(--mute)}
-.does b{color:var(--gold2);font-weight:800}
-.trade .btn{margin-top:12px;min-height:48px;font-size:16px}
-ul.work{list-style:none;margin-top:14px}
-ul.work li{margin-bottom:10px;padding:12px 14px;background:var(--n1);border:2px solid var(--line);border-left:6px solid var(--gold);border-radius:6px;box-shadow:5px 5px 0 #000;font-size:16px;line-height:1.4}
-ul.work b{color:var(--gold2)}
-.ask{margin-top:14px;font-weight:800}
-ul.cost{list-style:none;margin-top:14px}
-ul.cost li{margin-bottom:10px;padding:12px 14px;background:var(--n1);border:2px solid var(--line);border-left:6px solid var(--gold);border-radius:6px;box-shadow:5px 5px 0 #000;font-size:16px;line-height:1.45}
-ul.cost b{color:var(--gold2)}
-ul.cost a{font-size:13px;font-weight:800}
-.fine{margin-top:12px;font-size:14px;color:var(--mute);line-height:1.45}
-.soon{display:flex;align-items:center;justify-content:center;min-height:48px;margin-top:12px;border:2px dashed var(--line);border-radius:6px;color:var(--gold2);font-weight:800;font-size:15px}
-.tradepick{margin-top:22px}
-.tradepick label{display:block;font-weight:800;font-size:16px}
-.tradepick label span{display:block;margin-top:3px;font-weight:500;font-size:14px;color:var(--mute)}
-.trade-select{display:block;width:100%;min-height:54px;margin-top:8px;padding:0 46px 0 14px;font:800 16px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:var(--n1);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M3 6l5 5 5-5' fill='none' stroke='%23e8b53b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");background-repeat:no-repeat;background-position:right 14px center;border:2px solid var(--gold);border-radius:6px;box-shadow:4px 4px 0 #000;cursor:pointer;appearance:none;-webkit-appearance:none}
-.trade-select:focus{outline:3px solid var(--gold2);outline-offset:2px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:16px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font:400 var(--t-m)/1.55 var(--sans);background:var(--bg);color:var(--ink);overflow-x:hidden;
+ padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom))}
+a{color:var(--gold2);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--gold2);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.narrow{max-width:720px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--gold);color:var(--on-gold);padding:10px 14px;border-radius:8px;font-weight:800;z-index:50}
+.skip:focus{top:12px}
+svg.i{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- type ---------- */
+h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+h1{font-size:var(--t-2xl);line-height:1.08}
+h2{font-size:var(--t-xl);line-height:1.15}
+h3{font-size:var(--t-l);line-height:1.25}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:800 var(--t-xs)/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
+.eyebrow::before{content:"";width:18px;height:2px;background:var(--gold)}
+.lead{font-size:var(--t-m);color:var(--ink2);margin-top:var(--sp3);max-width:60ch}
+.fine{font-size:var(--t-s);color:var(--mute);margin-top:var(--sp3);line-height:1.5}
+
+/* ---------- top bar ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;color:var(--ink);font:800 var(--t-s)/1 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.brand span{color:var(--gold)}
+.btn.top-call{display:none}
+
+/* ---------- buttons ---------- */
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:12px 20px;border-radius:var(--r);
+ font:800 var(--t-m)/1.2 var(--sans);text-decoration:none;text-align:center;border:2px solid transparent;transition:transform .12s,background .12s}
+.btn:active{transform:translateY(1px)}
+.btn.g{background:var(--gold);color:var(--on-gold)}
+.btn.g:hover{background:var(--gold2)}
+.btn.o{background:transparent;color:var(--gold2);border-color:var(--gold)}
+.btn.o:hover{background:rgba(232,181,59,.1)}
+.btn small{display:block;font-weight:600;font-size:var(--t-xs);opacity:.85}
+
+/* ---------- hero ---------- */
+.hero{background:radial-gradient(120% 80% at 85% 0%,#1a2650 0%,rgba(10,13,24,0) 60%),linear-gradient(180deg,#121a35,var(--bg));border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;gap:var(--sp6);padding:var(--sp4) 0 var(--sp7)}
+.hero h1{margin-top:var(--sp4)}
+.hero h1 em{display:block;font-style:normal;color:var(--gold)}
+.hero .sub{font-size:var(--t-m);color:var(--ink2);margin-top:var(--sp4);max-width:34em}
+.cta{display:grid;gap:var(--sp3);margin-top:var(--sp5)}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:var(--sp4);padding:8px 14px;border:1px solid var(--gold);border-radius:999px;
+ font:700 var(--t-s)/1.3 var(--sans);color:var(--gold2);text-decoration:none;background:rgba(232,181,59,.08)}
+.chip svg.i{width:18px;height:18px}
+.honest{display:flex;gap:12px;margin-top:var(--sp5);padding:var(--sp4);border-left:3px solid var(--gold);background:rgba(255,255,255,.03);border-radius:0 var(--r) var(--r) 0;font-size:var(--t-s);color:var(--ink2)}
+.honest svg.i{color:var(--gold);margin-top:2px}
+.honest b{color:var(--ink)}
+
+/* ---------- sections ---------- */
+section{padding:var(--sp7) 0 0}
+.sec-head{max-width:720px}
+.sec-head h2{margin-top:var(--sp2)}
+.grid{display:grid;gap:var(--sp3);margin-top:var(--sp5)}
+.card{background:var(--n1);border:1px solid var(--line);border-radius:var(--r);padding:var(--sp4) var(--sp4) var(--sp5)}
+.card h3{display:flex;align-items:center;gap:10px;font-size:var(--t-l)}
+.card p{margin-top:var(--sp2);font-size:var(--t-s);color:var(--ink2)}
+.ic{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:var(--n3);color:var(--gold);flex:none}
+.bad .ic{color:var(--mute)}
+.bad h3{font-family:var(--sans);font-size:var(--t-m);font-weight:800}
+.fourth{display:flex;gap:12px;align-items:flex-start;margin-top:var(--sp3);padding:var(--sp4);border:1px solid var(--gold);border-radius:var(--r);background:linear-gradient(135deg,rgba(232,181,59,.12),rgba(232,181,59,.03))}
+.fourth .ic{background:var(--gold);color:var(--on-gold)}
+.fourth p{font-size:var(--t-s);color:var(--ink2)}
+.fourth b{display:block;color:var(--ink);font-size:var(--t-m)}
+
+/* call timeline */
+.call{list-style:none;margin-top:var(--sp5);position:relative}
+.call::before{content:"";position:absolute;left:21px;top:22px;bottom:22px;width:2px;background:var(--line)}
+.call li{position:relative;display:grid;grid-template-columns:44px 1fr;gap:14px;padding-bottom:var(--sp5)}
+.call li:last-child{padding-bottom:0}
+.call .ic{position:relative;z-index:1;border:1px solid var(--line)}
+.call b{display:block;font-size:var(--t-m);color:var(--ink)}
+.call p{font-size:var(--t-s);color:var(--ink2);margin-top:2px}
+.say{display:block;margin-top:var(--sp2);padding:10px 12px;border-radius:10px 10px 10px 2px;background:var(--n2);border:1px solid var(--line);font-size:var(--t-s);color:var(--ink);font-style:italic}
+.say.caller{border-radius:10px 10px 2px 10px;background:#0c1222}
+.say i{font-style:normal;font-weight:800;color:var(--gold2);font-size:var(--t-xs);letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
+
+/* email card */
+.mail{margin-top:var(--sp5);background:var(--paper);color:var(--paper-ink);border-radius:14px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45);max-width:560px}
+.mail-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f3f5f9;border-bottom:1px solid var(--paper-line);font:600 var(--t-xs)/1 var(--sans);color:var(--paper-mute)}
+.mail-bar svg.i{width:18px;height:18px;color:var(--paper-mute)}
+.mail-head{padding:14px 16px 12px;border-bottom:1px solid var(--paper-line)}
+.mail-subj{font:800 var(--t-m)/1.3 var(--sans);color:var(--paper-ink)}
+.tag{display:inline-block;margin-right:6px;padding:2px 7px;border-radius:4px;background:var(--gold);color:var(--on-gold);font:800 11px/1.5 var(--sans);letter-spacing:.06em;vertical-align:2px}
+.mail-from{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:var(--t-xs);color:var(--paper-mute)}
+.av{width:32px;height:32px;border-radius:50%;background:#0a0d18;color:var(--gold);display:flex;align-items:center;justify-content:center;font:700 13px var(--serif);flex:none}
+.mail-from b{color:var(--paper-ink);font-size:var(--t-s)}
+.mail-body{padding:14px 16px 16px}
+.mail dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:var(--t-s)}
+.mail dt{color:var(--paper-mute);font-weight:600}
+.mail dd{color:var(--paper-ink);font-weight:600}
+.mail .sum{margin-top:12px;padding-top:12px;border-top:1px solid var(--paper-line);font-size:var(--t-s);line-height:1.5;color:#2c3446}
+.mail .tx{margin-top:12px;font-size:var(--t-xs);color:var(--paper-mute)}
+.cap{margin-top:var(--sp3);font-size:var(--t-xs);color:var(--mute)}
+
+/* hero call card (desktop) */
+.callcard{width:100%;max-width:440px;background:var(--n1);border:1px solid var(--line);border-radius:18px;padding:var(--sp5);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.callcard .who-call{display:flex;align-items:center;gap:12px}
+.callcard .who-call b{display:block;font:700 var(--t-l)/1.2 var(--serif)}
+.callcard .who-call span{font-size:var(--t-xs);color:var(--mute)}
+.callcard .live{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font:800 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold2)}
+.callcard .live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.callcard .say{font-size:var(--t-m);line-height:1.5;margin-top:var(--sp4)}
+.callcard .cap{margin-top:var(--sp4)}
+.swipe{display:none;margin-top:var(--sp2);font-size:var(--t-xs);color:var(--mute)}
+/* trades */
+.trade{background:var(--n1);border:1px solid var(--line);border-radius:var(--r);padding:var(--sp4)}
+.trade h3{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:var(--t-l)}
+.trade h3 .ticon{width:40px;height:40px;flex:none;display:block;padding:6px;border-radius:10px;background:var(--n3)}
+.trade h3 small{font:800 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--on-gold);background:var(--gold);padding:5px 7px;border-radius:4px}
+.sit{margin-top:var(--sp3);font-size:var(--t-s);font-style:italic;color:var(--ink)}
+.does{margin-top:var(--sp2);font-size:var(--t-s);color:var(--ink2)}
+.does b{color:var(--gold2)}
+.trade .btn{margin-top:var(--sp4);min-height:52px;font-size:var(--t-s)}
+.soon{display:flex;align-items:center;justify-content:center;min-height:48px;margin-top:var(--sp4);border:1px dashed var(--line);border-radius:var(--r);color:var(--mute);font-weight:700;font-size:var(--t-s)}
+.tradepick{margin-top:var(--sp6);padding:var(--sp4);border:1px solid var(--line);border-radius:var(--r);background:rgba(255,255,255,.02)}
+.tradepick label{display:block;font-weight:800;font-size:var(--t-m)}
+.tradepick label span{display:block;margin-top:2px;font-weight:500;font-size:var(--t-s);color:var(--mute)}
+.trade-select{display:block;width:100%;min-height:56px;margin-top:var(--sp3);padding:0 46px 0 14px;font:700 var(--t-m)/1.3 var(--sans);color:var(--ink);background-color:var(--n2);
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path d='M3 6l5 5 5-5' fill='none' stroke='%23e8b53b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+ background-repeat:no-repeat;background-position:right 14px center;border:1px solid var(--gold);border-radius:var(--r);cursor:pointer;appearance:none;-webkit-appearance:none}
 .trade-select option{color:#120d00;background:#fff}
-.stage{display:block;margin-top:14px;padding-bottom:6px}
-.stage .trade{display:none;margin-top:0}
+.stage{margin-top:var(--sp3)}
+.stage .trade{display:none}
 .stage .trade.on{display:block}
-.chip{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;padding:8px 14px;border:2px solid var(--gold);border-radius:999px;font-weight:800;font-size:15px;line-height:1.3;color:var(--gold2);text-decoration:none;background:rgba(232,181,59,.07)}
-.hero .tryhint a{color:var(--gold2)}
-.price{position:relative;background:linear-gradient(160deg,var(--n2),var(--n1));border:3px solid var(--gold);border-radius:6px;padding:20px 16px;margin-top:22px;box-shadow:6px 6px 0 #000}
-.price .amt{font:700 54px/1 Georgia,serif;color:var(--gold)}
-.loss{font:700 68px/0.95 Georgia,"DejaVu Serif","Times New Roman",serif;color:var(--gold);margin:8px 0 2px;letter-spacing:-.02em}
-.loss small{display:block;margin-bottom:8px;font:800 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.price .amt small{font-size:19px;color:var(--ink)}
-.price ul{list-style:none;margin-top:14px}
-.price li{padding:9px 0 9px 28px;position:relative;border-top:1px solid var(--line);font-size:16px}
-.price li::before{content:"✦";position:absolute;left:4px;top:9px;color:var(--gold)}
-.burst{position:absolute;right:12px;top:-16px;background:var(--gold);color:var(--dark);font-weight:900;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:7px 11px;border:2px solid #000;transform:rotate(4deg);box-shadow:3px 3px 0 #000}
-.who{display:flex;gap:14px;align-items:flex-start}
-.who svg{flex:none}
-.who p{font-size:16px}
-.who p+p{margin-top:9px}
-.phone{margin-top:8px;font-weight:800;font-size:16px}
-.phone a{display:inline-block;min-height:44px;line-height:1.35;color:var(--gold2)}
-.tryhead{margin:14px 0 0;font-size:18px;font-weight:800;line-height:1.25}
-.tryhint{margin-top:8px;font-size:15px;color:var(--mute);line-height:1.4}
-details{background:var(--n1);border:2px solid var(--line);border-radius:6px;margin-top:10px}
-summary{cursor:pointer;list-style:none;padding:14px 40px 14px 14px;font-weight:800;font-size:16px;position:relative}
+
+/* nevers */
+.never{display:grid;gap:var(--sp3);margin-top:var(--sp5)}
+.never li{list-style:none;display:flex;align-items:center;gap:14px;padding:var(--sp4);background:var(--n1);border:1px solid var(--line);border-radius:var(--r)}
+.never .ic{background:rgba(232,181,59,.12)}
+.never b{display:block;font:800 var(--t-m)/1.25 var(--sans)}
+.never div>span{display:block;font-size:var(--t-s);color:var(--ink2);margin-top:2px}
+.yours{margin-top:var(--sp3);font-size:var(--t-s);color:var(--ink2)}
+.yours b{color:var(--gold2)}
+
+/* steps */
+.steps{list-style:none;counter-reset:s;display:grid;gap:var(--sp3);margin-top:var(--sp5)}
+.steps li{counter-increment:s;position:relative;padding:var(--sp4) var(--sp4) var(--sp4) 64px;background:var(--n1);border:1px solid var(--line);border-radius:var(--r)}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:16px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--gold);color:var(--on-gold);font:700 var(--t-m)/1 var(--serif)}
+.steps b{display:block;font-size:var(--t-m)}
+.steps span{display:block;font-size:var(--t-s);color:var(--ink2);margin-top:2px}
+
+/* price */
+.price{position:relative;margin-top:var(--sp5);padding:var(--sp5) var(--sp4);border:2px solid var(--gold);border-radius:14px;background:linear-gradient(160deg,var(--n2),var(--n1))}
+.price .flag{position:absolute;top:-14px;left:16px;background:var(--gold);color:var(--on-gold);font:800 var(--t-xs)/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:8px 10px;border-radius:6px}
+.amt{font:700 3.5rem/1 var(--serif);color:var(--gold);letter-spacing:-.02em}
+.amt small{font:600 var(--t-m) var(--sans);color:var(--ink2);margin-left:4px;letter-spacing:0}
+.price .lede{margin-top:var(--sp2);font-weight:700;color:var(--ink)}
+.price ul{list-style:none;margin-top:var(--sp4)}
+.price li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:var(--t-s);color:var(--ink2)}
+.price li svg.i{width:20px;height:20px;color:var(--gold);margin-top:1px}
+.price li b{color:var(--ink)}
+.price .btn{margin-top:var(--sp4)}
+
+/* cost estimates */
+details{background:var(--n1);border:1px solid var(--line);border-radius:var(--r);margin-top:var(--sp3)}
+summary{cursor:pointer;list-style:none;min-height:56px;display:flex;align-items:center;padding:12px 48px 12px 16px;font-weight:800;font-size:var(--t-m);position:relative}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:14px;top:10px;color:var(--gold);font-size:24px;font-weight:900}
-details[open] summary::after{content:"–"}
+summary::after{content:"";position:absolute;right:18px;top:50%;width:10px;height:10px;margin-top:-7px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);transition:transform .15s}
+details[open] summary::after{transform:rotate(-135deg);margin-top:-2px}
 details[open]{border-color:var(--gold)}
-details p{padding:0 14px 14px;font-size:15px;color:#d6dbea}
-footer{margin-top:40px;padding:22px 0 36px;border-top:4px solid var(--gold);box-shadow:none;background:#06080f;font-size:15px}
-footer p+p{margin-top:6px;color:var(--mute);font-size:13px}
-@media(min-width:600px){h1{font-size:44px}.btns{flex-direction:row}.btns .btn{flex:1}}
+details .in{padding:0 16px 16px;font-size:var(--t-s);color:var(--ink2)}
+details .in p+p{margin-top:8px}
+ul.cost{list-style:none}
+ul.cost li{padding:10px 0;border-top:1px solid var(--line)}
+ul.cost li:first-child{border-top:0}
+ul.cost b{color:var(--ink)}
+ul.cost a{font-weight:700}
+.math{margin-top:var(--sp4);padding:var(--sp4);border-radius:var(--r);background:var(--n1);border:1px solid var(--line);font-size:var(--t-s);color:var(--ink2)}
+.math .big{display:block;font:700 var(--t-2xl)/1 var(--serif);color:var(--gold);margin:6px 0 8px}
+.math .btn{margin-top:var(--sp4)}
+
+/* who */
+.who{display:grid;gap:var(--sp4);margin-top:var(--sp5)}
+.badge{display:flex;align-items:center;gap:14px}
+.badge .ic{width:56px;height:56px;border-radius:14px}
+.badge .ic svg.i{width:30px;height:30px}
+.badge b{display:block;font:700 var(--t-l)/1.2 var(--serif)}
+.badge span{display:block;font-size:var(--t-s);color:var(--mute)}
+.who p{font-size:var(--t-m);color:var(--ink2)}
+.facts{list-style:none;display:grid;gap:8px;margin-top:var(--sp2)}
+.facts li{display:flex;gap:10px;align-items:flex-start;font-size:var(--t-s);color:var(--ink2)}
+.facts svg.i{width:20px;height:20px;color:var(--gold);margin-top:1px}
+.also{margin-top:var(--sp4);font-size:var(--t-s);color:var(--mute)}
+.also b{color:var(--ink2)}
+
+/* faq */
+.faq details p{padding:0 16px 16px;font-size:var(--t-s);color:var(--ink2)}
+
+/* final cta + footer */
+.final{margin-top:var(--sp7);padding:var(--sp6) 0;border-top:1px solid var(--line);text-align:left}
+.final .cta{max-width:560px}
+footer{padding:var(--sp5) 0 var(--sp6);background:#06080f;border-top:1px solid var(--line);font-size:var(--t-s);color:var(--mute)}
+footer p+p{margin-top:6px;font-size:var(--t-xs)}
+
+/* sticky call bar (mobile). Body has matching padding-bottom, so it never covers content. */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;grid-template-columns:1fr auto;gap:8px;
+ padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:rgba(8,11,22,.96);border-top:1px solid var(--line);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.callbar .btn{min-height:52px;font-size:var(--t-m)}
+.callbar .btn.o{padding:0 16px}
+.callbar .btn.o svg.i{width:22px;height:22px}
+
+/* ---------- larger screens ---------- */
+@media (min-width:640px){
+ h1{font-size:var(--t-3xl)}
+ h2{font-size:var(--t-2xl)}
+ .cta{grid-template-columns:1fr 1fr}
+ .grid.three{grid-template-columns:repeat(3,1fr)}
+ .never{grid-template-columns:repeat(3,1fr)}
+ .never li{flex-direction:column;align-items:flex-start}
+ .steps{grid-template-columns:repeat(3,1fr)}
+ .steps li{padding:64px var(--sp4) var(--sp4)}
+}
+@media (min-width:960px){
+ :root{--bar-h:0px}
+ body{font-size:1.0625rem}
+ .callbar{display:none}
+ .btn.top-call{display:inline-flex;min-height:44px;padding:8px 14px;font-size:var(--t-s)}
+ h1{font-size:3.25rem}
+ .hero-grid{grid-template-columns:1.1fr .9fr;align-items:center;padding:var(--sp5) 0 var(--sp8)}
+ .hero .callcard{justify-self:end;transform:rotate(1deg)}
+ section{padding-top:var(--sp8)}
+ .split{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp7);align-items:start}
+ .featured{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp3)}
+ .featured .trade{display:flex;flex-direction:column}
+ .featured .trade .btn{margin-top:auto}
+ .featured .trade .does{margin-bottom:var(--sp4)}
+ .swipe{display:none}
+ .faq .narrow{max-width:none;display:grid;grid-template-columns:340px 1fr;gap:0 var(--sp7);align-items:start}
+ .faq .qs details:first-child{margin-top:0}
+ .who{grid-template-columns:320px 1fr;gap:var(--sp7)}
+ .price-wrap{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp7);align-items:start}
+}
+@media (max-width:959px){
+ .featured{display:grid;grid-auto-flow:column;grid-auto-columns:86%;gap:var(--sp3);margin:var(--sp5) -20px 0;padding:0 20px 8px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+ .featured .trade{scroll-snap-align:start;display:flex;flex-direction:column}
+ .featured .trade .btn{margin-top:auto}
+ .featured .trade .does{margin-bottom:var(--sp4)}
+ .swipe{display:block}
+ .hero .callcard{display:none}
+ .price-wrap{display:grid;gap:var(--sp5)}
+ .price-wrap .price{order:-1;margin-top:var(--sp4)}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- One consistent icon set: 24px grid, 2px stroke, round caps. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></symbol>
+  <symbol id="i-voicemail" viewBox="0 0 24 24"><circle cx="6" cy="12" r="4"/><circle cx="18" cy="12" r="4"/><path d="M6 16h12"/></symbol>
+  <symbol id="i-headset" viewBox="0 0 24 24"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/><path d="M18 17v1a3 3 0 0 1-3 3h-3"/></symbol>
+  <symbol id="i-phone-off" viewBox="0 0 24 24"><path d="M10.7 13.3a16 16 0 0 0 3.4 2.6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 6.2"/><path d="M5.2 2.9A2 2 0 0 1 6.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L10 9.9"/><path d="M22 2 2 22"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-tag-x" viewBox="0 0 24 24"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><path d="m8 8 5 5M13 8l-5 5"/></symbol>
+  <symbol id="i-wrench-x" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+  <symbol id="i-card-x" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M15 14l4 4M19 14l-4 4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
+  <symbol id="i-fist" viewBox="0 0 24 24"><path d="M6 11V7a2 2 0 0 1 4 0v3M10 10V6a2 2 0 0 1 4 0v4M14 10V7a2 2 0 0 1 4 0v6a8 8 0 0 1-8 8H9a5 5 0 0 1-5-5v-2a2 2 0 0 1 2-2h3"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+ </defs>
+</svg>
+
 <header class="hero" id="top">
-<div class="wrap">
- <div class="bar">
-  <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="10" fill="#0a0d18" stroke="#e8b53b" stroke-width="4"/><text x="32" y="43" font-family="Georgia,serif" font-size="30" font-weight="700" text-anchor="middle" fill="#e8b53b">D<tspan fill="#f6d27a">R</tspan></text></svg>
-  <b>Dojo <span>Receptionist</span></b>
+ <div class="wrap">
+  <div class="top">
+   <a class="brand" href="#top" aria-label="Dojo Receptionist, top of page">
+    <svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="12" fill="#0a0d18" stroke="#e8b53b" stroke-width="4"/><text x="32" y="43" font-family="Georgia,serif" font-size="30" font-weight="700" text-anchor="middle" fill="#e8b53b">D<tspan fill="#f6d27a">R</tspan></text></svg>
+    Dojo <span>Receptionist</span>
+   </a>
+   <a class="btn g top-call" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>541-833-0643</a>
+  </div>
+
+  <div class="hero-grid">
+   <div>
+    <p class="eyebrow">Owner-run shops · Lane County, OR</p>
+    <!-- SWAP-TEST: broke. Headline + "Bella" + Veneta setup line. -->
+    <h1>Under a truck when the phone rings?<em>Bella picks up.</em></h1>
+    <p class="sub">She answers the calls you miss, says she's an AI, and emails you who called and what they need. Jeremy, a Veneta dad and Marine vet, sets her up at your counter.</p>
+    <div class="cta">
+     <a class="btn g" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg><span>Call Bella: 541-833-0643<small>Demo line. Play your own customer.</small></span></a>
+     <a class="btn o" href="#trades"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>Hear your trade's demo</a>
+    </div>
+    <!-- Price chip: one line, reword here only. Full plan terms are in #price. -->
+    <a class="chip" href="#price"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg>Founding shops: first week free, $129/mo, no setup fee</a>
+   </div>
+
+   <!-- Desktop only: what callers hear on the demo line (first message of the live main-line agent). -->
+   <div class="callcard">
+    <div class="who-call"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg></span><div><b>Bella</b><span>Dojo Receptionist demo · 541-833-0643</span></div><span class="live">AI</span></div>
+    <p class="say"><i>Bella</i>"Hi there, thanks for calling Dojo Receptionist! I'm Bella, an AI demo receptionist, and this call may be recorded. Here's the fun part: pretend you're a customer calling your own shop."</p>
+    <p class="cap">Her actual greeting on the demo line today.</p>
+   </div>
+  </div>
  </div>
- <span class="kick">Owner-run shops · Lane County, OR</span>
- <h1 class="disp">Under a truck when the phone rings?<em>A Veneta dad and Marine vet sets up an AI that answers it for your shop.</em></h1>
- <p class="sub">It says it's an AI, takes the message and emails you. I set up your call forwarding myself.</p>
- <div class="btns">
-  <a class="btn g" href="tel:+15418330643">Call the demo: 541-833-0643</a>
-  <a class="btn o" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop">Email Jeremy</a>
- </div>
- <!-- Price chip: one line, reword here only. Full plan terms are in #price. -->
- <a class="chip" href="#price">Founding shops: first week free, $129/mo, no setup fee</a>
- <p class="tryhint">Or <a href="#trades">try your trade's demo in your browser</a>.</p>
- <p class="honest"><b>Straight talk:</b> I set every one up to tell callers it's an AI and that the call may be recorded. It never quotes your prices, never diagnoses the problem and never takes payment. It takes the message; you make the call.</p>
-</div>
 </header>
 
-<main class="wrap">
+<main id="main">
+<div class="wrap">
 
-<section id="how">
- <h2 class="disp">How I set it up</h2>
- <ol class="steps">
-  <li><b>You tell me about your shop</b><span>A short form, or a call with me, Jeremy: your hours, your services, and the questions your callers always ask.</span></li>
-  <li><b>I set it up myself, from Veneta</b><span>Not a self-serve portal. You keep your number; your phone forwards the calls you miss, and after-hours calls, to the AI.</span></li>
-  <li><b>It answers, then emails you</b><span>It gets the caller's name, number (read back), where they are, and what they need, then emails you a summary, so you can call back when your hands are free.</span></li>
- </ol>
+<!-- ===== three bad options ===== -->
+<section id="today" aria-labelledby="today-h">
+ <div class="sec-head">
+  <p class="eyebrow">When you can't pick up</p>
+  <h2 id="today-h">Right now you have three bad options.</h2>
+ </div>
+ <div class="grid three">
+  <div class="card bad"><h3><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-voicemail"/></svg></span>Voicemail</h3><p>The caller with a leaking water heater in Elmira hears a beep, and may dial the next number instead.</p></div>
+  <div class="card bad"><h3><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-headset"/></svg></span>An answering service</h3><p>A script read from somewhere else, set up through an online portal you fill out yourself.</p></div>
+  <div class="card bad"><h3><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-phone-off"/></svg></span>Let it ring</h3><p>You climb out from under the truck to a missed call, no name, and no idea what they needed.</p></div>
+ </div>
+ <!-- SWAP-TEST: broke ("Jeremy sets her up at your counter"). -->
+ <div class="fourth"><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-spark"/></svg></span><p><b>Or Bella answers in your shop's name.</b>She gets the details and emails you. Jeremy sets her up at your counter, with your hours and your callers' questions.</p></div>
 </section>
 
-<section id="trades">
- <h2 class="disp">Calls Lane County shops miss</h2>
- <p class="lead">Made-up callers, written the way calls come in around Lane County. The shop is made up; the voice and the questions are real. Ask about hours or services, ask what something costs and hear how it handles that, or leave a message, just as a customer would.</p>
- <p class="tryhint">Each "Hear it" button opens that trade's demo in a new tab. Tap the call button there, allow the mic, and talk to it like a customer.</p>
+<!-- ===== one call ===== -->
+<section id="one-call" aria-labelledby="call-h">
+ <div class="split">
+  <div>
+   <div class="sec-head">
+    <p class="eyebrow">One call, start to finish</p>
+    <h2 id="call-h">A real demo call from Nov 10, 8:33 AM.</h2>
+    <p class="lead">Coast Range Heating &amp; Air is a made-up shop. The call and the questions are real.</p>
+   </div>
+   <ol class="call">
+    <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg></span><div><b>Answers in the shop's name</b><p>Says it's an AI and that the call may be recorded.</p><span class="say"><i>AI</i>"Hi, thanks for calling Coast Range Heating &amp; Air (demo)! I'm the AI assistant, and this call may be recorded."</span></div></li>
+    <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-user"/></svg></span><div><b>Gets the name and reads the number back</b><p>Digit by digit, then waits for a yes. Then the address and the best time to call back.</p></div></li>
+    <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg></span><div><b>Knows where you work</b><p>The caller said "Angels." It checked against the shop's towns.</p><span class="say"><i>AI</i>"Is the city Angels, or did you mean one of our service areas like Eugene, Springfield, Veneta, Elmira, or Fern Ridge?"</span></div></li>
+    <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-alert"/></svg></span><div><b>Flags what's urgent</b><span class="say caller"><i>Caller</i>"I have an urgent no heat concern."</span><p style="margin-top:8px">The email went out with URGENT first in the subject line.</p></div></li>
+    <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></span><div><b>Emails you, then you call</b><p>You call back with the real answer when your hands are free.</p></div></li>
+   </ol>
+  </div>
 
- <div id="featured-trades"></div>
- <div class="tradepick">
-  <label for="trade-pick">Pick a trade<span>The example below changes to that shop.</span></label>
-  <select id="trade-pick" class="trade-select"></select>
+  <div id="summary">
+   <div class="sec-head">
+    <p class="eyebrow">What lands in your inbox</p>
+    <h2>The summary email.</h2>
+   </div>
+   <div class="mail" role="img" aria-label="Sample summary email. Subject: URGENT, no heat, small kids at home. Caller Dana in Veneta, callback number read back, call back any time after noon.">
+    <div class="mail-bar"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Inbox · 8:45 AM</div>
+    <div class="mail-head">
+     <p class="mail-subj"><span class="tag">URGENT</span>No heat, small kids at home</p>
+     <div class="mail-from"><span class="av">DR</span><div><b>Dojo Receptionist</b><br>to you@yourshop.com</div></div>
+    </div>
+    <div class="mail-body">
+     <dl>
+      <dt>Shop</dt><dd>Coast Range Heating &amp; Air</dd>
+      <dt>Caller</dt><dd>Dana</dd>
+      <dt>Callback</dt><dd>541-···-··42 (read back, confirmed)</dd>
+      <dt>Where</dt><dd>Veneta</dd>
+      <dt>Reason</dt><dd>No heat</dd>
+      <dt>Urgency</dt><dd>URGENT, small kids at home</dd>
+      <dt>Call back</dt><dd>Afternoon, any time after noon</dd>
+     </dl>
+     <p class="sum">Dana's furnace quit overnight and there are two small kids in the house. She confirmed her number and address in Veneta and asked for a call back any time after noon.</p>
+     <p class="tx">Full call transcript below ↓</p>
+    </div>
+   </div>
+   <p class="cap">Sample. Same fields as the real email; the caller is made up.</p>
+  </div>
  </div>
- <div class="stage" id="trade-stage"></div>
- <p class="tryhint">Trade not listed? Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll set one up for the way your shop gets calls.</p>
+</section>
+
+<!-- ===== trades ===== -->
+<section id="trades" aria-labelledby="trades-h">
+ <div class="sec-head">
+  <p class="eyebrow">Hear it</p>
+  <!-- SWAP-TEST: broke (Elmira / Noti / Crow callers). -->
+  <h2 id="trades-h">Calls Lane County shops miss.</h2>
+  <p class="lead">Made-up shops, real voices. Tap "Hear it," allow the mic, and call it like a customer: ask the hours, ask for a price, or leave a message.</p>
+ </div>
+ <div class="featured" id="featured-trades"></div>
+ <p class="swipe" aria-hidden="true">Swipe for more trades →</p>
+ <div class="tradepick">
+  <label for="trade-pick">Don't see your trade?<span>Pick it and the example below changes.</span></label>
+  <select id="trade-pick" class="trade-select"></select>
+  <div class="stage" id="trade-stage"></div>
+ </div>
+ <p class="fine">Not listed? Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll build one for the way your shop gets calls.</p>
  <script>
  (function(){
-  /* Add a trade by appending one object. featured cards are shown above the picker. */
+  /* Same trades and demo links as v2.1. Add a trade by appending one object. */
   var TRADES=[
    {id:"plumbing",name:"Plumbing",featured:true,icon:"/assets/icons/plumbing.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx",
     sit:"\"Water heater's leaking all over the garage out in Elmira, and it's Saturday morning.\"",
-    does:"asks if the water's shut off, how bad it is, the address, and when they can be reached, then emails you a summary."},
+    does:"asks if the water's shut off, how bad it is, the address, and when they can be reached, then emails you."},
    {id:"hvac",name:"HVAC",featured:true,icon:"/assets/icons/hvac.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75",
     sit:"\"Furnace quit on the first cold Willamette Valley night, and we've got kids in the house.\"",
-    does:"asks what kind of system, whether there's any heat at all, the address, and how soon they need you, then emails you a summary, even when it's 10 p.m. and you're off the clock."},
+    does:"asks what kind of system, whether there's any heat, the address, and how soon, then emails you, even at 10 p.m."},
    {id:"auto",name:"Auto repair",featured:true,icon:"/assets/icons/auto-repair.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p",
     sit:"\"Check-engine light came on driving in from Noti. Can you look at it today?\"",
-    does:"gets year, make and model, what the car's doing, whether it's drivable, and when they can bring it in, then emails you while you're still under the lift."},
+    does:"gets year, make and model, what it's doing, whether it's drivable, and when they can bring it in, while you're under the lift."},
    {id:"electrical",name:"Electrical",featured:true,icon:"/assets/icons/electrical.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3",
     sit:"\"Half the house went dark in the windstorm out by Crow, and the breaker won't reset.\"",
-    does:"asks which rooms are out, whether there's a burning smell, and the address, then emails you a summary. You decide who goes out."},
+    does:"asks which rooms are out, whether there's a burning smell, and the address. You decide who goes out."},
    {id:"dispensary",name:"Dispensary",featured:true,icon:"/assets/icons/dispensary.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6601m732qh8ted69rqzd4qq1kxm5",
     sit:"\"Cedar Hollow Cannabis? You still open tonight, and do I have to be 21?\"",
     line:"Hours, directions and the 21+ rule. Never talks product, prices or deals."},
-   {id:"restaurant",name:"Restaurant",icon:"/assets/icons/restaurant.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs",
-    sit:"\"Fern Hollow Family Diner? Can I call in a to-go order for four, and do you have the room for a party Saturday?\"",
-    does:"takes down the to-go order and reads back their name and number for you to confirm. For a party or banquet it gets the date and headcount. It answers hours. You confirm."},
+   {id:"restaurant",name:"Restaurant",featured:true,icon:"/assets/icons/restaurant.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs",
+    sit:"\"Fern Hollow Family Diner? Can I call in a to-go order for four, and do you have room for a party Saturday?\"",
+    does:"takes the to-go order and reads back the name and number. For a party it gets the date and headcount. You confirm."},
    {id:"salon",name:"Salon",icon:"/assets/icons/salon.svg",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb",
     sit:"\"Can I get a cut and color before my sister's wedding in Eugene this Saturday?\"",
-    does:"takes their name, the service, the days that work, and a callback number. It never confirms a booking without you."},
+    does:"takes their name, the service, the days that work, and a callback number. You confirm every appointment."},
    {id:"barber",name:"Barber",icon:"/assets/icons/barber.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb",
     sit:"\"Got time for a fade at Copper Pine before my interview in Springfield tomorrow morning?\"",
-    does:"takes their name, the cut, the days that work, and a callback number while you finish the client in the chair. It never confirms a booking without you."},
+    does:"takes their name, the cut, the days that work, and a callback number while you finish the client in the chair. You confirm every appointment."},
    {id:"pet",name:"Pet grooming",icon:"/assets/icons/pet-grooming.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw",
     sit:"\"My dog rolled in something awful out by Fern Ridge. Any chance Muddy Paws has a bath this week?\"",
-    does:"gets the dog's breed and size, the service, the days that work, and a callback number. No price quotes over the phone; you set the appointment."},
+    does:"gets the breed and size, the service, the days that work, and a callback number. You set the appointment."},
    {id:"exterior",name:"Exterior cleaning",icon:"/assets/icons/exterior-cleaning.svg",
     sit:"\"The roof's gone green out past Elmira, and the gutters are packed. Can you soft wash it before the rain?\"",
-    notes:["You're on a ladder or running the pressure washer, with no hand free for the phone. Miss it, and that homeowner may call the next crew."],
-    does:"gets the address and whether they need the roof, the gutters, the house, or the driveway, then emails you a summary. It never quotes a price. You call back when you're on the ground."},
+    does:"gets the address and whether it's the roof, gutters, house or driveway, then emails you. You call back from the ground."},
    {id:"tree",name:"Tree service",icon:"/assets/icons/tree-service.svg",
     sit:"\"A fir came down on the house out by Crow. Can somebody come look?\"",
-    notes:["You're in the tree or beside a running saw, with no hand free for the phone. A homeowner with a tree down may already be calling the next crew."],
-    does:"gets the address and whether a tree is on the house. Then it emails you a summary. It never quotes the job. You decide who goes out."},
+    does:"gets the address and whether a tree is on the house, then emails you. You decide who goes out."},
    {id:"septic",name:"Septic service",icon:"/assets/icons/septic.svg",
     sit:"\"The tank's backing up into the yard out in Noti, and the bathroom won't drain.\"",
-    notes:["You're on the pump hose or down in a hole, with no hand free for the phone. A backed-up house wants a person to call them back, and they may try the next truck."],
-    does:"gets the address and whether it's a routine pump or a backup. Then it emails you a summary. It never quotes a price. You decide who goes out."},
+    does:"gets the address and whether it's a routine pump or a backup, then emails you. You decide who goes out."},
    {id:"well",name:"Well and pump",icon:"/assets/icons/well-pump.svg",
     sit:"\"No water this morning at the place past Veneta. The pump hums and quits.\"",
-    notes:["You're out on a gravel road with both hands on a pump. A house with no water may call the next shop if nobody answers."],
-    does:"gets the address, what the pump is doing, and a callback number, then emails you a summary. It never quotes a price. You call back from the truck."},
+    does:"gets the address, what the pump is doing, and a callback number, then emails you. You call back from the truck."},
    {id:"fencing",name:"Fencing",icon:"/assets/icons/fencing.svg",
     sit:"\"We need fence along the pasture out by Fern Ridge. Can you come look?\"",
-    notes:["You're setting posts or up a ladder with the wire, and the phone is in the truck. Miss that call and the whole fence job may go to the next crew."],
-    does:"gets the address, about how much fence, and a callback number, then emails you a summary. It never quotes a price. You call back when the tools are down."},
+    does:"gets the address, about how much fence, and a callback number, then emails you. You call back when the tools are down."},
    {id:"chimney",name:"Chimney sweep",icon:"/assets/icons/chimney-sweep.svg",
     sit:"\"First cold night's coming, and the chimney hasn't been swept. Can you fit us in before we light the stove?\"",
-    notes:["You're on the roof or working the flue, with no hand free for the phone. Folks ready to heat the house may call the next sweep if nobody answers."],
-    does:"gets the address, whether it's a sweep or a repair question, and a callback number, then emails you a summary. It never quotes a price. You call back when you're off the roof."}
+    does:"gets the address, whether it's a sweep or a repair question, and a callback number, then emails you. You call back off the roof."}
   ];
   var featured=document.getElementById("featured-trades");
   var stage=document.getElementById("trade-stage");
@@ -224,33 +487,28 @@ footer p+p{margin-top:6px;color:var(--mute);font-size:13px}
   function renderCard(t){
    var card=node("div","trade");
    card.setAttribute("data-trade",t.id);
-   var h=node("h3","disp");
+   var h=node("h3");
    var img=document.createElement("img");
-   img.className="ticon";img.src=t.icon;img.alt="";img.width=44;img.height=44;
+   img.className="ticon";img.src=t.icon;img.alt="";img.width=40;img.height=40;
    h.appendChild(img);
    h.appendChild(document.createTextNode(t.name));
-   if(t.badge)h.appendChild(node("small",null,"Hear it live"));
+   if(t.badge)h.appendChild(node("small",null,"Live demo"));
    card.appendChild(h);
    card.appendChild(node("p","sit",t.sit));
-   (t.notes||[]).forEach(function(note){card.appendChild(node("p","does",note))});
-   if(t.line){
-    card.appendChild(node("p","does",t.line));
-   }else{
-    var does=node("p","does");
-    does.appendChild(node("b",null,"The AI:"));
-    does.appendChild(document.createTextNode(" "+t.does));
-    card.appendChild(does);
-   }
+   if(t.line){card.appendChild(node("p","does",t.line));}
+   else{var does=node("p","does");does.appendChild(node("b",null,"It "));does.appendChild(document.createTextNode(t.does));card.appendChild(does);}
    if(t.demo){
-    var a=node("a","btn g","Hear it as your customers will");
+    var a=node("a","btn g");
     a.href=t.demo;a.target="_blank";a.rel="noopener";
+    a.setAttribute("aria-label","Hear the "+t.name+" demo (opens in a new tab)");
+    a.innerHTML='<svg class="i" aria-hidden="true"><use href="#i-play"/></svg>';
+    a.appendChild(document.createTextNode("Hear it"));
     card.appendChild(a);
-   }else card.appendChild(node("div","soon","Hear it soon"));
+   }else card.appendChild(node("div","soon","Demo coming soon"));
    return card;
   }
   function show(id){
-   var cards=stage.querySelectorAll(".trade");
-   cards.forEach(function(card){
+   stage.querySelectorAll(".trade").forEach(function(card){
     var on=card.getAttribute("data-trade")===id;
     card.classList.toggle("on",on);
     card.setAttribute("aria-hidden",on?"false":"true");
@@ -258,23 +516,12 @@ footer p+p{margin-top:6px;color:var(--mute);font-size:13px}
    });
   }
   TRADES.forEach(function(t){
-   var opt=document.createElement("option");
-   opt.value=t.id;opt.textContent=t.name;
-   pick.appendChild(opt);
+   var opt=document.createElement("option");opt.value=t.id;opt.textContent=t.name;pick.appendChild(opt);
    if(t.featured)featured.appendChild(renderCard(t));
    stage.appendChild(renderCard(t));
   });
   /* Email links use these ids. Aliases cover the longer slugs. */
-  var ALIASES={
-   "auto-repair":"auto",
-   "exterior-cleaning":"exterior",
-   "tree-service":"tree",
-   "septic-service":"septic",
-   "well-and-pump":"well",
-   "well-pump":"well",
-   "chimney-sweep":"chimney",
-   "pet-grooming":"pet"
-  };
+  var ALIASES={"auto-repair":"auto","exterior-cleaning":"exterior","tree-service":"tree","septic-service":"septic","well-and-pump":"well","well-pump":"well","chimney-sweep":"chimney","pet-grooming":"pet"};
   function canon(raw){
    var key=String(raw||"").replace(/^\s+|\s+$/g,"").toLowerCase();
    if(!key) return "";
@@ -283,146 +530,166 @@ footer p+p{margin-top:6px;color:var(--mute);font-size:13px}
    return "";
   }
   function linkedTrade(){
-   var q=null;
-   try{ q=new URLSearchParams(window.location.search).get("trade"); }catch(e){ q=null; }
-   if(q!=null && String(q).replace(/^\s+|\s+$/g,"")!=="") return canon(q)||"restaurant";
-   var hash=(window.location.hash||"").replace(/^#/,"");
-   var m=/^trade-(.+)$/i.exec(hash);
-   if(m){
-    var fromHash="";
-    try{ fromHash=decodeURIComponent(m[1]); }catch(e2){ fromHash=m[1]; }
-    return canon(fromHash)||"restaurant";
-   }
-   return "restaurant";
+   var q=null;try{q=new URLSearchParams(window.location.search).get("trade");}catch(e){q=null;}
+   if(q!=null&&String(q).replace(/^\s+|\s+$/g,"")!=="") return canon(q)||"salon";
+   var m=/^trade-(.+)$/i.exec((window.location.hash||"").replace(/^#/,""));
+   if(m){var f="";try{f=decodeURIComponent(m[1]);}catch(e2){f=m[1];}return canon(f)||"salon";}
+   return "salon";
   }
   function fromLink(){
-   var q=null;
-   try{ q=new URLSearchParams(window.location.search).get("trade"); }catch(e){ q=null; }
-   if(q!=null && String(q).replace(/^\s+|\s+$/g,"")!=="") return true;
+   var q=null;try{q=new URLSearchParams(window.location.search).get("trade");}catch(e){q=null;}
+   if(q!=null&&String(q).replace(/^\s+|\s+$/g,"")!=="") return true;
    return /^#trade-/i.test(window.location.hash||"");
   }
-  var initial=linkedTrade();
-  pick.value=initial;
-  show(initial);
-  function focusExample(){
-   var el=document.querySelector(".tradepick");
-   if(el&&el.scrollIntoView) el.scrollIntoView({block:"start"});
-  }
-  if(fromLink()){
-   focusExample();
-   window.addEventListener("load",function(){
-    focusExample();
-    if(window.requestAnimationFrame) requestAnimationFrame(focusExample);
-   });
-  }
+  var initial=linkedTrade();pick.value=initial;show(initial);
+  function focusExample(){var el=document.querySelector(".tradepick");if(el&&el.scrollIntoView) el.scrollIntoView({block:"start"});}
+  if(fromLink()){focusExample();window.addEventListener("load",function(){focusExample();if(window.requestAnimationFrame) requestAnimationFrame(focusExample);});}
   pick.addEventListener("change",function(){show(pick.value)});
  })();
  </script>
 </section>
 
-<section id="what-i-do">
- <h2 class="disp">What I do</h2>
- <ul class="work">
-  <li><b>Dojo Receptionist:</b> answers your missed and after-hours calls and emails you a summary.</li>
-  <li><b>Google profile cleanup:</b> hours, photos, services and categories fixed so people find the right info.</li>
-  <li><b>Review replies:</b> I draft replies to your Google reviews and nothing posts until you OK it.</li>
-  <li><b>One-page websites:</b> a simple, fast page with your number, hours and services.</li>
- </ul>
- <p class="ask">Ask about any of these when you call.</p>
-</section>
-
-<section id="setup">
- <h2 class="disp">I come to your shop and set it up with you.</h2>
- <div class="panel">
-  <p>I'm Jeremy, a Marine veteran in Veneta. I walk in, sit at the counter with you, and set the call forwarding on your phone myself. We don't hang up until a test call lands in your inbox. I come back on Day 7 with a one-page report, and again on Day 30.</p>
-  <p>It answers in your shop's name. It never quotes a price, never diagnoses, and never takes payment. You approve every job.</p>
+<!-- ===== three nevers ===== -->
+<section id="never" aria-labelledby="never-h">
+ <div class="sec-head">
+  <p class="eyebrow">Straight talk</p>
+  <h2 id="never-h">Three things Bella never does.</h2>
+  <p class="lead">Every caller hears that she's an AI and that the call may be recorded. She takes the message; you make the call.</p>
  </div>
-</section>
-
-<section id="price">
- <h2 class="disp">One plan, set up by a neighbor</h2>
- <p class="lead">$129/mo. No setup fee, no minimum. First week free.</p>
- <div class="price">
-  <span class="burst">First week free</span>
-  <div class="amt">$129<small> /mo</small></div>
-  <ul>
-   <li>No setup fee, no minimum</li>
-   <li>150 calls a month. Spam, robocalls and hang-ups under 15 seconds don't count.</li>
-   <li>No overage charges, ever. If you run over two months in a row, I'll call you to talk it through.</li>
-   <li>Free pause for up to 3 months a year. One text or email starts it, your calls forward straight back to your shop, and there's no restart fee.</li>
-   <li>Cancel the same day, with no last-month charge</li>
-   <li>Set up by Jeremy himself from your hours and your callers' questions, not an onboarding portal</li>
-   <li>You keep your number; I walk you through the forwarding</li>
-  </ul>
- </div>
-</section>
-
-<section id="missed-cost">
- <h2 class="disp">What one missed call can cost (estimates, not quotes)</h2>
- <p class="lead">A missed call isn't always the big job. Sometimes it's a small repair. Sometimes it's the job that pays the month.</p>
- <p class="lead">The figures below are public estimates, not quotes, and not your prices. I'll count your missed calls for a week before we go live, and we'll use your tickets, not a national average.</p>
- <ul class="cost">
-  <li><b>HVAC, a full system in Oregon:</b> $22,487 on average in 2025 among ServiceTitan shops; 75th percentile $32,761. Source: <a href="https://www.servicetitan.com/toolbox/state-of-the-trades/trends/hvac-replacement-cost-by-state" target="_blank" rel="noopener">ServiceTitan cost data, May 2026</a>.</li>
-  <li><b>Plumbing:</b> typical repair about $341; a water heater install $800–$2,000. Source: <a href="https://www.angi.com/articles/plumber-cost.htm" target="_blank" rel="noopener">Angi, Oct 14, 2026</a>.</li>
-  <li><b>Electrical panel replacement:</b> typically $518–$2,193. Source: <a href="https://www.angi.com/articles/cost-replace-circuit-breaker-box.htm" target="_blank" rel="noopener">Angi, Oct 22, 2026</a>.</li>
-  <li><b>Septic pump-out in Oregon:</b> usually $300–$600. Source: <a href="https://callapumper.com/guides/septic-pumping-cost/oregon/" target="_blank" rel="noopener">Call a Pumper Oregon guide, opened Nov 10, 2026</a>.</li>
-  <li><b>Tow:</b> no statewide rate. We'll use your hook-up and mileage prices.</li>
-  <li><b>Tree removal (one Eugene company's published 2024 ranges):</b> about $1,500 to $8,000+ by size. Source: <a href="https://www.urbanarborcare.net/blog/tree-removal-cost-in-oregon-what-to-expect" target="_blank" rel="noopener">Urban Arbor Care, July 10, 2025</a>.</li>
-  <li><b>Garage door:</b> typical repair $265; typical replacement $1,231. Source: <a href="https://www.angi.com/articles/most-common-garage-door-repair-costs.htm" target="_blank" rel="noopener">Angi, 2026</a>; <a href="https://www.angi.com/articles/garage-door-replacement-cost.htm" target="_blank" rel="noopener">Angi, 2026</a>.</li>
-  <li><b>Appliance (refrigerator):</b> typical repair $275. Source: <a href="https://www.angi.com/articles/how-much-does-refrigerator-repair-cost.htm" target="_blank" rel="noopener">Angi, Oct 15, 2026</a>.</li>
+ <ul class="never">
+  <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-tag-x"/></svg></span><div><b>Never quotes a price</b><span>Pushed for a number, she says you'll give the real one when you call back.</span></div></li>
+  <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-wrench-x"/></svg></span><div><b>Never diagnoses</b><span>No "sounds like your igniter." She writes down what the caller sees and hears.</span></div></li>
+  <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-card-x"/></svg></span><div><b>Never takes payment</b><span>No card numbers on the phone, ever.</span></div></li>
  </ul>
- <p class="ask">I'll count your missed calls for a week and we'll use your tickets.</p>
- <p class="fine">These are estimates from public cost guides, not quotes and not a promise of what you would have earned. Jobs vary by scope, parts, travel, and the shop's own rates. I'll use your numbers when we count a real week of missed calls.</p>
+ <p class="yours"><b>You stay in charge:</b> you confirm every appointment and approve every job.</p>
 </section>
 
-<section id="who">
- <h2 class="disp">The guy who sets it up</h2>
- <div class="panel who">
-  <svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4l24 9v17c0 15-10 26-24 30C18 56 8 45 8 30V13z" fill="#16213f" stroke="#e8b53b" stroke-width="3"/><path d="M32 18l4 9 10 1-7.5 6.5L41 44l-9-5-9 5 2.5-9.5L18 28l10-1z" fill="#e8b53b" stroke="#000" stroke-width="1.5"/></svg>
+<!-- ===== how we start ===== -->
+<section id="how" aria-labelledby="how-h">
+ <div class="sec-head">
+  <p class="eyebrow">How we start</p>
+  <!-- SWAP-TEST: broke (in person at your counter, Day 7 / Day 30 visits). -->
+  <h2 id="how-h">I set it up at your counter, not in a portal.</h2>
+ </div>
+ <ol class="steps">
+  <li><b>Tell me about your shop</b><span>A short form or a call: your hours, your services, the questions callers always ask.</span></li>
+  <li><b>I come to your shop</b><span>I set the call forwarding on your phone myself. You keep your number. We don't stop until a test call lands in your inbox.</span></li>
+  <li><b>Day 7 and Day 30</b><span>I come back on Day 7 with a one-page report, and again on Day 30.</span></li>
+ </ol>
+</section>
+
+<!-- ===== price ===== -->
+<section id="price" aria-labelledby="price-h">
+ <div class="price-wrap">
   <div>
-   <p>I'm Jeremy Alvarado, a local dad in Veneta. I served in the Marine Corps from 2009 to 2015.</p>
-   <p>I set up every receptionist myself for owner-run shops around Lane County. I use this myself. If I can't get to the phone, my assistant picks up, takes your name and what you need, and I call you back within one business day. Folks around here already joke that if they can't reach me, they'll reach my assistant, and they're right. That's exactly what it'll do for your shop.</p>
-   <p class="tryhead" id="try-demo">Step into your customer's shoes</p>
-   <p class="phone"><a href="tel:+15418330643">Call 541-833-0643 and hear the welcome your callers would get.</a></p>
-   <p class="tryhint">Ask about hours or services, ask what something costs and hear how it handles that, or leave a message, just as a customer would. Demo calls don't send a summary. Yours start once your shop is set up.</p>
+   <div class="sec-head">
+    <p class="eyebrow">Pricing</p>
+    <h2 id="price-h">One plan, set up by a neighbor.</h2>
+    <p class="lead">One price. Everything below is included.</p>
+   </div>
+   <div class="math" id="math">
+    <b>Run your own numbers</b>
+    <span class="big">$1,625/mo</span>
+    Towing example: 5 missed calls a week × 4.33 weeks × 25% who'd book × $300 a job. Change every number for your trade.
+    <a class="btn o" href="/calculator/"><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg>See what missed calls cost you</a>
+   </div>
+   <details>
+    <summary>What one missed call can cost (public estimates)</summary>
+    <div class="in">
+     <ul class="cost">
+      <li><b>HVAC, full system in Oregon:</b> $22,487 average in 2025 among ServiceTitan shops; 75th percentile $32,761. <a href="https://www.servicetitan.com/toolbox/state-of-the-trades/trends/hvac-replacement-cost-by-state" target="_blank" rel="noopener">ServiceTitan, May 2026</a></li>
+      <li><b>Plumbing:</b> typical repair about $341; water heater install $800–$2,000. <a href="https://www.angi.com/articles/plumber-cost.htm" target="_blank" rel="noopener">Angi, Oct 14, 2026</a></li>
+      <li><b>Electrical panel replacement:</b> typically $518–$2,193. <a href="https://www.angi.com/articles/cost-replace-circuit-breaker-box.htm" target="_blank" rel="noopener">Angi, Oct 22, 2026</a></li>
+      <li><b>Septic pump-out in Oregon:</b> usually $300–$600. <a href="https://callapumper.com/guides/septic-pumping-cost/oregon/" target="_blank" rel="noopener">Call a Pumper, opened Nov 10, 2026</a></li>
+      <li><b>Tow:</b> no statewide rate. We'll use your hook-up and mileage prices.</li>
+      <li><b>Tree removal (one Eugene company's published ranges):</b> about $1,500 to $8,000+ by size. <a href="https://www.urbanarborcare.net/blog/tree-removal-cost-in-oregon-what-to-expect" target="_blank" rel="noopener">Urban Arbor Care, July 10, 2025</a></li>
+      <li><b>Garage door:</b> typical repair $265; replacement $1,231. <a href="https://www.angi.com/articles/most-common-garage-door-repair-costs.htm" target="_blank" rel="noopener">Angi</a>, <a href="https://www.angi.com/articles/garage-door-replacement-cost.htm" target="_blank" rel="noopener">Angi</a> (2026)</li>
+      <li><b>Appliance (refrigerator):</b> typical repair $275. <a href="https://www.angi.com/articles/how-much-does-refrigerator-repair-cost.htm" target="_blank" rel="noopener">Angi, Oct 15, 2026</a></li>
+     </ul>
+     <p class="fine">Public estimates, not quotes and not your prices. Before we go live I'll count your missed calls for a week, and we'll use your tickets.</p>
+    </div>
+   </details>
+  </div>
+
+  <div class="price">
+   <span class="flag">First week free</span>
+   <div class="amt">$129<small>/month</small></div>
+   <p class="lede">No setup fee. No contract. No minimum.</p>
+   <ul>
+    <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>150 calls a month.</b> Spam, robocalls and hang-ups under 15 seconds don't count.</span></li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>No overage charges, ever.</b> Run over two months in a row and I'll call you to talk it through.</span></li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Free pause, up to 3 months a year.</b> One text or email; calls forward straight back to you; no restart fee.</span></li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Cancel the same day,</b> with no last-month charge.</span></li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>You keep your number.</b> I set up the forwarding with you.</span></li>
+   </ul>
+   <a class="btn g" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Start my free week</a>
   </div>
  </div>
 </section>
 
-<section id="fit">
- <h2 class="disp">Tailor-made, not one-size-fits-all</h2>
- <div class="panel">
-  <p>I've trained in martial arts my whole life. I'm 5'6". When I teach a 200-pound man to throw a jab, I don't teach him my jab. I teach the jab to his body: his reach, his weight, how his hand turns over. Every technique works that way.</p>
-  <p>Your receptionist works the same way. It isn't a general-purpose bot. It's tailor-made for you. It learns your hours, your menu or services, your regulars' questions, and how you like things said, so it answers like it's worked your counter for years.</p>
+<!-- ===== who ===== -->
+<section id="who" aria-labelledby="who-h">
+ <div class="who">
+  <div>
+   <p class="eyebrow">The guy who sets it up</p>
+   <h2 id="who-h" style="margin-top:8px">Jeremy Alvarado</h2>
+   <ul class="facts">
+    <li><svg class="i" aria-hidden="true"><use href="#i-home"/></svg>Local dad in Veneta</li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>U.S. Marine Corps, 2009–2015</li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-fist"/></svg>Martial arts, his whole life</li>
+   </ul>
+  </div>
+  <div>
+   <!-- SWAP-TEST: broke (5'6", 200-pound man, the jab). -->
+   <p>I'm 5'6". When I teach a 200-pound man to throw a jab, I don't teach him my jab. I teach it to his reach, his weight, how his hand turns over.</p>
+   <p style="margin-top:12px">Your receptionist gets the same treatment. Not a general-purpose bot: your hours, your services, your regulars' questions, said the way you'd say them.</p>
+   <p style="margin-top:12px">I use one myself. If I can't get to the phone, my assistant takes your name and what you need, and I call you back within one business day.</p>
+   <p class="also"><b>Also on request:</b> Google profile cleanup, review replies (nothing posts until you OK it), and one-page websites.</p>
+  </div>
  </div>
 </section>
 
-<section id="next">
- <h2 class="disp">Run your own numbers</h2>
- <p class="loss"><small>Missed calls · towing · a month</small>$1,625</p>
- <p class="lead">The calculator opens on towing: 5 missed calls a week, a $300 average job, and 25% who'd book. You can change every number. Electrical, plumbing, HVAC, auto repair, and tattoo start at the same figures.</p>
- <a class="btn g" href="/calculator/" style="margin-top:16px">See what missed calls cost you</a>
- <a class="btn r" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop" style="margin-top:12px">Email Jeremy about a free week</a>
- <p class="lead" style="margin-top:10px">jeremy@dojoreceptionist.com · I read every one myself.</p>
+<!-- ===== faq ===== -->
+<section id="faq" class="faq" aria-labelledby="faq-h">
+ <div class="narrow">
+ <div>
+  <p class="eyebrow">Asked across the counter</p>
+  <h2 id="faq-h" style="margin-top:8px">Questions owners ask.</h2>
+ </div>
+ <div class="qs">
+  <details><summary>Will callers know they're talking to an AI?</summary><p>Yes. It answers with your shop's name, says it's an AI and that the call may be recorded, then asks how it can help. It never pretends to be a person.</p></details>
+  <details><summary>Will my customers hate it?</summary><p>It only picks up the calls you miss, so your regulars still reach you the way they do now. Instead of a full voicemail box, they get your shop's name, an honest "I'm an AI," and someone writing down what they need. Call Bella at <a href="tel:+15418330643">541-833-0643</a> and judge for yourself.</p></details>
+  <details><summary>What if someone asks for a price?</summary><p>It won't make one up. It takes the caller's name, number and what they need, so you call back with the real answer.</p></details>
+  <details><summary>How do I get the message?</summary><p>By email, right after the call: name, number (read back to the caller), where they are, what they need, and when to call back. Urgent calls say URGENT up front. Text alerts are coming soon. Demo calls don't send a summary; yours start once your shop is set up.</p></details>
+  <details><summary>Is recording calls legal in Oregon?</summary><p>For phone calls, Oregon generally allows recording when one party consents (ORS 165.540), and the AI announces the possible recording on every call anyway. This is not legal advice; check with your own advisor if you're unsure.</p></details>
+  <details><summary>Do I keep my phone number?</summary><p>Yes. I set up the forwarding on your phone with you, and you can turn it off anytime.</p></details>
+  <details><summary>Can I pause it for the slow season?</summary><p>Yes, free, for up to 3 months a year. One text or email starts it, your calls forward straight back to your shop, and there's no restart fee.</p></details>
+  <details><summary>Can I cancel?</summary><p>Yes, the same day, with no last-month charge. Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll turn it off.</p></details>
+ </div>
+ </div>
 </section>
 
-<section id="faq">
- <h2 class="disp">Asked across the counter</h2>
- <details><summary>Will callers know they're talking to an AI?</summary><p>Yes. It answers with your shop's name, says it's an AI and that the call may be recorded, then asks how it can help. It never pretends to be a person.</p></details>
- <details><summary>Will my customers hate it?</summary><p>It only picks up the calls you miss, so your regulars still reach you the way they do now. Instead of a full voicemail box, they get your shop's name, an honest "I'm an AI," and someone writing down what they need. Call the demo at <a href="tel:+15418330643">541-833-0643</a> and judge for yourself. Demo calls don't send a summary. Yours start once your shop is set up.</p></details>
- <details><summary>What if someone asks for a price?</summary><p>It won't make one up. It never quotes prices. It takes the caller's name, number and what they need, so you call back with the real answer.</p></details>
- <details><summary>What happens to the message?</summary><p>You get an email summary of each call with the caller's name, number (read back to them), where they are and what they need, so you can call them back.</p></details>
- <details><summary>Is recording calls legal in Oregon?</summary><p>For phone calls, Oregon generally allows recording when one party consents (ORS 165.540), and the AI announces the possible recording on every call anyway. This is not legal advice; check with your own advisor if you're unsure.</p></details>
- <details><summary>Do I keep my phone number?</summary><p>Yes. I sit down with you and set up the forwarding on your phone myself, and you can turn it off anytime.</p></details>
- <details><summary>What does it cost?</summary><p>$129/mo. No setup fee, no minimum. First week free. That covers 150 calls a month, and spam, robocalls and hang-ups under 15 seconds don't count. No overage charges, ever. If you run over two months in a row, I'll call you to talk it through.</p></details>
- <details><summary>Can I pause it for the slow season?</summary><p>Yes, free, for up to 3 months a year. One text or email starts it, your calls forward straight back to your shop, and there's no restart fee.</p></details>
- <details><summary>Can I cancel?</summary><p>Yes, the same day, with no last-month charge. Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll turn it off.</p></details>
+<section class="final" aria-labelledby="final-h">
+ <h2 id="final-h">Hear what your callers would hear.</h2>
+ <p class="lead">Call Bella and pretend you're a customer of your own shop.</p>
+ <div class="cta">
+  <a class="btn g" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Call 541-833-0643</a>
+  <a class="btn o" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Email Jeremy</a>
+ </div>
+ <p class="fine">jeremy@dojoreceptionist.com · I read every one myself.</p>
 </section>
+
+</div>
 </main>
 
 <footer><div class="wrap">
- <p><b>Set up by Jeremy, a local dad in Veneta</b> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p>
- <p>Dojo Receptionist · Veneta, Oregon, serving Lane County. Example callers and the shops you hear are made up. Not legal advice.</p>
+ <p><b style="color:var(--ink2)">Dojo Receptionist</b> · Veneta, Oregon, serving Lane County · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p>
+ <p>Example callers and the shops in the demos are made up. Not legal advice.</p>
 </div></footer>
+
+<nav class="callbar" aria-label="Quick contact">
+ <a class="btn g" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Call Bella · 541-833-0643</a>
+ <a class="btn o" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop" aria-label="Email Jeremy"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></a>
+</nav>
 </body>
 </html>
