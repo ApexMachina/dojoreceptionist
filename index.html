@@ -53,29 +53,68 @@
     "@id": "https://dojoreceptionist.com/#org"
    },
    "description": "Bella answers the calls an owner-run shop misses, says she's an AI, and emails the owner who called and what they need. She never quotes prices, never diagnoses, and never takes payment.",
-   "offers": {
-    "@type": "Offer",
-    "name": "Dojo Receptionist monthly plan",
-    "url": "https://dojoreceptionist.com/#price",
-    "price": "129.00",
-    "priceCurrency": "USD",
-    "priceSpecification": {
-     "@type": "UnitPriceSpecification",
+   "offers": [
+    {
+     "@type": "Offer",
+     "name": "Dojo Receptionist monthly plan",
+     "url": "https://dojoreceptionist.com/#price",
      "price": "129.00",
      "priceCurrency": "USD",
-     "unitText": "month",
-     "referenceQuantity": {
-      "@type": "QuantitativeValue",
-      "value": 1,
-      "unitCode": "MON"
+     "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "129.00",
+      "priceCurrency": "USD",
+      "unitText": "month",
+      "referenceQuantity": {
+       "@type": "QuantitativeValue",
+       "value": 1,
+       "unitCode": "MON"
+      }
+     },
+     "description": "$129 a month. First week free. No setup fee. 150 calls a month. No overage charges. Cancel the same day.",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@id": "https://dojoreceptionist.com/#org"
      }
     },
-    "description": "$129 a month. First week free. No setup fee. 150 calls a month. No overage charges. Cancel the same day.",
-    "availability": "https://schema.org/InStock",
-    "seller": {
-     "@id": "https://dojoreceptionist.com/#org"
+    {
+     "@type": "Offer",
+     "name": "After-hours Bella",
+     "url": "https://dojoreceptionist.com/#after-hours",
+     "price": "49.00",
+     "priceCurrency": "USD",
+     "priceSpecification": {
+      "@type": "UnitPriceSpecification",
+      "price": "49.00",
+      "priceCurrency": "USD",
+      "unitText": "month",
+      "referenceQuantity": {
+       "@type": "QuantitativeValue",
+       "value": 1,
+       "unitCode": "MON"
+      }
+     },
+     "description": "$49 a month. Bella answers only when you're closed: nights, weekends, and any other hours you don't pick up. First week free. No setup fee. 60 calls a month. No overage charges. Cancel the same day. She never quotes a price, never diagnoses, and never takes payment.",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@id": "https://dojoreceptionist.com/#org"
+     }
+    },
+    {
+     "@type": "AggregateOffer",
+     "name": "Reminder and win-back calls",
+     "url": "https://dojoreceptionist.com/#reminders",
+     "lowPrice": "99.00",
+     "highPrice": "199.00",
+     "priceCurrency": "USD",
+     "offerCount": 2,
+     "description": "Per campaign. $99 for up to 100 contacts, $199 for up to 300. Bella only calls people who already did business with you, honors do-not-call requests and opt-outs, and never takes payment. Available on its own or with a Bella plan.",
+     "availability": "https://schema.org/InStock",
+     "seller": {
+      "@id": "https://dojoreceptionist.com/#org"
+     }
     }
-   }
+   ]
   }
  ]
 }
@@ -252,6 +291,20 @@ section{padding:var(--sp7) 0 0}
 .price li svg.i{width:20px;height:20px;color:var(--gold);margin-top:1px}
 .price li b{color:var(--ink)}
 .price .btn{margin-top:var(--sp4)}
+
+/* secondary offers under the $129 hero; quieter border, smaller type */
+.more-plans{margin-top:var(--sp6)}
+.more-plans-lead{margin:8px 0 0;max-width:36rem}
+.more-plans-grid{display:grid;gap:var(--sp4);margin-top:var(--sp5)}
+.price.alt{margin-top:0;border-width:1px;background:var(--n1)}
+.price.alt .amt{font-size:2.25rem}
+.price.alt .flag{background:var(--n3);color:var(--gold2);border:1px solid var(--gold)}
+.price.alt h3{margin:10px 0 0;font:700 var(--t-l)/1.2 var(--serif);color:var(--ink)}
+@media (min-width:640px){
+ .more-plans-grid{grid-template-columns:1fr 1fr;align-items:stretch}
+ .price.alt{display:flex;flex-direction:column}
+ .price.alt .btn{margin-top:auto}
+}
 
 /* cost estimates */
 details{background:var(--n1);border:1px solid var(--line);border-radius:var(--r);margin-top:var(--sp3)}
@@ -685,8 +738,8 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
   <div>
    <div class="sec-head">
     <p class="eyebrow">Pricing</p>
-    <h2 id="price-h">One plan, set up personally.</h2>
-    <p class="lead">One price. Everything below is included.</p>
+    <h2 id="price-h">The full plan, set up personally.</h2>
+    <p class="lead">$129 a month covers every missed call. After-hours coverage and reminder campaigns are listed under the plan.</p>
    </div>
    <div class="math" id="math">
     <b>Run your own numbers</b>
@@ -726,6 +779,44 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
    <p class="bonus"><b>Free bonus:</b> we claim your business in ChatGPT for you during your free week. <a href="#faq-chatgpt">What that means</a></p>
    <a class="btn g" href="#start"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Start my free week</a>
    <p class="fine" style="margin-top:10px">A short form, a call, or an email. There's no online checkout; I call you and set it up with you.</p>
+  </div>
+ </div>
+
+ <!-- SWAP-TEST: after-hours and reminders — kept caps, DNC/opt-out, list-you-send, three nevers, and per-campaign prices; cut generic “win back customers” lines. -->
+ <div class="more-plans">
+  <p class="eyebrow">Also on this page</p>
+  <p class="lead more-plans-lead">After-hours coverage, and calls back to your past customers.</p>
+  <div class="more-plans-grid">
+   <article class="price alt" id="after-hours" aria-labelledby="after-h">
+    <span class="flag">After hours</span>
+    <h3 id="after-h">After-hours Bella</h3>
+    <div class="amt">$49<small>/month</small></div>
+    <p class="lede">Bella answers only when you're closed: nights, weekends, and any other hours you don't pick up.</p>
+    <ul>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>60 calls a month.</b> Spam, robocalls and hang-ups under 15 seconds don't count.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>No overage charges, ever.</b> Run over two months in a row and I'll call you to talk it through.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>First week free.</b> No setup fee. Free pause, up to 3 months a year. Cancel the same day, with no last-month charge.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Same three nevers:</b> she never quotes a price, never diagnoses, and never takes payment.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>You keep your number.</b> I set the after-hours forwarding with you.</span></li>
+    </ul>
+    <a class="btn o" href="#start"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Start my free week</a>
+    <p class="fine" style="margin-top:10px">On the form or in your email, say you want the after-hours plan.</p>
+   </article>
+   <article class="price alt" id="reminders" aria-labelledby="remind-h">
+    <span class="flag">Per campaign</span>
+    <h3 id="remind-h">Reminder and win-back calls</h3>
+    <div class="amt">$99–$199<small>/campaign</small></div>
+    <p class="lede">Bella calls your past customers with a reminder you approve, like "your oil change is due" or "you're due for a septic pump."</p>
+    <ul>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>$99 for up to 100 contacts. $199 for up to 300.</b> Larger lists get a quote before we start.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>She only calls people who already did business with you.</b> You send the list. We don't buy or scrape one.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>She honors do-not-call requests and opt-outs.</b> Anyone who says stop is taken off and not called again.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>She never takes payment,</b> never quotes a price, and never diagnoses.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Available on its own,</b> or as an add-on to a Bella plan. No monthly fee; you pay per campaign.</span></li>
+    </ul>
+    <a class="btn o" href="#start"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Ask about a campaign</a>
+    <p class="fine" style="margin-top:10px">There's no online checkout. Use the form or email me and say you want a reminder campaign.</p>
+   </article>
   </div>
  </div>
 
@@ -821,6 +912,8 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
   <details><summary>Can I pause it for the slow season?</summary><p>Yes, free, for up to 3 months a year. One text or email starts it, your calls forward straight back to your shop, and there's no restart fee.</p></details>
   <details id="faq-chatgpt"><summary>What's the free ChatGPT bonus?</summary><p>OpenAI just opened Businesses in ChatGPT, a beta where a business can claim a verified profile and keep its details current. If your shop is eligible, we claim it and fill in your details during your free week, at no charge. It's OpenAI's program, not ours: we don't control how ChatGPT shows or ranks businesses, and we can't promise it brings you calls.</p></details>
   <details><summary>Can I cancel?</summary><p>Yes, the same day, with no last-month charge. Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll turn it off.</p></details>
+  <details><summary>What's the $49 after-hours plan?</summary><p>Bella answers only when you're closed: nights, weekends, and any other hours you don't pick up. It's $49 a month, with 60 calls, a first week free, no setup fee, and no overage charges. Cancel the same day. She still never quotes a price, never diagnoses, and never takes payment. The $129 plan is the one that covers every missed call, including during the day.</p></details>
+  <details><summary>What are reminder and win-back calls?</summary><p>A one-time campaign: Bella calls people who already did business with you, with a reminder you approve. $99 for up to 100 contacts, $199 for up to 300. Larger lists get a quote first. She honors do-not-call requests and opt-outs, and she never takes payment. You send the list; we don't buy or scrape one. You can run a campaign with or without a Bella plan.</p></details>
  </div>
  </div>
 </section>
