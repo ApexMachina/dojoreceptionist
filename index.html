@@ -2,7 +2,8 @@
 <!--
   Dojo Receptionist · dojoreceptionist.com · v3.1 UNIVERSAL (2026-11-10)
   Location-neutral copy on top of v3 @ ca76fd1. Single file: inline CSS + inline SVG icon sprite,
-  one small script (trade picker, same data and demo links as v2.1). No outside fonts, images or tracking.
+  one small script (trade picker; on-site ElevenLabs demo widget loads only after a tap on "Hear it").
+  Free-week form posts to FormSubmit (email delivery). No outside fonts, images or tracking.
 -->
 <html lang="en">
 <head>
@@ -15,12 +16,70 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="canonical" href="https://dojoreceptionist.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dojo Receptionist">
 <meta property="og:title" content="Dojo Receptionist · A missed call is someone else's customer">
 <meta property="og:description" content="A missed call is someone else's customer. Bella answers: she takes the calls you miss, says she's an AI, and emails you who called and what they need. Set up for you personally by Jeremy, a Marine vet.">
 <meta property="og:image" content="https://dojoreceptionist.com/assets/og-share.png">
 <meta property="og:url" content="https://dojoreceptionist.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dojoreceptionist.com/assets/og-share.png">
+<meta name="twitter:title" content="Dojo Receptionist · A missed call is someone else's customer">
+<meta name="twitter:description" content="Bella takes the calls you miss, says she's an AI, and emails you who called and what they need. $129/mo, first week free, no setup fee.">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://dojoreceptionist.com/#org",
+   "name": "Dojo Receptionist",
+   "url": "https://dojoreceptionist.com/",
+   "logo": "https://dojoreceptionist.com/assets/favicon-512.png",
+   "email": "jeremy@dojoreceptionist.com",
+   "telephone": "+1-541-833-0643",
+   "founder": {
+    "@type": "Person",
+    "name": "Jeremy Alvarado"
+   }
+  },
+  {
+   "@type": "Service",
+   "@id": "https://dojoreceptionist.com/#service",
+   "name": "Dojo Receptionist",
+   "serviceType": "AI phone receptionist for missed calls",
+   "provider": {
+    "@id": "https://dojoreceptionist.com/#org"
+   },
+   "description": "Bella answers the calls an owner-run shop misses, says she's an AI, and emails the owner who called and what they need. She never quotes prices, never diagnoses, and never takes payment.",
+   "offers": {
+    "@type": "Offer",
+    "name": "Dojo Receptionist monthly plan",
+    "url": "https://dojoreceptionist.com/#price",
+    "price": "129.00",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+     "@type": "UnitPriceSpecification",
+     "price": "129.00",
+     "priceCurrency": "USD",
+     "unitText": "month",
+     "referenceQuantity": {
+      "@type": "QuantitativeValue",
+      "value": 1,
+      "unitCode": "MON"
+     }
+    },
+    "description": "$129 a month. First week free. No setup fee. 150 calls a month. No overage charges. Cancel the same day.",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+     "@id": "https://dojoreceptionist.com/#org"
+    }
+   }
+  }
+ ]
+}
+</script>
 <style>
 /* ---------- tokens ---------- */
 :root{
@@ -283,6 +342,27 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
  .price-wrap{display:grid;gap:var(--sp5)}
  .price-wrap .price{order:-1;margin-top:var(--sp4)}
 }
+/* ---------- demo widget, start form ---------- */
+.trade button.btn{width:100%;cursor:pointer}
+.demo-note{position:fixed;left:12px;right:12px;bottom:calc(var(--bar-h) + 12px + env(safe-area-inset-bottom));z-index:45;max-width:420px;margin:0 auto;padding:12px 14px;border:1px solid var(--gold);border-radius:var(--r);background:var(--n2);color:var(--ink);font-size:var(--t-s);display:none}
+.demo-note.on{display:block}
+body.demo-open .callbar{display:none}
+body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
+.start{margin-top:var(--sp5);padding:var(--sp5) var(--sp4);border:1px solid var(--line);border-radius:14px;background:var(--n1)}
+.start h3{font-size:var(--t-l)}
+.start form{display:grid;gap:var(--sp3);margin-top:var(--sp4)}
+.start label{display:grid;gap:6px;font-weight:700;font-size:var(--t-s);color:var(--ink)}
+.start input,.start select{min-height:52px;padding:0 14px;font:600 var(--t-m)/1.3 var(--sans);color:var(--ink);background:var(--n2);border:1px solid var(--line);border-radius:var(--r);width:100%}
+.start input:focus,.start select:focus{border-color:var(--gold)}
+.start .hp{position:absolute;left:-5000px}
+.start button.btn{width:100%;cursor:pointer}
+.start .alt{display:grid;gap:var(--sp3);margin-top:var(--sp3)}
+.form-msg{margin-top:var(--sp3);padding:12px 14px;border-radius:var(--r);font-size:var(--t-s);display:none}
+.form-msg.ok{display:block;border:1px solid var(--gold);background:rgba(232,181,59,.1);color:var(--ink)}
+.form-msg.err{display:block;border:1px solid #e07a5f;background:rgba(224,122,95,.12);color:var(--ink)}
+.bonus{margin-top:var(--sp3);padding:10px 12px;border:1px dashed var(--gold);border-radius:var(--r);font-size:var(--t-s);color:var(--ink2)}
+.bonus b{color:var(--gold2)}
+@media (min-width:640px){.start .alt{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -420,7 +500,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
   <p class="eyebrow">Hear it</p>
   <!-- SWAP-TEST: broke (Saturday water heater, first cold night with kids, fir on the house). -->
   <h2 id="trades-h">Calls owner-run shops miss.</h2>
-  <p class="lead">Made-up shops, real voices. Tap "Hear it," allow the mic, and call it like a customer: ask the hours, ask for a price, or leave a message.</p>
+  <p class="lead">Made-up shops, real voices, right on this page. Tap "Hear it," then the phone button, allow the mic, and call it like a customer: ask the hours, ask for a price, or leave a message.</p>
  </div>
  <div class="featured" id="featured-trades"></div>
  <p class="swipe" aria-hidden="true">Swipe for more trades →</p>
@@ -429,54 +509,55 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
   <select id="trade-pick" class="trade-select"></select>
   <div class="stage" id="trade-stage"></div>
  </div>
- <p class="fine">Not listed? Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll build one for the way your shop gets calls.</p>
+ <p class="fine">Not listed? Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll build one for the way your shop gets calls. Web demos run on ElevenLabs and may be recorded; see <a href="/privacy/">Privacy</a>.</p>
+ <div class="demo-note" id="demo-note" role="status" aria-live="polite"></div>
  <script>
  (function(){
-  /* Same trades and demo links as v2.1. Add a trade by appending one object. */
+  /* Each trade with an agent id gets an on-site "Hear it" demo (ElevenLabs widget). Add a trade by appending one object. */
   var TRADES=[
-   {id:"plumbing",name:"Plumbing",featured:true,icon:"/assets/icons/plumbing.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_4801m6ppvzrnfd7r73zggf3eypbx",
+   {id:"plumbing",name:"Plumbing",featured:true,icon:"/assets/icons/plumbing.svg",badge:true,agent:"agent_4801m6ppvzrnfd7r73zggf3eypbx",
     sit:"\"Water heater's leaking all over the garage, and it's Saturday morning.\"",
     does:"asks if the water's shut off, how bad it is, the address, and when they can be reached, then emails you."},
-   {id:"hvac",name:"HVAC",featured:true,icon:"/assets/icons/hvac.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_7201m6m3k17jepbv88ngghxnpg75",
+   {id:"hvac",name:"HVAC",featured:true,icon:"/assets/icons/hvac.svg",badge:true,agent:"agent_7201m6m3k17jepbv88ngghxnpg75",
     sit:"\"Furnace quit on the first cold night, and we've got kids in the house.\"",
     does:"asks what kind of system, whether there's any heat, the address, and how soon, then emails you, even at 10 p.m."},
-   {id:"auto",name:"Auto repair",featured:true,icon:"/assets/icons/auto-repair.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p",
+   {id:"auto",name:"Auto repair",featured:true,icon:"/assets/icons/auto-repair.svg",badge:true,agent:"agent_2901m6ppvtj3ebyrdzn5k5w7y78p",
     sit:"\"Check-engine light came on on the way in. Can you look at it today?\"",
     does:"gets year, make and model, what it's doing, whether it's drivable, and when they can bring it in, while you're under the lift."},
-   {id:"electrical",name:"Electrical",featured:true,icon:"/assets/icons/electrical.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_5901m6m3jzp6f9frwzt67a55cbe3",
+   {id:"electrical",name:"Electrical",featured:true,icon:"/assets/icons/electrical.svg",badge:true,agent:"agent_5901m6m3jzp6f9frwzt67a55cbe3",
     sit:"\"Half the house went dark in the windstorm, and the breaker won't reset.\"",
     does:"asks which rooms are out, whether there's a burning smell, and the address. You decide who goes out."},
-   {id:"dispensary",name:"Dispensary",featured:true,icon:"/assets/icons/dispensary.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6601m732qh8ted69rqzd4qq1kxm5",
+   {id:"dispensary",name:"Dispensary",featured:true,icon:"/assets/icons/dispensary.svg",badge:true,agent:"agent_6601m732qh8ted69rqzd4qq1kxm5",
     sit:"\"Cedar Hollow Cannabis? You still open tonight, and do I have to be 21?\"",
     line:"Hours, directions and the 21+ rule. Never talks product, prices or deals."},
-   {id:"restaurant",name:"Restaurant",featured:true,icon:"/assets/icons/restaurant.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_6901m6s7r2cafgv81eygz3kq03rs",
+   {id:"restaurant",name:"Restaurant",featured:true,icon:"/assets/icons/restaurant.svg",badge:true,agent:"agent_6901m6s7r2cafgv81eygz3kq03rs",
     sit:"\"Fern Hollow Family Diner? Can I call in a to-go order for four, and do you have room for a party Saturday?\"",
     does:"takes the to-go order and reads back the name and number. For a party it gets the date and headcount. You confirm."},
-   {id:"salon",name:"Salon",icon:"/assets/icons/salon.svg",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb",
+   {id:"salon",name:"Salon",icon:"/assets/icons/salon.svg",badge:true,agent:"agent_3501m762zzkdex18y2a1kt4gxnzv",
     sit:"\"Can I get a cut and color before my sister's wedding this Saturday?\"",
     does:"takes their name, the service, the days that work, and a callback number. You confirm every appointment."},
-   {id:"barber",name:"Barber",icon:"/assets/icons/barber.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_8501m6q77zgyewrs08efekykp2kb",
+   {id:"barber",name:"Barber",icon:"/assets/icons/barber.svg",badge:true,agent:"agent_3101m7630163ex4afw7f74mxct41",
     sit:"\"Got time for a fade at Copper Pine before my interview tomorrow morning?\"",
     does:"takes their name, the cut, the days that work, and a callback number while you finish the client in the chair. You confirm every appointment."},
-   {id:"pet",name:"Pet grooming",icon:"/assets/icons/pet-grooming.svg",badge:true,demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_1701m6sehstre3pstxxvr7rxj0sw",
+   {id:"pet",name:"Pet grooming",icon:"/assets/icons/pet-grooming.svg",badge:true,agent:"agent_1701m6sehstre3pstxxvr7rxj0sw",
     sit:"\"My dog rolled in something awful. Any chance Muddy Paws has a bath this week?\"",
     does:"gets the breed and size, the service, the days that work, and a callback number. You set the appointment."},
-   {id:"exterior",name:"Exterior cleaning",icon:"/assets/icons/exterior-cleaning.svg",
+   {id:"exterior",name:"Exterior cleaning",icon:"/assets/icons/exterior-cleaning.svg",badge:true,agent:"agent_5401m762zmyaenfban9r0v0fgrff",
     sit:"\"The roof's gone green, and the gutters are packed. Can you soft wash it before the rain?\"",
     does:"gets the address and whether it's the roof, gutters, house or driveway, then emails you. You call back from the ground."},
-   {id:"tree",name:"Tree service",icon:"/assets/icons/tree-service.svg",
+   {id:"tree",name:"Tree service",icon:"/assets/icons/tree-service.svg",badge:true,agent:"agent_0101m762zpmneth908dxysrfkqt9",
     sit:"\"A fir came down on the house. Can somebody come look?\"",
     does:"gets the address and whether a tree is on the house, then emails you. You decide who goes out."},
-   {id:"septic",name:"Septic service",icon:"/assets/icons/septic.svg",
+   {id:"septic",name:"Septic service",icon:"/assets/icons/septic.svg",badge:true,agent:"agent_1201m762zqz4f3c8p8607h9133jh",
     sit:"\"The tank's backing up into the yard, and the bathroom won't drain.\"",
     does:"gets the address and whether it's a routine pump or a backup, then emails you. You decide who goes out."},
-   {id:"well",name:"Well and pump",icon:"/assets/icons/well-pump.svg",
+   {id:"well",name:"Well and pump",icon:"/assets/icons/well-pump.svg",badge:true,agent:"agent_9701m762zsx4fm78e86kc04h5j5n",
     sit:"\"No water this morning. The pump hums and quits.\"",
     does:"gets the address, what the pump is doing, and a callback number, then emails you. You call back from the truck."},
-   {id:"fencing",name:"Fencing",icon:"/assets/icons/fencing.svg",
+   {id:"fencing",name:"Fencing",icon:"/assets/icons/fencing.svg",badge:true,agent:"agent_0901m762zv9tecqraknhnfkgz93z",
     sit:"\"We need fence along the pasture. Can you come look?\"",
     does:"gets the address, about how much fence, and a callback number, then emails you. You call back when the tools are down."},
-   {id:"chimney",name:"Chimney sweep",icon:"/assets/icons/chimney-sweep.svg",
+   {id:"chimney",name:"Chimney sweep",icon:"/assets/icons/chimney-sweep.svg",badge:true,agent:"agent_1701m762zwz9et6b1yq3thmk5hr4",
     sit:"\"First cold night's coming, and the chimney hasn't been swept. Can you fit us in before we light the stove?\"",
     does:"gets the address, whether it's a sweep or a repair question, and a callback number, then emails you. You call back off the roof."}
   ];
@@ -497,15 +578,35 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
    card.appendChild(node("p","sit",t.sit));
    if(t.line){card.appendChild(node("p","does",t.line));}
    else{var does=node("p","does");does.appendChild(node("b",null,"It "));does.appendChild(document.createTextNode(t.does));card.appendChild(does);}
-   if(t.demo){
-    var a=node("a","btn g");
-    a.href=t.demo;a.target="_blank";a.rel="noopener";
-    a.setAttribute("aria-label","Hear the "+t.name+" demo (opens in a new tab)");
+   if(t.agent){
+    var a=node("button","btn g");
+    a.type="button";
+    a.setAttribute("aria-label","Hear the "+t.name+" demo on this page");
     a.innerHTML='<svg class="i" aria-hidden="true"><use href="#i-play"/></svg>';
     a.appendChild(document.createTextNode("Hear it"));
+    a.addEventListener("click",function(){openDemo(t)});
     card.appendChild(a);
    }else card.appendChild(node("div","soon","Demo coming soon"));
    return card;
+  }
+  /* On-site demo: one ElevenLabs widget, swapped per trade, script loaded on first tap only. */
+  var note=document.getElementById("demo-note");
+  function openDemo(t){
+   var old=document.getElementById("demo-widget");if(old&&old.parentNode)old.parentNode.removeChild(old);
+   var w=document.createElement("elevenlabs-convai");
+   w.id="demo-widget";
+   w.setAttribute("agent-id",t.agent);
+   w.setAttribute("variant","expanded");
+   w.setAttribute("dismissible","true");
+   w.setAttribute("action-text","Hear the "+t.name+" demo");
+   w.setAttribute("start-call-text","Start the call");
+   w.setAttribute("end-call-text","End call");
+   w.setAttribute("avatar-orb-color-1","#e8b53b");
+   w.setAttribute("avatar-orb-color-2","#f6d27a");
+   document.body.appendChild(w);
+   document.body.classList.add("demo-open");
+   if(!document.getElementById("el-widget-js")){var sc=document.createElement("script");sc.id="el-widget-js";sc.async=true;sc.src="https://unpkg.com/@elevenlabs/convai-widget-embed";document.body.appendChild(sc);}
+   if(note){note.textContent=t.name+" demo is ready at the bottom right. Tap the phone button and allow the mic.";note.classList.add("on");clearTimeout(note._t);note._t=setTimeout(function(){note.classList.remove("on")},7000);}
   }
   function show(id){
    stage.querySelectorAll(".trade").forEach(function(card){
@@ -622,10 +723,63 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Cancel the same day,</b> with no last-month charge.</span></li>
     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>You keep your number.</b> I set up the forwarding with you.</span></li>
    </ul>
-   <a class="btn g" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Email Jeremy to start your free week</a>
-   <p class="fine" style="margin-top:10px">Opens an email to Jeremy. There's no online checkout; I reply and set it up with you.</p>
+   <p class="bonus"><b>Free bonus:</b> we claim your business in ChatGPT for you during your free week. <a href="#faq-chatgpt">What that means</a></p>
+   <a class="btn g" href="#start"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Start my free week</a>
+   <p class="fine" style="margin-top:10px">A short form, a text, or an email. There's no online checkout; I call you and set it up with you.</p>
   </div>
  </div>
+
+ <!-- SWAP-TEST: broke (Jeremy calls you back himself; five fields; text or email instead). -->
+ <div class="start" id="start">
+  <h3>Start my free week</h3>
+  <p class="fine">Five quick answers. Jeremy calls you back himself to set it up. No card, no checkout.</p>
+  <form id="start-form" action="https://formsubmit.co/jeremy@dojoreceptionist.com" method="POST" novalidate>
+   <input type="hidden" name="_subject" value="Free week request - Dojo Receptionist">
+   <input type="hidden" name="_template" value="table">
+   <input type="hidden" name="_captcha" value="false">
+   <input type="hidden" name="_next" value="https://dojoreceptionist.com/?sent=1#start">
+   <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+   <label>Your name<input name="name" autocomplete="name" required></label>
+   <label>Shop name<input name="shop" autocomplete="organization" required></label>
+   <label>Trade<select name="trade" id="start-trade" required><option value="">Pick one</option></select></label>
+   <label>Phone<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+   <label>Best time to call<input name="best_time" placeholder="e.g. weekdays after 3" required></label>
+   <button class="btn g" type="submit"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Send it to Jeremy</button>
+  </form>
+  <div class="form-msg" id="start-msg" role="status" aria-live="polite"></div>
+  <div class="alt">
+   <a class="btn o" href="sms:+15412465403?&amp;body=Hi%20Jeremy%2C%20I%27d%20like%20to%20start%20my%20free%20week%20of%20Dojo%20Receptionist.%20Shop%3A%20"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Text Jeremy</a>
+   <a class="btn o" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Email Jeremy</a>
+  </div>
+  <p class="fine">Your answers go only to Jeremy's inbox. See <a href="/privacy/">Privacy</a>.</p>
+ </div>
+ <script>
+ (function(){
+  var f=document.getElementById("start-form"),msg=document.getElementById("start-msg"),sel=document.getElementById("start-trade");
+  if(!f) return;
+  var names=["Plumbing","HVAC","Auto repair","Electrical","Dispensary","Restaurant","Salon","Barber","Pet grooming","Exterior cleaning","Tree service","Septic service","Well and pump","Fencing","Chimney sweep","Other"];
+  names.forEach(function(n){var o=document.createElement("option");o.value=n;o.textContent=n;sel.appendChild(o);});
+  function say(cls,html){msg.className="form-msg "+cls;msg.innerHTML=html;}
+  if(/[?&]sent=1/.test(location.search)) say("ok","Got it. Jeremy will call you at the time you picked.");
+  var fallback=' Please <a href="sms:+15412465403">text Jeremy</a> or <a href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop">email him</a> instead.';
+  f.addEventListener("submit",function(e){
+   e.preventDefault();
+   var data={},missing=false;
+   Array.prototype.forEach.call(f.elements,function(el){if(!el.name)return;data[el.name]=el.value.trim();if(el.required&&!data[el.name])missing=true;});
+   if(missing){say("err","Please fill in all five boxes.");return;}
+   if(data._honey){say("ok","Thanks!");return;}
+   var btn=f.querySelector("button");btn.disabled=true;say("ok","Sending…");
+   fetch("https://formsubmit.co/ajax/jeremy@dojoreceptionist.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)})
+    .then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {ok:r.ok,j:j};});})
+    .then(function(x){
+     if(x.ok&&(x.j.success===true||x.j.success==="true")){f.reset();say("ok","Got it. Jeremy will call you at the time you picked.");}
+     else{say("err","That didn't go through."+fallback);}
+    })
+    .catch(function(){say("err","That didn't go through."+fallback);})
+    .then(function(){btn.disabled=false;});
+  });
+ })();
+ </script>
 </section>
 
 <!-- ===== who ===== -->
@@ -661,10 +815,11 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
   <details><summary>Will callers know they're talking to an AI?</summary><p>Yes. It answers with your shop's name, says it's an AI and that the call may be recorded, then asks how it can help. It never pretends to be a person.</p></details>
   <details><summary>Will my customers hate it?</summary><p>It only picks up the calls you miss, so your regulars still reach you the way they do now. Instead of a full voicemail box, they get your shop's name, an honest "I'm an AI," and someone writing down what they need. Call Bella at <a href="tel:+15418330643">541-833-0643</a> and judge for yourself.</p></details>
   <details><summary>What if someone asks for a price?</summary><p>It won't make one up. It takes the caller's name, number and what they need, so you call back with the real answer.</p></details>
-  <details><summary>How do I get the message?</summary><p>By email, right after the call: name, number (read back to the caller), where they are, what they need, and when to call back. Urgent calls say URGENT up front. Text alerts are coming soon. Demo calls don't send a summary; yours start once your shop is set up.</p></details>
+  <details><summary>How do I get the message?</summary><p>By email, right after the call: name, number (read back to the caller), where they are, what they need, and when to call back. Urgent calls say URGENT up front. Text alerts are coming soon. Want to see one first? Call the demo line and ask, and Bella can email you a sample summary. Yours start once your shop is set up.</p></details>
   <details><summary>Is recording calls legal?</summary><p>It depends on the state. Bella announces that the call may be recorded on every call, so that consent is asked for up front. This is not legal advice; check with your own advisor if you're unsure.</p></details>
   <details><summary>Do I keep my phone number?</summary><p>Yes. I set up the forwarding on your phone with you, and you can turn it off anytime.</p></details>
   <details><summary>Can I pause it for the slow season?</summary><p>Yes, free, for up to 3 months a year. One text or email starts it, your calls forward straight back to your shop, and there's no restart fee.</p></details>
+  <details id="faq-chatgpt"><summary>What's the free ChatGPT bonus?</summary><p>OpenAI just opened Businesses in ChatGPT, a beta where a business can claim a verified profile and keep its details current. If your shop is eligible, we claim it and fill in your details during your free week, at no charge. It's OpenAI's program, not ours: we don't control how ChatGPT shows or ranks businesses, and we can't promise it brings you calls.</p></details>
   <details><summary>Can I cancel?</summary><p>Yes, the same day, with no last-month charge. Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll turn it off.</p></details>
  </div>
  </div>
@@ -675,9 +830,9 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
  <p class="lead">Call Bella and pretend you're a customer of your own shop.</p>
  <div class="cta">
   <a class="btn g" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Call 541-833-0643</a>
-  <a class="btn o" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Email Jeremy</a>
+  <a class="btn o" href="#start"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Start my free week</a>
  </div>
- <p class="fine">jeremy@dojoreceptionist.com · I read every one myself.</p>
+ <p class="fine">Or email jeremy@dojoreceptionist.com · I read every one myself.</p>
 </section>
 
 </div>
@@ -685,7 +840,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
 
 <footer><div class="wrap">
  <p><b style="color:var(--ink2)">Dojo Receptionist</b> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p>
- <p>Example callers and the shops in the demos are made up. Not legal advice. <a href="/privacy/">Privacy</a></p>
+ <p>Example callers and the shops in the demos are made up. Not legal advice. <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
 </div></footer>
 
 <nav class="callbar" aria-label="Quick contact">
