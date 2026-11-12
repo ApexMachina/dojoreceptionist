@@ -1,0 +1,390 @@
+<!doctype html>
+<!--
+  Dojo Receptionist · /missed-call-log/ · free 7-Day Missed Call Log
+  Landing plus the on-phone tally. Counts stay in this browser only.
+  Same navy/gold tokens, brand bar, footer, and mobile call bar as the other pages.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Free 7-Day Missed Call Log | Dojo Receptionist</title>
+<meta name="description" content="It's a hard number to know when you're under a sink, on a ladder, or with a customer when it rings. Tally every missed call for one week, on paper or on your phone, then see a rough estimate of what that week could have been worth, by your own numbers.">
+<meta name="theme-color" content="#0b1730">
+<link rel="canonical" href="https://dojoreceptionist.com/missed-call-log/">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dojo Receptionist">
+<meta property="og:title" content="Free 7-Day Missed Call Log | Dojo Receptionist">
+<meta property="og:description" content="Tally every missed call for one week, on paper or on your phone, then see a rough estimate of what that week could have been worth, by your own numbers.">
+<meta property="og:url" content="https://dojoreceptionist.com/missed-call-log/">
+<meta property="og:image" content="https://dojoreceptionist.com/assets/og-share.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free 7-Day Missed Call Log | Dojo Receptionist">
+<meta name="twitter:description" content="One week, one tally mark per missed call. Your numbers, your estimate.">
+<meta name="twitter:image" content="https://dojoreceptionist.com/assets/og-share.png">
+<style>
+:root{
+ --bg:#0a0d18;--n1:#0f1730;--n2:#16213f;--n3:#1d2a4f;--line:#2a3966;
+ --gold:#e8b53b;--gold2:#f6d27a;--on-gold:#120d00;
+ --ink:#f3f5fb;--ink2:#d5dbea;--mute:#aeb8d0;
+ --t-xs:.8125rem;--t-s:.9375rem;--t-m:1.0625rem;--t-l:1.3125rem;--t-xl:1.625rem;--t-2xl:2.0625rem;--t-3xl:2.5625rem;
+ --sp2:8px;--sp3:12px;--sp4:16px;--sp5:24px;--sp6:32px;--sp7:48px;--sp8:64px;
+ --r:10px;--bar-h:76px;
+ --serif:Georgia,"DejaVu Serif","Times New Roman",serif;
+ --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:16px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font:400 var(--t-m)/1.55 var(--sans);background:var(--bg);color:var(--ink);overflow-x:hidden;
+ padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom))}
+a{color:var(--gold2);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--gold2);outline-offset:3px;border-radius:4px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:12px;top:-60px;background:var(--gold);color:var(--on-gold);padding:10px 14px;border-radius:8px;font-weight:800;z-index:50}
+.skip:focus{top:12px}
+svg.i{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+h1,h2{font-family:var(--serif);font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+h1{font-size:var(--t-2xl);line-height:1.08}
+h2{font-size:var(--t-xl);line-height:1.15}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:800 var(--t-xs)/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
+.eyebrow::before{content:"";width:18px;height:2px;background:var(--gold)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;min-height:44px;text-decoration:none;color:var(--ink);font:800 var(--t-s)/1 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.brand span{color:var(--gold)}
+.btn.top-call{display:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:12px 18px;border-radius:var(--r);
+ font:800 var(--t-m)/1.2 var(--sans);text-decoration:none;text-align:center;border:2px solid transparent;cursor:pointer;touch-action:manipulation}
+.btn:active{transform:translateY(1px)}
+.btn.g{background:var(--gold);color:var(--on-gold)}
+.btn.g:hover{background:var(--gold2)}
+.btn.o{background:transparent;color:var(--gold2);border-color:var(--gold)}
+.btn.o:hover{background:rgba(232,181,59,.1)}
+.hero{background:radial-gradient(120% 80% at 85% 0%,#1a2650 0%,rgba(10,13,24,0) 60%),linear-gradient(180deg,#121a35,var(--bg));border-bottom:1px solid var(--line)}
+.hero-inner{padding:var(--sp4) 0 var(--sp7)}
+.hero h1{margin-top:var(--sp4)}
+.lede{font-size:var(--t-m);color:var(--ink2);margin-top:var(--sp4)}
+.cta{display:grid;gap:var(--sp3);margin-top:var(--sp5)}
+section{padding:var(--sp7) 0 0}
+section h2{margin-top:var(--sp2)}
+.card{background:var(--n1);border:1px solid var(--line);border-radius:14px;padding:var(--sp4)}
+.card+.card{margin-top:var(--sp3)}
+ul.gets{list-style:none;display:grid;gap:var(--sp3);margin-top:var(--sp5)}
+ul.gets li{padding:var(--sp4);background:var(--n1);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:var(--r);color:var(--ink2)}
+ol.steps{list-style:none;counter-reset:s;display:grid;gap:var(--sp3);margin-top:var(--sp5)}
+ol.steps li{counter-increment:s;position:relative;padding:var(--sp4) var(--sp4) var(--sp4) 64px;background:var(--n1);border:1px solid var(--line);border-radius:var(--r);color:var(--ink2)}
+ol.steps li::before{content:counter(s);position:absolute;left:16px;top:16px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--gold);color:var(--on-gold);font:700 var(--t-m)/1 var(--serif)}
+.fine{margin-top:var(--sp3);color:var(--mute);font-size:var(--t-s)}
+.founders{margin-top:var(--sp5);padding:var(--sp4);border:2px solid var(--gold);border-radius:14px;background:linear-gradient(160deg,var(--n2),var(--n1));color:var(--gold2);font-weight:800}
+.founders+.cta{margin-top:var(--sp4)}
+#log{scroll-margin-top:12px}
+.note{margin-top:var(--sp5);color:var(--ink2);font-size:var(--t-s)}
+.tabs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:var(--sp4)}
+.tabs button{min-height:48px;padding:6px 0;border-radius:10px;border:2px solid var(--line);background:var(--n1);color:var(--ink);font:800 13px/1.1 var(--sans);cursor:pointer;touch-action:manipulation}
+.tabs button.on{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.tabs button small{display:block;margin-top:3px;font-size:12px;font-weight:800}
+.tabs button:not(.on) small{color:var(--gold2)}
+.day{border:1px solid var(--line);border-radius:14px;margin-top:var(--sp3);overflow:hidden;background:var(--n1)}
+.day.off{display:none}
+body.printing .day.off{display:block}
+.day h3{margin:0;background:var(--n2);color:var(--ink);padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;font:800 18px/1.2 var(--sans)}
+.day h3 span{color:var(--gold);font-size:15px;text-align:right}
+.blk{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;border-top:1px solid var(--line);min-height:60px}
+.blk:nth-child(even){background:rgba(255,255,255,.02)}
+.lab{font-weight:700;font-size:15px;line-height:1.2}
+.ctr{display:flex;align-items:center;gap:4px}
+.ctr button{width:44px;height:44px;border-radius:10px;border:2px solid var(--line);background:transparent;color:var(--ink);font-size:24px;font-weight:800;line-height:1;cursor:pointer;touch-action:manipulation}
+.ctr button.plus{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.ctr output{min-width:28px;text-align:center;font-weight:800;font-size:20px}
+.week{margin-top:var(--sp5);background:var(--n1);border:1px solid var(--line);border-radius:14px;padding:var(--sp4)}
+.week .k,.estimate .k{font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.week .big{font-size:44px;font-weight:900;line-height:1.05;color:var(--gold);margin:4px 0}
+.bars{margin-top:var(--sp4)}
+.bars h3{font:800 var(--t-m)/1.3 var(--sans);margin-bottom:8px}
+.bar{display:grid;grid-template-columns:minmax(0,7.2rem) minmax(0,1fr) 1.6rem;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.bar .n{font-weight:700;line-height:1.2}
+.bar .t{background:var(--n3);border-radius:6px;height:14px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--gold)}
+.bar .v{text-align:right;font-weight:800}
+label{display:block;font-weight:800;margin-top:var(--sp4)}
+label .hint{display:block;font-weight:500;color:var(--mute);font-size:var(--t-s);margin-top:2px}
+.inp{display:flex;align-items:center;margin-top:8px;min-height:52px;border:2px solid var(--line);border-radius:12px;background:var(--n1);padding:0 12px}
+.inp:focus-within{border-color:var(--gold);outline:3px solid var(--gold2);outline-offset:1px}
+.inp span{font-weight:800;color:var(--mute)}
+.inp input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:800 20px/1.2 var(--sans);padding:12px 8px}
+.inp input::placeholder{color:#8b97b3;font-weight:600}
+.estimate{margin-top:var(--sp5);background:var(--gold);color:var(--on-gold);border-radius:14px;padding:18px}
+.estimate .big{font-size:40px;font-weight:900;line-height:1.05;margin:4px 0;color:var(--bg)}
+.estimate p{margin-top:8px;font-weight:700}
+.estimate .math{font-weight:600;font-size:var(--t-s)}
+.row{display:grid;gap:var(--sp3);margin-top:var(--sp4)}
+footer{margin-top:var(--sp7);padding:var(--sp5) 0 var(--sp6);background:#06080f;border-top:1px solid var(--line);font-size:var(--t-s);color:var(--mute)}
+footer a{min-height:44px;display:inline-flex;align-items:center}
+footer p+p{margin-top:6px}
+footer .links{font-size:var(--t-xs);line-height:1.6}
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;
+ padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:rgba(8,11,22,.96);border-top:1px solid var(--line)}
+.callbar .btn{min-height:52px}
+@media (min-width:640px){
+ h1{font-size:var(--t-3xl)}
+ .cta{grid-template-columns:1fr 1fr}
+ .btn{width:auto}
+ .cta .btn,.row .btn{width:100%}
+}
+@media (min-width:960px){
+ :root{--bar-h:0px}
+ .callbar{display:none}
+ .btn.top-call{display:inline-flex;width:auto;min-height:44px;padding:8px 14px;font-size:var(--t-s)}
+ .hero-inner{padding:var(--sp5) 0 var(--sp8)}
+}
+@media print{
+ body{background:#fff;color:#111;padding:0}
+ .noprint,.callbar,.skip{display:none!important}
+ .hero{background:#fff;border:0;color:#111}
+ h1,h2,.lede{color:#111}
+ .day,.day.off{display:block!important;break-inside:avoid;background:#fff;color:#111;border:1px solid #ccc}
+ .day h3{background:#0b1730;color:#fff;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .estimate{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ a{color:#111}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+ </defs>
+</svg>
+
+<header class="hero">
+ <div class="wrap">
+  <div class="top">
+   <a class="brand" href="/" aria-label="Dojo Receptionist, home">
+    <svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="12" fill="#0a0d18" stroke="#e8b53b" stroke-width="4"/><text x="32" y="43" font-family="Georgia,serif" font-size="30" font-weight="700" text-anchor="middle" fill="#e8b53b">D<tspan fill="#f6d27a">R</tspan></text></svg>
+    Dojo <span>Receptionist</span>
+   </a>
+   <a class="btn g top-call" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>541-833-0643</a>
+  </div>
+  <div class="hero-inner">
+   <p class="eyebrow">Free for shop owners</p>
+   <h1>How many calls did you miss this week?</h1>
+   <p class="lede">It's a hard number to know when you're under a sink, on a ladder, or with a customer when it rings. Tally every missed call for one week, on paper or on your phone, then see a rough estimate of what that week could have been worth, by your own numbers.</p>
+   <div class="cta">
+    <a class="btn g" href="#log">Use it on my phone</a>
+    <a class="btn o" href="/missed-call-log/7-day-missed-call-log.pdf" download="7-day-missed-call-log.pdf">Download the printable PDF</a>
+   </div>
+  </div>
+ </div>
+</header>
+
+<main id="main">
+<div class="wrap">
+
+<section aria-labelledby="get-h">
+ <h2 id="get-h">What you get</h2>
+ <ul class="gets">
+  <li>A printable letter-size log: one page of tally boxes by day and time block, one page for callback notes and the week's math.</li>
+  <li>A phone version that adds up the week, shows your busiest day and time, and does the estimate (this week, and a month at that pace).</li>
+  <li>Nothing leaves your phone.</li>
+ </ul>
+</section>
+
+<section aria-labelledby="how-h">
+ <h2 id="how-h">How it works</h2>
+ <ol class="steps">
+  <li>One tally mark every time the phone rings and nobody picks up.</li>
+  <li>Do it for seven days. Skip spam and robocalls.</li>
+  <li>Enter your average job value and booking rate. Missed calls × booking rate × job value = your estimate for the week.</li>
+ </ol>
+ <p class="fine">Every dollar figure comes from numbers you enter. It's your estimate, not a promise.</p>
+</section>
+
+<section id="log" aria-labelledby="log-h">
+ <h2 id="log-h">Log a missed call</h2>
+ <p class="lede">Tap + every time the phone rings and nobody picks up. After a week, you'll see when you miss the most calls and a rough estimate of what they could be worth, using your own numbers.</p>
+ <p class="note card">Your taps are saved on this phone only, in this browser. Nothing you enter leaves this page. Count missed rings, hang-ups, and voicemails. Skip spam and robocalls.</p>
+ <noscript><p class="card" style="margin-top:12px">This phone log needs JavaScript to add up the week. The printable PDF works without it.</p></noscript>
+ <p class="fine">Pick the day, then tap + in the time block. Tap − to undo.</p>
+ <div class="tabs noprint" id="tabs" role="tablist" aria-label="Day"></div>
+ <div id="days"></div>
+
+ <div class="week" aria-live="polite">
+  <div class="k">This week</div>
+  <div class="big" id="total">0</div>
+  <p id="busy">Start tapping to see your busiest day and time.</p>
+  <div class="bars">
+   <h3>By time of day</h3>
+   <div id="bars"></div>
+  </div>
+ </div>
+
+ <h2 style="margin-top:32px">What could they be worth?</h2>
+ <p class="fine" style="margin-top:8px">Your numbers only. This is your own estimate, not a promise.</p>
+ <label for="job">Average job value<span class="hint">What a typical job brings in for your shop.</span></label>
+ <div class="inp"><span>$</span><input id="job" type="number" inputmode="decimal" min="0" step="1" placeholder="e.g. 300" autocomplete="off"></div>
+ <label for="rate">Booking rate<span class="hint">Of the people who'd have reached you, about what share would book? If many missed callers are existing customers or wrong numbers, go lower.</span></label>
+ <div class="inp"><input id="rate" type="number" inputmode="decimal" min="0" max="100" step="1" placeholder="e.g. 25" autocomplete="off"><span>%</span></div>
+
+ <div class="estimate" aria-live="polite">
+  <div class="k">Estimate, not a promise</div>
+  <p style="margin-top:6px">Estimated work missed this week</p>
+  <div class="big" id="wk">$0</div>
+  <p>About <b id="mo">$0</b> a month at that pace (this week × 4.33).</p>
+  <p class="math" id="math">Missed calls × booking rate × average job value. Add your numbers above.</p>
+ </div>
+ <div class="row noprint">
+  <button class="btn o" id="print" type="button">Print or save as PDF</button>
+  <a class="btn o" href="/missed-call-log/7-day-missed-call-log.pdf" download="7-day-missed-call-log.pdf">Download the printable PDF</a>
+  <button class="btn o" id="reset" type="button">Start a new week</button>
+ </div>
+</section>
+
+<section aria-labelledby="after-h">
+ <h2 id="after-h">After the week</h2>
+ <p class="lede">Try the free calculator for a second look at the math, or hear Bella, the AI receptionist that takes the calls you can't. She says she's an AI, takes the message, and emails you. She never quotes, diagnoses, books, or takes payment, and she does not transfer calls live.</p>
+ <p class="founders">Founders: first week free, then $129/mo, no setup fee, no contract, 150 calls a month.</p>
+ <div class="cta">
+  <a class="btn g" href="/calculator/">Open the calculator</a>
+  <a class="btn o" href="tel:+15418330643">Hear Bella: 541-833-0643</a>
+ </div>
+ <p class="fine">Jeremy, a Marine vet, sets Bella up for you personally. <a href="mailto:jeremy@dojoreceptionist.com?subject=My%20missed%20call%20log">Email Jeremy</a></p>
+</section>
+
+</div>
+</main>
+
+<footer>
+ <div class="wrap">
+  <p><b style="color:var(--ink2)">Dojo Receptionist</b> · Jeremy Alvarado, a Marine vet. Every dollar figure in this log comes from numbers you enter. It's your estimate, not a promise. Nothing you enter leaves this page. Bella says she's an AI on every call, and calls may be recorded. She never quotes, diagnoses, books, or takes payment, and she does not transfer calls live.</p>
+  <p>Hear Bella: <a href="tel:+15418330643">541-833-0643</a> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p>
+  <p class="links"><a href="/">Home</a> · <a href="/calculator/">Missed Call Math</a> · <a href="/missed-call-log/" aria-current="page">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+ </div>
+</footer>
+
+<nav class="callbar noprint" aria-label="Quick contact">
+ <a class="btn g" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Call Bella · 541-833-0643</a>
+</nav>
+
+<script>
+(function(){
+var DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+var BLOCKS=['Before 8 am','8 - 10 am','10 am - noon','Noon - 2 pm','2 - 4 pm','4 - 6 pm','After 6 pm'];
+var KEY='dojo-missed-call-log-v1';
+var S={c:DAYS.map(function(){return BLOCKS.map(function(){return 0})}),job:'',rate:'',day:null};
+try{
+ var saved=JSON.parse(localStorage.getItem(KEY)||'null');
+ if(saved&&saved.c&&saved.c.length===7&&saved.c.every(function(r){return r&&r.length===7})) S=saved;
+}catch(e){}
+if(S.day===null||S.day<0||S.day>6){
+ var js=new Date().getDay();
+ S.day=(js+6)%7;
+}
+function $(id){return document.getElementById(id)}
+function money(n){return '$'+Math.round(n).toLocaleString('en-US')}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function build(){
+ var tabs=$('tabs'), days=$('days');
+ DAYS.forEach(function(d,i){
+  var t=document.createElement('button');
+  t.type='button';
+  t.setAttribute('role','tab');
+  t.setAttribute('aria-controls','day'+i);
+  t.dataset.i=i;
+  t.addEventListener('click',function(){S.day=i;save();render()});
+  tabs.appendChild(t);
+  var box=document.createElement('div');
+  box.className='day';
+  box.id='day'+i;
+  box.setAttribute('role','tabpanel');
+  var h='<h3>'+d+'<span id="dt'+i+'"></span></h3>';
+  BLOCKS.forEach(function(b,j){
+   h+='<div class="blk"><div class="lab">'+b+'</div><div class="ctr">'
+    +'<button type="button" aria-label="Remove one, '+d+' '+b+'" data-d="'+i+'" data-b="'+j+'" data-v="-1">−</button>'
+    +'<output id="o'+i+'_'+j+'">0</output>'
+    +'<button type="button" class="plus" aria-label="Add one, '+d+' '+b+'" data-d="'+i+'" data-b="'+j+'" data-v="1">+</button>'
+    +'</div></div>';
+  });
+  box.innerHTML=h;
+  days.appendChild(box);
+ });
+ days.addEventListener('click',function(e){
+  var b=e.target.closest('button[data-v]');
+  if(!b) return;
+  var d=+b.dataset.d, k=+b.dataset.b;
+  S.c[d][k]=Math.max(0,(+S.c[d][k])+(+b.dataset.v));
+  save();
+  render();
+ });
+}
+function showAllDays(){return document.body.classList.contains('printing')}
+function render(){
+ var dayT=S.c.map(function(r){return r.reduce(function(a,b){return a+(+b||0)},0)});
+ var blkT=BLOCKS.map(function(_,j){return S.c.reduce(function(a,r){return a+(+r[j]||0)},0)});
+ var total=dayT.reduce(function(a,b){return a+b},0);
+ var printing=showAllDays();
+ document.querySelectorAll('#tabs button').forEach(function(t,i){
+  t.className=i===S.day?'on':'';
+  t.setAttribute('aria-selected',i===S.day?'true':'false');
+  t.innerHTML=DAYS[i]+(dayT[i]?'<small>'+dayT[i]+'</small>':'');
+ });
+ DAYS.forEach(function(_,i){
+  var el=$('day'+i);
+  var on=printing||i===S.day;
+  el.classList.toggle('off',!on);
+  $('dt'+i).textContent=dayT[i]+' missed';
+  BLOCKS.forEach(function(_,j){$('o'+i+'_'+j).textContent=S.c[i][j]});
+ });
+ $('total').textContent=String(total);
+ if(total){
+  var md=dayT.indexOf(Math.max.apply(null,dayT));
+  var mb=blkT.indexOf(Math.max.apply(null,blkT));
+  $('busy').textContent='Most missed: '+DAYS[md]+' ('+dayT[md]+'), and '+BLOCKS[mb]+' ('+blkT[mb]+') across the week.';
+ }else{
+  $('busy').textContent='Start tapping to see your busiest day and time.';
+ }
+ var mx=Math.max.apply(null,[1].concat(blkT));
+ $('bars').innerHTML=BLOCKS.map(function(b,j){
+  return '<div class="bar"><span class="n">'+b+'</span><span class="t"><i style="width:'+(blkT[j]/mx*100)+'%"></i></span><span class="v">'+blkT[j]+'</span></div>';
+ }).join('');
+ var job=parseFloat(S.job), rate=parseFloat(S.rate);
+ if(job>0&&rate>=0&&!isNaN(rate)){
+  var pct=Math.min(rate,100);
+  var wk=total*(pct/100)*job;
+  $('wk').textContent=money(wk);
+  $('mo').textContent=money(wk*4.33);
+  $('math').textContent=total+' missed × '+pct+'% × '+money(job)+' = '+money(wk)+' this week. Your estimate, from your numbers.';
+ }else{
+  $('wk').textContent='$0';
+  $('mo').textContent='$0';
+  $('math').textContent='Missed calls × booking rate × average job value. Add your numbers above.';
+ }
+}
+$('job').value=S.job||'';
+$('rate').value=S.rate||'';
+$('job').addEventListener('input',function(e){S.job=e.target.value;save();render()});
+$('rate').addEventListener('input',function(e){S.rate=e.target.value;save();render()});
+$('reset').addEventListener('click',function(){
+ if(confirm('Clear all taps and start a new week? Your job value and booking rate stay.')){
+  S.c=DAYS.map(function(){return BLOCKS.map(function(){return 0})});
+  save();
+  render();
+ }
+});
+function setPrinting(on){
+ document.body.classList.toggle('printing',on);
+ render();
+}
+$('print').addEventListener('click',function(){window.print()});
+window.addEventListener('beforeprint',function(){setPrinting(true)});
+window.addEventListener('afterprint',function(){setPrinting(false)});
+build();
+render();
+})();
+</script>
+</body>
+</html>
