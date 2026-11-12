@@ -416,6 +416,35 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
 .bonus{margin-top:var(--sp3);padding:10px 12px;border:1px dashed var(--gold);border-radius:var(--r);font-size:var(--t-s);color:var(--ink2)}
 .bonus b{color:var(--gold2)}
 @media (min-width:640px){.start .alt{grid-template-columns:1fr 1fr}}
+/* ---------- call-back slip: the form fills in a paper message slip as you type ---------- */
+.slip{position:relative;margin-top:var(--sp4);padding:14px 16px 12px;border-radius:6px;background:var(--paper);color:var(--paper-ink);box-shadow:0 4px 0 #b88a1e,0 10px 24px rgba(0,0,0,.35);transition:transform .12s ease,box-shadow .12s ease}
+.slip.press{transform:translateY(2px);box-shadow:0 2px 0 #b88a1e,0 6px 16px rgba(0,0,0,.35)}
+.slip::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;border-radius:6px 6px 0 0;background:repeating-linear-gradient(90deg,var(--gold) 0 10px,var(--gold2) 10px 20px)}
+.slip-hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:2px;font:800 11px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-mute)}
+.slip-hd b{color:var(--paper-ink)}
+.slip ol{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px}
+.slip li{display:grid;grid-template-columns:62px 1fr 18px;align-items:center;gap:8px;min-height:30px;border-bottom:1px dashed var(--paper-line);font-size:var(--t-s)}
+.slip li span{font:700 11px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--paper-mute)}
+.slip li em{font:italic 600 var(--t-m)/1.25 var(--serif);color:var(--paper-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slip li.empty em{color:#a9b0bf;font-weight:400}
+.slip li em.ink{animation:slip-ink .28s ease-out}
+.slip li i{width:18px;height:18px;border-radius:50%;border:2px solid var(--paper-line);transition:background .2s,border-color .2s,transform .2s}
+.slip li.done i{background:var(--gold);border-color:#b88a1e;transform:scale(1);animation:slip-tick .32s cubic-bezier(.3,1.6,.5,1)}
+.slip-stamp{position:absolute;right:44px;top:50%;margin-top:-6px;padding:6px 12px;border:3px solid #1d2a4f;border-radius:4px;background:rgba(255,255,255,.82);font:900 20px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#1d2a4f;transform:rotate(-8deg) scale(.6);opacity:0;pointer-events:none}
+.slip.sent .slip-stamp{opacity:.9;transform:rotate(-8deg) scale(1);transition:transform .25s cubic-bezier(.3,1.6,.5,1),opacity .15s}
+.meter{display:flex;align-items:center;gap:10px;margin-top:var(--sp3)}
+.meter-bars{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;flex:1}
+.meter-bars b{height:8px;border-radius:2px;background:var(--n3);transition:background .25s}
+.meter-bars b.on{background:var(--gold);animation:meter-pop .3s cubic-bezier(.3,1.6,.5,1)}
+.meter-name{font:800 11px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);white-space:nowrap}
+.meter-say{margin-top:6px;min-height:1.4em;font-size:var(--t-s);color:var(--ink2)}
+.start label.done>input,.start label.done>select{border-color:rgba(232,181,59,.55)}
+.start form.ready button.btn{animation:ready-nudge 1.6s ease-in-out 1}
+@keyframes slip-ink{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:none}}
+@keyframes slip-tick{0%{transform:scale(.4)}100%{transform:scale(1)}}
+@keyframes meter-pop{0%{transform:scaleY(1)}40%{transform:scaleY(1.9)}100%{transform:scaleY(1)}}
+@keyframes ready-nudge{0%,100%{transform:none}20%{transform:translateY(-3px)}40%{transform:none}55%{transform:translateY(-2px)}70%{transform:none}}
+@media (prefers-reduced-motion:reduce){.slip,.slip.press{transition:none;transform:none}.slip li em.ink,.slip li.done i,.meter-bars b.on,.start form.ready button.btn{animation:none}.slip.sent .slip-stamp{transition:none}}
 </style>
 </head>
 <body>
@@ -823,6 +852,19 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
  <div class="start" id="start">
   <h3>Start my free week</h3>
   <p class="fine">Five quick answers. Jeremy calls you back himself to set it up. No card, no checkout.</p>
+  <div class="slip" id="slip" aria-hidden="true">
+   <div class="slip-hd"><b>While you were out</b><span>for Jeremy</span></div>
+   <ol>
+    <li class="empty" data-f="name"><span>Who</span><em>your name</em><i></i></li>
+    <li class="empty" data-f="shop"><span>Shop</span><em>your shop</em><i></i></li>
+    <li class="empty" data-f="trade"><span>Trade</span><em>pick one below</em><i></i></li>
+    <li class="empty" data-f="phone"><span>Number</span><em>your number</em><i></i></li>
+    <li class="empty" data-f="best_time"><span>When</span><em>a good time</em><i></i></li>
+   </ol>
+   <div class="slip-stamp">Sent</div>
+  </div>
+  <div class="meter" aria-hidden="true"><div class="meter-bars"><b></b><b></b><b></b><b></b><b></b></div><span class="meter-name" id="meter-name">0 of 5</span></div>
+  <p class="meter-say" id="meter-say" aria-live="polite">A blank slip. Jeremy can't call a blank slip.</p>
   <form id="start-form" action="https://formsubmit.co/9dd86b5fea31b28520d40e9e373e117f" method="POST" novalidate>
    <input type="hidden" name="_subject" value="Free week request - Dojo Receptionist">
    <input type="hidden" name="_template" value="table">
@@ -862,13 +904,66 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
    fetch("https://formsubmit.co/ajax/9dd86b5fea31b28520d40e9e373e117f",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(data)})
     .then(function(r){return r.json().catch(function(){return {};}).then(function(j){return {ok:r.ok,j:j};});})
     .then(function(x){
-     if(x.ok&&(x.j.success===true||x.j.success==="true")){f.reset();say("ok","Got it. Jeremy will call you at the time you picked.");}
+     if(x.ok&&(x.j.success===true||x.j.success==="true")){if(window.__slipSent)window.__slipSent();f.reset();say("ok","Got it. Jeremy will call you at the time you picked.");}
      else{say("err","That didn't go through."+fallback);}
     })
     .catch(function(){say("err","That didn't go through."+fallback);})
     .then(function(){btn.disabled=false;});
   });
  })();
+ </script>
+ <script>
+/* Call-back slip. The form still works on its own; this only mirrors it onto a paper slip and a five-step meter. */
+(function(){
+ var f=document.getElementById("start-form"),slip=document.getElementById("slip");
+ if(!f||!slip) return;
+ var bars=slip.parentNode.querySelectorAll(".meter-bars b"),nameEl=document.getElementById("meter-name"),sayEl=document.getElementById("meter-say");
+ var order=["name","shop","trade","phone","best_time"],sent=false,lastCount=-1,pressT=0;
+ var EMPTY={name:"your name",shop:"your shop",trade:"pick one below",phone:"your number",best_time:"a good time"};
+ var GOT={name:"Got a name. Nice to meet you.",shop:"Now he knows the shop.",trade:"He'll know which questions your callers ask.",phone:"A number he can actually dial.",best_time:"And when to call. No phone tag."};
+ function digits(v){return (v||"").replace(/\D/g,"");}
+ function fmtPhone(v){var d=digits(v);if(d.length===11&&d[0]==="1")d=d.slice(1);if(d.length<4)return d;if(d.length<7)return d.slice(0,3)+"-"+d.slice(3);return d.slice(0,3)+"-"+d.slice(3,6)+"-"+d.slice(6,10)+(d.length>10?" "+d.slice(10):"");}
+ function ok(n,v){if(n==="phone"){var d=digits(v);return d.length>=10;}return v.trim().length>0;}
+ function field(n){return f.elements[n];}
+ function render(changed){
+  var count=0,lastNew=null;
+  order.forEach(function(n){
+   var el=field(n),v=el?el.value:"",li=slip.querySelector('li[data-f="'+n+'"]'),em=li.querySelector("em"),good=ok(n,v);
+   var text=v.trim()?(n==="phone"?fmtPhone(v):v.trim()):EMPTY[n];
+   if(n==="phone"&&v.trim()&&!good)text=fmtPhone(v)+" …";
+   if(em.textContent!==text){em.textContent=text;if(n===changed){em.classList.remove("ink");void em.offsetWidth;em.classList.add("ink");}}
+   li.classList.toggle("empty",!v.trim());
+   var was=li.classList.contains("done");li.classList.toggle("done",good);
+   if(good&&!was&&n===changed)lastNew=n;
+   if(el&&el.parentNode)el.parentNode.classList.toggle("done",good);
+   if(good)count++;
+  });
+  for(var i=0;i<bars.length;i++)bars[i].classList.toggle("on",i<count);
+  nameEl.textContent=count===5?"Ready":count+" of 5";
+  f.classList.toggle("ready",count===5);
+  if(count!==lastCount||lastNew){
+   var msg;
+   if(count===5)msg="That's the whole slip. Send it to Jeremy.";
+   else if(lastNew)msg=GOT[lastNew];
+   else if(count===0)msg="A blank slip. Jeremy can't call a blank slip.";
+   else if(changed==="phone"&&digits(field("phone").value).length)msg="A few more digits.";
+   else msg=(5-count)+" to go.";
+   if(sayEl.textContent!==msg)sayEl.textContent=msg;
+   lastCount=count;
+  }
+ }
+ function poke(e){
+  var n=e.target&&e.target.name;if(order.indexOf(n)<0)return;
+  if(sent){sent=false;slip.classList.remove("sent");}
+  slip.classList.add("press");clearTimeout(pressT);pressT=setTimeout(function(){slip.classList.remove("press");},90);
+  render(n);
+ }
+ f.addEventListener("input",poke);f.addEventListener("change",poke);
+ /* The form resets after a good send. Keep the filled slip on screen with a SENT stamp until they type again. */
+ window.__slipSent=function(){sent=true;slip.classList.add("sent");nameEl.textContent="Sent";sayEl.textContent="On Jeremy's desk. He'll call you at the time you picked.";};
+ f.addEventListener("reset",function(){if(sent){setTimeout(function(){f.classList.remove("ready");order.forEach(function(n){var el=field(n);if(el&&el.parentNode)el.parentNode.classList.remove("done");});},0);}else setTimeout(function(){render(null);},0);});
+ render(null);
+})();
  </script>
 </section>
 
