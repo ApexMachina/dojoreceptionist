@@ -80,6 +80,30 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 .trade-pages a{display:flex;align-items:center;min-height:44px;padding:8px 12px;background:var(--navy2);border:1px solid var(--line);border-radius:10px;color:var(--gold2);font-weight:800;text-decoration:none}
 .trade-pages a:focus{outline:3px solid var(--gold2);outline-offset:2px}
 @media(min-width:560px){h1{font-size:44px}.big{font-size:52px}}
+/* ---------- live leak meter: the result reacts to every number ---------- */
+.in{transition:border-color .15s,transform .15s,box-shadow .15s}
+.in:focus-within{transform:translateY(-1px);box-shadow:0 4px 0 rgba(232,181,59,.35)}
+.in.tick input[type=number]{animation:num-tick .22s ease-out}
+input[type=range]::-webkit-slider-thumb{transition:transform .12s}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
+.result{transition:transform .12s ease}
+.result.bump{animation:card-bump .34s cubic-bezier(.3,1.6,.5,1)}
+.leak{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.leak-name{display:inline-block;padding:4px 8px;border-radius:4px;background:var(--navy);color:var(--gold2);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.phones{display:flex;flex-wrap:wrap;gap:4px;margin:12px 0 4px;min-height:22px}
+.phones svg{width:18px;height:18px;fill:none;stroke:var(--navy);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.38}
+.phones svg.job{opacity:1;fill:var(--navy)}
+.phones svg.new{animation:phone-ring .4s ease-out}
+.phones-key{font-size:13px;font-weight:700;opacity:.8}
+.gauge{position:relative;height:14px;margin:14px 0 6px;border-radius:3px;background:rgba(11,23,48,.16);overflow:visible}
+.gauge-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:var(--navy);transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.gauge-mark{position:absolute;top:-5px;bottom:-5px;width:3px;margin-left:-1px;background:var(--navy);border-radius:1px}
+.gauge-mark span{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:900;white-space:nowrap}
+.gauge-key{display:flex;justify-content:space-between;margin-top:18px;font-size:12px;font-weight:800;opacity:.75}
+@keyframes num-tick{0%{color:#b88a1e}100%{color:var(--navy)}}
+@keyframes card-bump{0%{transform:scale(1)}35%{transform:scale(1.025)}100%{transform:scale(1)}}
+@keyframes phone-ring{0%{transform:rotate(0)}25%{transform:rotate(-14deg)}50%{transform:rotate(12deg)}75%{transform:rotate(-6deg)}100%{transform:rotate(0)}}
+@media (prefers-reduced-motion:reduce){.in,.in:focus-within{transition:none;transform:none}.in.tick input[type=number],.result.bump,.phones svg.new{animation:none}.gauge-fill{transition:none}input[type=range]:active::-webkit-slider-thumb{transform:none}}
 </style>
 </head>
 <body>
@@ -109,9 +133,15 @@ footer{margin:34px 0 0;padding:20px 0 34px;border-top:1px solid var(--line);font
 </div>
 
 <div class="result" aria-live="polite">
- <div class="k">Work that may be walking away</div>
+ <div class="leak"><div class="k">Work that may be walking away</div><span class="leak-name" id="leak-name" aria-hidden="true">A steady leak</span></div>
  <div class="big" id="mo">$1,819</div>
  <p class="verdict" id="month-line" style="margin-top:0;font-weight:700">a month, by your numbers. <span id="jobs">5.2</span> jobs a month that never got a callback.</p>
+ <div aria-hidden="true">
+  <div class="phones" id="phones"></div>
+  <div class="phones-key" id="phones-key">Each phone is a missed call this month. Filled ones could have been work.</div>
+  <div class="gauge"><div class="gauge-fill" id="gauge-fill"></div><div class="gauge-mark" id="gauge-mark"><span>Bella $129</span></div></div>
+  <div class="gauge-key"><span>$0</span><span>$20,000+</span></div>
+ </div>
  <div class="row"><span>Lost per year</span><b id="yr">$21,823</b></div>
  <div class="cmp">
   <div>Bella<b>$129/mo</b></div>
@@ -281,7 +311,7 @@ function calc(){
   jobs=c*W*neu*pct; mo=jobs*j; yr=mo*12;
   math="<b>The math, out in the open:</b> "+c+" missed calls/week × "+W+" weeks/month × "+Math.round(neu*100)+"% new customers × "+Math.round(pct*100)+"% who'd book × "+money(j)+" per job = <b>"+money(mo)+"/month</b>. × 12 = <b>"+money(yr)+"/year</b>. $129/mo. No setup fee, no minimum. First week free.";
  }
- $("mo").textContent=money(mo); $("yr").textContent=money(yr);
+ $("yr").textContent=money(yr);
  $("jobs").textContent=jobsLabel(jobs);
  $("be").textContent=beLabel(j, kind);
  var monthKind=d?(p.result.toLowerCase()):"jobs";
@@ -292,7 +322,38 @@ function calc(){
  else{v="By your numbers, missed calls cost less than $129 a month. You may not need this, and that's fine."}
  $("verdict").textContent=v;
  $("math").innerHTML=math;
+ leak(c*W, jobs, mo, monthKind);
 }
+/* The live part. Everything below is driven by the same three numbers calc() just worked out; nothing here changes the math. */
+var RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var PH='<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>';
+var shownMo=null, raf=0, lastTier=-1, lastIcons=0;
+var TIERS=[[0,"Nothing to count yet"],[0.001,"Barely a drip"],[1,"A slow leak"],[3,"A steady leak"],[10,"A burst pipe"],[25,"The floodgates"]];
+function tierOf(mo){var x=mo/129,t=0;for(var i=0;i<TIERS.length;i++)if(mo>0&&x>=TIERS[i][0])t=i;return mo>0?Math.max(1,t):0}
+function countTo(target){
+ var el=$("mo");
+ if(RM||shownMo===null){shownMo=target;el.textContent=money(target);return}
+ cancelAnimationFrame(raf);
+ var from=shownMo,t0=performance.now(),d=320;
+ (function step(now){var k=Math.min(1,(now-t0)/d),e=1-Math.pow(1-k,3);shownMo=from+(target-from)*e;el.textContent=money(shownMo);if(k<1)raf=requestAnimationFrame(step);else{shownMo=target;el.textContent=money(target)}})(t0);
+}
+function leak(callsMo, jobsMo, mo, what){
+ countTo(mo);
+ var t=tierOf(mo); $("leak-name").textContent=TIERS[t][1];
+ if(t!==lastTier&&lastTier>=0&&!RM){var r=document.querySelector(".result");r.classList.remove("bump");void r.offsetWidth;r.classList.add("bump")}
+ lastTier=t;
+ var total=Math.round(callsMo), unit=Math.max(1,Math.ceil(total/48)), n=Math.ceil(total/unit), filled=Math.min(n,Math.round(jobsMo/unit));
+ if(jobsMo>0&&filled===0&&n>0)filled=1;
+ var box=$("phones"),html="";
+ for(var i=0;i<n;i++)html+='<svg viewBox="0 0 24 24" class="'+(i<filled?"job":"")+(i>=lastIcons&&!RM?" new":"")+'">'+PH+'</svg>';
+ box.innerHTML=html; lastIcons=n;
+ $("phones-key").textContent=total?((unit>1?"Each phone is "+unit+" missed calls":"Each phone is a missed call")+" this month. Filled ones could have been "+(what||"jobs")+"."):"No missed calls, no leak. Nice.";
+ /* log scale, so $50 and $15,000 both register; the $129 mark never moves */
+ var pos=function(x){return Math.min(100,Math.log(1+x/50)/Math.log(1+20000/50)*100)};
+ $("gauge-fill").style.width=pos(mo)+"%";
+ $("gauge-mark").style.left=pos(129)+"%";
+}
+function tick(id){var el=$(id);if(!el||RM)return;var box=el.parentNode;box.classList.remove("tick");void box.offsetWidth;box.classList.add("tick")}
 /* Add a calculator trade by appending one object. t must match a PRESETS key when that trade has one. */
 var TRADES=[
  {t:"auto repair",name:"Auto repair",demo:"https://elevenlabs.io/app/talk-to?agent_id=agent_2901m6ppvtj3ebyrdzn5k5w7y78p"},
@@ -345,7 +406,7 @@ showDemo();
 function pair(id){
   var numEl=$(id), rng=$(id+"R");
   if(!numEl||!rng) return;
-  rng.addEventListener("input",function(){numEl.value=rng.value;calc()});
+  rng.addEventListener("input",function(){numEl.value=rng.value;tick(id);calc()});
   numEl.addEventListener("input",function(){syncRange(id);calc()});
 }
 ["calls","newp","pct","job","calls-day","miss","buy","ticket"].forEach(pair);
