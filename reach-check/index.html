@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reach Check: can customers actually reach your shop? | Dojo Receptionist</title>
+<meta name="description" content="Free 60-second self-check for shop owners. Answer 10 quick questions about your phone, hours, and Google listing. Get a score out of 100, a letter grade, and 3 fixes.">
+<link rel="canonical" href="https://dojoreceptionist.com/reach-check/">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dojo Receptionist">
+<meta property="og:title" content="Reach Check: can customers actually reach your shop?">
+<meta property="og:description" content="Free 60-second self-check. 10 quick questions, a score out of 100, and 3 fixes. Nothing you type is saved.">
+<meta property="og:url" content="https://dojoreceptionist.com/reach-check/">
+<meta property="og:image" content="https://dojoreceptionist.com/reach-check/share.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Reach Check: can customers actually reach you? Free 60-second score.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reach Check: can customers actually reach your shop?">
+<meta name="twitter:description" content="Free 60-second self-check. 10 quick questions, a score out of 100, and 3 fixes.">
+<meta name="twitter:image" content="https://dojoreceptionist.com/reach-check/share.png">
+<meta name="theme-color" content="#0b1730">
+<style>
+:root{--navy:#0b1730;--navy2:#13244a;--line:#2a3f6e;--gold:#e8b53b;--gold2:#f6d27a;--white:#fff;--mute:#a9b4cc}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--navy);color:var(--white);font:17px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;padding:28px 20px 48px}
+.brand{font-weight:800;letter-spacing:.14em;font-size:13px;color:var(--gold)}
+h1{font-size:34px;line-height:1.08;margin:10px 0 10px}
+h2{font-size:21px;margin:0 0 10px}
+.lede{color:var(--mute);margin:0 0 22px}
+.card{background:var(--navy2);border-radius:18px;padding:20px;margin-bottom:16px}
+label.big{display:block;font-weight:800;margin:0 0 8px}
+input[type=text]{width:100%;min-height:52px;font-size:18px;border-radius:12px;border:2px solid var(--line);background:var(--navy);color:var(--white);padding:10px 14px}
+input[type=text]:focus{outline:3px solid var(--gold2);outline-offset:1px}
+.check{display:inline-block;margin-top:12px;color:var(--gold2);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.check[aria-disabled=true]{color:var(--mute);text-decoration:none;pointer-events:none}
+.note{color:var(--mute);font-size:14px;margin:10px 0 0}
+.q{border-top:1px solid var(--line);padding:16px 0}
+.q:first-of-type{border-top:0;padding-top:4px}
+.q p{margin:0 0 10px;font-weight:700}
+.q .why{display:block;font-weight:400;color:var(--mute);font-size:14px;margin-top:4px}
+.opts{display:flex;gap:8px}
+.opts label{flex:1;position:relative}
+.opts input{position:absolute;opacity:0;width:1px;height:1px}
+.opts span{display:block;text-align:center;min-height:46px;line-height:46px;border-radius:12px;border:2px solid var(--line);font-weight:700;cursor:pointer;user-select:none}
+.opts input:checked+span{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.opts input:focus-visible+span{outline:3px solid var(--gold2);outline-offset:2px}
+.qcheck{font-size:14px;margin-top:8px;display:inline-block;color:var(--gold2)}
+.progress{position:sticky;top:0;z-index:2;background:var(--navy);padding:10px 0 12px;margin:0 0 6px}
+.bar{height:8px;border-radius:8px;background:var(--navy2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}
+.progress small{display:block;color:var(--mute);margin-top:6px;font-size:13px}
+.result{background:var(--gold);color:var(--navy);border-radius:18px;padding:22px;margin-bottom:16px}
+.result .k{font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;overflow-wrap:anywhere}
+.scoreRow{display:flex;align-items:flex-end;gap:16px;margin:8px 0 4px}
+.score{font-size:64px;font-weight:900;line-height:1}
+.score small{font-size:22px;font-weight:800}
+.grade{margin-left:auto;font-size:56px;font-weight:900;line-height:1;border:4px solid var(--navy);border-radius:16px;min-width:76px;text-align:center;padding:4px 8px}
+.result p{margin:6px 0 0;font-weight:600}
+ol.fixes{padding-left:0;list-style:none;margin:0;counter-reset:f}
+ol.fixes li{counter-increment:f;position:relative;padding:14px 0 14px 46px;border-top:1px solid var(--line)}
+ol.fixes li:first-child{border-top:0;padding-top:4px}
+ol.fixes li:before{content:counter(f);position:absolute;left:0;top:12px;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:900;text-align:center;line-height:32px}
+ol.fixes li:first-child:before{top:2px}
+ol.fixes b{display:block;margin-bottom:4px}
+ol.fixes p{margin:0;color:var(--mute)}
+ol.fixes .bella{color:var(--white)}
+ol.fixes a{color:var(--gold2);font-weight:700}
+.btn{display:block;width:100%;text-align:center;min-height:52px;line-height:1.2;padding:15px 12px;border-radius:14px;font-weight:800;text-decoration:none;font-size:18px;margin-top:12px;border:0;font-family:inherit;cursor:pointer}
+.btn.gold{background:var(--gold);color:var(--navy)}
+.btn.ghost{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.fine{color:var(--mute);font-size:13px;margin-top:20px}
+.fine a{color:var(--gold2)}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="brand">DOJO RECEPTIONIST · REACH CHECK</div>
+  <h1>Can customers actually reach you?</h1>
+  <p class="lede">A free 60-second self-check. Ten yes/no questions about your phone, your hours, and your Google listing. You get a score out of 100, a letter grade, and three fixes in plain English.</p>
+
+  <section class="card" aria-label="Your business">
+    <label class="big" for="biz">Your business name</label>
+    <input type="text" id="biz" autocomplete="off" autocapitalize="words" spellcheck="false" maxlength="80" placeholder="e.g. Main Street Plumbing">
+    <a class="check" id="gcheck" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Check it now on Google ↗</a>
+    <p class="note">Opens a Google search for your name in a new tab, so you can look at your listing while you answer. This page can't look anything up by itself, so you're the judge.</p>
+  </section>
+
+  <div class="progress" aria-hidden="true"><div class="bar"><i id="barFill"></i></div><small id="progText">0 of 10 answered</small></div>
+
+  <section class="card" aria-label="Questions" id="questions"></section>
+
+  <section id="out" class="hidden" aria-live="polite">
+    <div class="result">
+      <div class="k" id="outName">Your Reach Check</div>
+      <div class="scoreRow"><div class="score"><span id="score">0</span><small>/100</small></div><div class="grade" id="grade">F</div></div>
+      <p id="gradeText"></p>
+    </div>
+    <section class="card">
+      <h2>Your 3 fixes</h2>
+      <ol class="fixes" id="fixes"></ol>
+    </section>
+    <section class="card">
+      <h2>Want the full report?</h2>
+      <p style="margin:0;color:var(--mute)">Tap below and your own mail app opens a draft to Jeremy with your score and answers. Nothing is sent unless you press send. Jeremy replies with a written report for your shop.</p>
+      <a class="btn gold" id="mail" href="#">Email me the full report</a>
+      <!-- Alternative if Jeremy prefers a free form service instead of mailto:
+           a POST form whose action is [FORM ENDPOINT] (Formspree-style free service).
+           Not used. Keep this page free of any form that submits automatically. -->
+      <a class="btn ghost" href="tel:+15418330643">Hear Bella: call 541-833-0643</a>
+      <a class="btn ghost" href="/calculator/">Open Missed Call Math</a>
+      <button class="btn ghost" type="button" id="restart">Start over</button>
+    </section>
+  </section>
+
+  <p class="fine"><b>Privacy:</b> nothing you type here is saved or sent by this page. It runs only in your browser and forgets everything when you close the tab. The email button only opens a draft in your own mail app; Jeremy uses what you send only to reply with your report. The score is a self-check from your own answers, not a measurement of your business. Bella is $129/mo, first week free, no setup fee, no contract, 150 calls a month. Built by Jeremy, a local Veneta dad and Marine vet. <a href="https://dojoreceptionist.com">dojoreceptionist.com</a></p>
+</main>
+<script>
+(function(){
+"use strict";
+var Q=[
+ {id:"hours",w:12,g:true,t:"Are your hours listed on Google, and correct (holidays too)?",why:"Search your name and look at the hours on your listing.",
+  fix:["Fix your Google hours","Open your Google Business Profile, set your regular hours, and add holiday hours. Wrong hours can make a caller give up before they dial."]},
+ {id:"phone",w:12,g:true,t:"Does the number on your Google Business Profile match the line you actually answer?",why:"Old numbers, a former employee's cell, or a fax line all count as no.",
+  fix:["Point your Google number at a phone someone picks up","Update the number on your Google Business Profile to the line that rings where someone can answer, then call it yourself to test."]},
+ {id:"rings",w:12,bella:true,t:"When you're open, does a caller reach a live person within 4 rings most of the time?",why:"Think about your busiest hour, not your quietest.",
+  fix:["Decide who grabs the phone when you're busy","Name a person for each part of the day, and test it: have a friend call during your busiest hour this week and count the rings."]},
+ {id:"after",w:14,bella:true,t:"After you close, does someone or something answer, not just voicemail?",why:"Evenings and weekends are when a lot of people finally have time to call.",
+  fix:["Get an answer after close","Forward after-hours calls to an on-call phone, or use an answering service, so callers reach something other than a beep."]},
+ {id:"vm",w:8,t:"Is your voicemail greeting set up with your business name, and is the mailbox not full?",why:"Call your own number after hours and listen.",
+  fix:["Record a real greeting and clear the mailbox","Say your business name and when you'll call back, then delete old messages so the box never says it's full."]},
+ {id:"callback",w:10,bella:true,t:"Do missed calls get a call back the same business day?",why:"Check yesterday's missed calls. Did each one get a call back?",
+  fix:["Make same-day callbacks a habit","Check missed calls at lunch and before close every day, and call back anyone who didn't leave a message too."]},
+ {id:"reviews",w:8,g:true,t:"Have you replied to a Google review in the last 30 days?",why:"Look at the reviews on your listing and the dates on your replies.",
+  fix:["Reply to your recent Google reviews","Answer your last few reviews, good and bad, with a short, real reply. It shows callers someone is paying attention."]},
+ {id:"site",w:8,t:"Does your website show your phone number as tap-to-call on a phone?",why:"Open your site on your phone and tap the number. Does it dial?",
+  fix:["Make your number tap-to-call","Put your phone number near the top of your website as a tap-to-call link, so a caller doesn't have to copy it."]},
+ {id:"listing",w:8,g:true,t:"When you search your business name, do you show up once, open, with the right name and address?",why:"Watch for duplicate listings or a 'Permanently closed' label.",
+  fix:["Clean up your Google listing","Claim your listing, report duplicates, and fix the name and address so callers find the right shop."]},
+ {id:"msg",w:8,t:"Is there a second way to reach you (text, web form, or messages) that you check every day?",why:"Some people won't call. They'd rather send a message.",
+  fix:["Give customers a second way in","Turn on one simple way to message you, like a web form or messages on your listing, and check it every day."]}
+];
+var BELLA={t:"Let Bella catch the calls you can't get to",html:true};
+var KEEP=[
+ ["Re-run this check every few months","Hours, numbers, and staff change. A quick re-check catches drift before callers do."],
+ ["Call your own number after hours once a month","Hear exactly what a customer hears when you're closed."],
+ ["Keep replying to reviews","A short reply every week or two keeps your listing looking lived-in."]
+];
+var ans={};
+var $=function(id){return document.getElementById(id)};
+var biz=$("biz"), g=$("gcheck");
+
+function name(){return biz.value.trim()}
+function gURL(){return "https://www.google.com/search?q="+encodeURIComponent(name())}
+
+function updGoogle(){
+  var n=name();
+  var links=document.querySelectorAll("a.gl");
+  if(n){g.href=gURL();g.setAttribute("aria-disabled","false");}
+  else{g.href="#";g.setAttribute("aria-disabled","true");}
+  for(var i=0;i<links.length;i++){
+    if(n){links[i].href=gURL();links[i].classList.remove("hidden");}
+    else{links[i].classList.add("hidden");}
+  }
+}
+
+function build(){
+  var box=$("questions");
+  Q.forEach(function(q,i){
+    var d=document.createElement("div");d.className="q";
+    var p=document.createElement("p");p.id="qt-"+q.id;p.textContent=(i+1)+". "+q.t;
+    var w=document.createElement("span");w.className="why";w.textContent=q.why;p.appendChild(w);d.appendChild(p);
+    var o=document.createElement("div");o.className="opts";o.setAttribute("role","radiogroup");o.setAttribute("aria-labelledby","qt-"+q.id);
+    [["yes","Yes"],["no","No"],["unsure","Not sure"]].forEach(function(v){
+      var l=document.createElement("label");var r=document.createElement("input");
+      r.type="radio";r.name=q.id;r.value=v[0];
+      r.addEventListener("change",function(){ans[q.id]=v[0];update();});
+      var s=document.createElement("span");s.textContent=v[1];l.appendChild(r);l.appendChild(s);o.appendChild(l);
+    });
+    d.appendChild(o);
+    if(q.g){var a=document.createElement("a");a.className="qcheck gl hidden";a.target="_blank";a.rel="noopener noreferrer";a.textContent="Check it now on Google ↗";a.href="#";d.appendChild(a);}
+    box.appendChild(d);
+  });
+}
+
+function grade(s){return s>=90?"A":s>=80?"B":s>=70?"C":s>=60?"D":"F"}
+var GT={A:"Callers can reach you. Keep it that way.",B:"Mostly reachable, with a gap or two worth closing.",C:"Some callers are likely hitting a wall. The fixes below are the place to start.",D:"A fair number of callers may not be getting through.",F:"Right now it's hard for a new customer to reach you. Good news: most of these fixes are free."};
+
+function li(title,body,cls){
+  var l=document.createElement("li");var b=document.createElement("b");b.textContent=title;l.appendChild(b);
+  var p=document.createElement("p");if(cls)p.className=cls;p.textContent=body;l.appendChild(p);return l;
+}
+
+function bellaLi(){
+  var l=document.createElement("li");var b=document.createElement("b");b.textContent=BELLA.t;l.appendChild(b);
+  var p=document.createElement("p");p.className="bella";
+  p.appendChild(document.createTextNode("Bella, from Dojo Receptionist, answers the calls you miss, after hours too. She says up front she's an AI and that the call may be recorded, takes the caller's name, number, and what they need, and sends you a summary. She never quotes prices, never diagnoses, and never takes payment. Jeremy sets her up with you in person in Lane County. Founders: first week free, then $129/mo, no setup fee, no contract, 150 calls a month. "));
+  var a=document.createElement("a");a.href="tel:+15418330643";a.textContent="Hear her first: 541-833-0643";p.appendChild(a);
+  l.appendChild(p);return l;
+}
+
+function update(){
+  var n=Object.keys(ans).length;
+  $("barFill").style.width=(n*10)+"%";
+  $("progText").textContent=n+" of 10 answered";
+  if(n<Q.length){$("out").classList.add("hidden");return;}
+  var s=0;Q.forEach(function(q){if(ans[q.id]==="yes")s+=q.w;});
+  var gr=grade(s);
+  $("score").textContent=s;$("grade").textContent=gr;$("gradeText").textContent=GT[gr];
+  $("outName").textContent=(name()?name():"Your business")+": Reach Check";
+  var failed=Q.filter(function(q){return ans[q.id]!=="yes";}).sort(function(a,b){return b.w-a.w;});
+  var bellaHit=failed.filter(function(q){return q.bella;});
+  var items=[];
+  if(bellaHit.length){
+    items.push({bella:true,w:bellaHit[0].w});
+    failed.filter(function(q){return !q.bella;}).forEach(function(q){items.push({q:q,w:q.w});});
+    bellaHit.slice(1).forEach(function(q){items.push({q:q,w:q.w-100});});
+  }else{
+    failed.forEach(function(q){items.push({q:q,w:q.w});});
+  }
+  items.sort(function(a,b){return b.w-a.w;});
+  items=items.slice(0,3);
+  var ol=$("fixes");ol.textContent="";
+  items.forEach(function(it){
+    if(it.bella){ol.appendChild(bellaLi());return;}
+    var q=it.q,body=q.fix[1];
+    if(ans[q.id]==="unsure")body="Not sure counts as a miss until you check. "+body;
+    ol.appendChild(li(q.fix[0],body));
+  });
+  for(var k=0;ol.children.length<3;k++){ol.appendChild(li(KEEP[k][0],KEEP[k][1]));}
+  // mailto: built only on demand, only opens the user's own mail app
+  var L={yes:"Yes",no:"No",unsure:"Not sure"};
+  var body="Business: "+(name()||"(not given)")+"\nReach Check score: "+s+"/100 ("+gr+")\n\nMy answers:\n";
+  Q.forEach(function(q,i){body+=(i+1)+". "+q.t+" "+L[ans[q.id]]+"\n";});
+  body+="\nPlease send me the full report.\n";
+  $("mail").href="mailto:jeremy@dojoreceptionist.com?subject="+encodeURIComponent("Reach Check: "+(name()||"my shop")+" scored "+s+"/100")+"&body="+encodeURIComponent(body);
+  if(!update.shown){update.shown=true;$("out").classList.remove("hidden");$("out").scrollIntoView({behavior:"smooth",block:"start"});}
+  else{$("out").classList.remove("hidden");}
+}
+
+$("restart").addEventListener("click",function(){
+  ans={};update.shown=false;biz.value="";
+  var r=document.querySelectorAll("input[type=radio]");for(var i=0;i<r.length;i++)r[i].checked=false;
+  updGoogle();update();window.scrollTo(0,0);biz.focus();
+});
+biz.addEventListener("input",function(){updGoogle();if(Object.keys(ans).length===Q.length)update();});
+g.addEventListener("click",function(e){if(!name())e.preventDefault();});
+build();updGoogle();
+})();
+</script>
+</body>
+</html>
