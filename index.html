@@ -304,6 +304,7 @@ section{padding:var(--sp7) 0 0}
  .more-plans-grid{grid-template-columns:1fr 1fr;align-items:stretch}
  .price.alt{display:flex;flex-direction:column}
  .price.alt .btn{margin-top:auto}
+ .price.alt.wide{grid-column:1/-1}
 }
 
 /* cost estimates */
@@ -813,7 +814,7 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
  <!-- SWAP-TEST: after-hours and reminders — kept caps, DNC/opt-out, list-you-send, three nevers, and per-campaign prices; cut generic “win back customers” lines. -->
  <div class="more-plans">
   <p class="eyebrow">Also on this page</p>
-  <p class="lead more-plans-lead">After-hours coverage, and calls back to your past customers.</p>
+  <p class="lead more-plans-lead">After-hours coverage, calls back to your past customers, and a weekly debrief.</p>
   <div class="more-plans-grid">
    <article class="price alt" id="after-hours" aria-labelledby="after-h">
     <span class="flag">After hours</span>
@@ -844,6 +845,20 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
     </ul>
     <a class="btn o" href="#start"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Ask about a campaign</a>
     <p class="fine" style="margin-top:10px">There's no online checkout. Use the form or email me and say you want a reminder campaign.</p>
+   </article>
+   <article class="price alt wide" id="huddle" aria-labelledby="huddle-h">
+    <span class="flag">New · Add-on</span>
+    <h3 id="huddle-h">The Monday Huddle</h3>
+    <div class="amt">$49<small>/month, on top of a Bella plan</small></div>
+    <p class="lede">Bella catches the call. The Huddle makes sure you learn from it. Every Monday morning you get a short debrief from me: 3 wins, 3 misses that are on us, and 1 fix for the week.</p>
+    <ul>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Review asks after every job.</b> One tap sends your customer a short, ready-written text from your own phone with your Google review link.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Review replies, drafted.</b> New reviews come to you with a reply ready to approve.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>One Google post a month.</b> Text me a photo and I'll post it with a short caption.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>We ask every customer,</b> not just the happy ones. No fake reviews, and no rewards for them.</span></li>
+    </ul>
+    <a class="btn o" href="/huddle/"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>See a sample Huddle</a>
+    <p class="fine" style="margin-top:10px">No contract. Cancel anytime by email or call.</p>
    </article>
   </div>
  </div>
@@ -1027,7 +1042,7 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
 
 <footer><div class="wrap">
  <p><b style="color:var(--ink2)">Dojo Receptionist</b> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p>
- <p>Example callers and the shops in the demos are made up. Not legal advice. <a href="/calculator/">Missed Call Math</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+ <p>Example callers and the shops in the demos are made up. Not legal advice. <a href="/calculator/">Missed Call Math</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/huddle/">Monday Huddle</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
 </div></footer>
 
 <nav class="callbar" aria-label="Quick contact">
