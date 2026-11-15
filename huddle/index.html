@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Monday Huddle | Dojo Receptionist</title>
+<meta name="description" content="A weekly debrief for owner-run shops: 3 wins, 3 misses that are on us, and 1 fix for the week. Plus review asks after every job. $49/month on top of a Bella plan.">
+<link rel="canonical" href="https://dojoreceptionist.com/huddle/">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dojo Receptionist">
+<meta property="og:title" content="The Monday Huddle">
+<meta property="og:description" content="What worked, what's on us, and one fix. A weekly debrief for owner-run shops.">
+<meta property="og:url" content="https://dojoreceptionist.com/huddle/">
+<meta property="og:image" content="https://dojoreceptionist.com/assets/og-share.png">
+<meta name="theme-color" content="#0b1730">
+<style>
+:root{--navy:#0b1730;--navy2:#16213f;--gold:#e8b53b;--gold2:#f6d27a;--white:#fff;--mute:#aeb8d0;--line:#2a3966}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--navy);color:var(--white);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.wrap{max-width:980px;margin:0 auto;padding:26px 16px 48px}
+.narrow{max-width:680px}
+.brand{font-weight:800;letter-spacing:.14em;font-size:13px;color:var(--gold)}
+.brand a{color:inherit;text-decoration:none}
+h1{font-size:34px;line-height:1.08;margin:10px 0 12px}
+h2{font-size:24px;line-height:1.15;margin:34px 0 12px}
+h3{font-size:18px;margin:0 0 6px}
+.lede{color:var(--mute);margin:0 0 18px;font-size:18px}
+a{color:var(--gold2)}
+sup a{text-decoration:none;font-weight:700;padding:0 1px}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 18px;border-radius:12px;font-weight:800;text-decoration:none}
+.btn.p{background:var(--gold);color:var(--navy)}
+.btn.s{border:2px solid var(--gold2);color:var(--white)}
+.small{font-size:14px;color:var(--mute)}
+/* comparison table: real table on wide screens, stacked cards on phones */
+table{width:100%;border-collapse:separate;border-spacing:0;background:var(--navy2);border-radius:16px;overflow:hidden}
+th,td{text-align:left;vertical-align:top;padding:14px;border-bottom:1px solid var(--line);font-size:15.5px}
+thead th{background:#0c1428;font-size:15px}
+thead th.bella{color:var(--gold2)}
+tbody th{width:17%;font-size:15px;color:var(--gold2)}
+td.bella{background:rgba(242,193,78,.07)}
+tr:last-child th,tr:last-child td{border-bottom:0}
+@media (max-width:760px){
+ table,thead,tbody,tr,th,td{display:block;width:100%}
+ table{background:none;border-radius:0}
+ thead{display:none}
+ tbody tr{background:var(--navy2);border-radius:16px;margin:0 0 14px;padding:4px 0}
+ tbody th{width:auto;font-size:18px;padding:12px 14px 4px;border:0;color:var(--white)}
+ td{border:0;padding:8px 14px 10px;border-top:1px solid var(--line)}
+ td.bella{background:none}
+ td::before{content:attr(data-label);display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:2px}
+ td.bella::before{color:var(--gold2)}
+}
+.cards{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:760px){.cards{grid-template-columns:1fr 1fr 1fr}}
+.card{background:var(--navy2);border-radius:16px;padding:16px}
+.card.hl{border:2px solid var(--gold)}
+.card ul{margin:6px 0 0;padding-left:20px}.card li{margin:0 0 6px;font-size:15.5px}
+.nevers{border-left:4px solid var(--gold2);background:var(--navy2);border-radius:12px;padding:12px 16px;margin:16px 0}
+details{background:var(--navy2);border-radius:14px;margin:0 0 10px;padding:0 16px}
+summary{cursor:pointer;font-weight:800;padding:14px 28px 14px 0;min-height:48px;list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:12px;color:var(--gold2);font-size:22px;line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{margin:0 0 14px;color:#e6eaf4}
+.trades{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0;padding:0;list-style:none}
+.trades a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:var(--white);background:var(--navy2);font-size:15px}
+.notes{font-size:13.5px;color:var(--mute);border-top:1px solid var(--line);margin-top:34px;padding-top:14px}
+.notes ol{padding-left:22px;margin:6px 0 10px}.notes li{margin:0 0 6px;word-break:break-word}
+.founders{background:var(--gold);color:var(--navy);border-radius:16px;padding:18px;margin:28px 0 0}
+.founders h2{margin:0 0 6px;color:var(--navy)}
+.founders p{margin:0 0 8px}
+.founders .btn.p{background:var(--navy);color:var(--white)}
+.founders .btn.s{border-color:var(--navy);color:var(--navy)}
+</style>
+<style>
+.huddle{background:#fff;color:#0b1730;border-radius:16px;padding:18px 18px 8px;margin:14px 0;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.huddle .hd{font-size:13px;color:#4a5677;border-bottom:1px solid #dfe4ef;padding-bottom:10px;margin-bottom:10px}
+.huddle .hd b{color:#0b1730}
+.huddle h3{font-size:15px;letter-spacing:.08em;text-transform:uppercase;margin:14px 0 6px;color:#0b1730}
+.huddle h3 span{display:inline-block;background:#e8b53b;color:#0b1730;border-radius:6px;padding:2px 8px;margin-right:6px}
+.huddle ul{margin:0 0 6px;padding-left:20px}.huddle li{margin:0 0 6px;font-size:15.5px}
+.huddle .fix{background:#fdf3d9;border-left:4px solid #e8b53b;border-radius:8px;padding:10px 12px;margin:8px 0 12px;font-size:15.5px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;background:var(--navy2);border-radius:14px;padding:14px 14px 14px 58px;margin:0 0 10px;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:800;display:flex;align-items:center;justify-content:center}
+blockquote{margin:14px 0;padding:14px 18px;border-left:4px solid var(--gold);background:var(--navy2);border-radius:12px;font-size:18px}
+.price-box{background:var(--navy2);border:2px solid var(--gold);border-radius:16px;padding:18px;margin:14px 0}
+.price-box .amt{font-size:40px;font-weight:800;color:var(--gold2)}.price-box .amt small{font-size:16px;color:var(--mute);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="brand"><a href="https://dojoreceptionist.com/">DOJO RECEPTIONIST</a></div>
+<div class="narrow">
+<h1>The Monday Huddle</h1>
+<p class="lede">Bella makes sure you never miss the call. The Huddle makes sure the next customer hears how it went, and that your shop gets a little better every week.</p>
+<div class="cta"><a class="btn p" href="/#start">Start my free week</a><a class="btn s" href="#sample">See a sample Huddle</a></div>
+
+<h2>Where this comes from</h2>
+<blockquote>When I worked at a leadership academy, we got together once a week and wrote down two lists: what worked, and where we were failing. And the failures were never the students'. They were ours. That one meeting made us better every single week.</blockquote>
+<p>Most shop owners never get that meeting. You're too busy doing the work to step back and look at it. So I bring it to you. It's not a dashboard to log into. It's a short debrief from a person, every Monday morning.</p>
+<p class="small">Jeremy Alvarado, Marine veteran and the person who sets up Bella.</p>
+
+<h2 id="sample">What lands in your inbox every Monday</h2>
+<p class="small">Example only. The shop, the names and the numbers are made up.</p>
+<div class="huddle">
+ <div class="hd"><b>Monday Huddle · Example Auto &amp; Tire</b><br>From Jeremy, 7:00 AM</div>
+ <h3><span>3</span>Wins</h3>
+ <ul>
+  <li>A new 5-star review: "Called on a Saturday, got a callback first thing Monday."</li>
+  <li>Bella caught 4 calls while you were under a car. 2 turned into jobs.</li>
+  <li>A customer from last spring called back for brakes.</li>
+ </ul>
+ <h3><span>3</span>Misses, on us</h3>
+ <ul>
+  <li>2 Saturday callers still haven't heard back.</li>
+  <li>A 3-star review from Thursday has no reply yet.</li>
+  <li>Two callers this week asked if we do alignments. The answer isn't anywhere they can find it.</li>
+ </ul>
+ <h3><span>1</span>Fix for this week</h3>
+ <div class="fix">Call back both Saturday callers by noon today. I've drafted a reply to the 3-star review for you to approve.</div>
+ <h3>Last week's fix</h3>
+ <ul><li>Done: "Ask every customer for a review at pickup." You sent 9 asks.</li></ul>
+</div>
+
+<h2>How it works</h2>
+<ol class="steps">
+ <li><b>Bella answers the call</b> and emails you the summary, the way she already does.</li>
+ <li><b>After the job, one tap sends a review ask.</b> It's a short text, already written, from your own phone, with your Google review link. One reminder after 3 days, then it stops.</li>
+ <li><b>New reviews come to you with a reply drafted.</b> Approve it, change it, or skip it.</li>
+ <li><b>Once a month, text me a photo.</b> I'll post it to your Google profile with a short caption.</li>
+ <li><b>Every Monday, your Huddle.</b> 3 wins, 3 misses that are on us, 1 fix, and whether last week's fix got done.</li>
+</ol>
+
+<h2>What it costs</h2>
+<div class="price-box">
+ <div class="amt">$49<small>/month, on top of a Bella plan</small></div>
+ <p>No contract. Cancel anytime by email or call. Want the Huddle without Bella? <a href="mailto:jeremy@dojoreceptionist.com?subject=Monday%20Huddle%20question">Email me</a> and we'll talk it through.</p>
+</div>
+
+<div class="nevers"><b>The rules we keep.</b> We ask every customer for a review, not just the happy ones. We never write reviews, never pay or reward anyone for one, and never hide the unhappy ones. The Huddle reports what actually happened. If a week was quiet, it says so.</div>
+
+<h2>Questions</h2>
+<details><summary>Is this software?</summary><p>No. A person writes your Huddle: me. The review ask goes out from your own phone, so customers see your name, not a stranger's number.</p></details>
+<details><summary>Do I need Bella?</summary><p>The Huddle is built as an add-on to a Bella plan, because Bella's call summaries are half of what goes into it. If you want it on its own, email me.</p></details>
+<details><summary>What if I get a bad review?</summary><p>It goes in the misses, with a calm reply drafted for you to approve. One honest reply to a bad review often tells the next customer more than ten 5-star ones.</p></details>
+<details><summary>How long does it take me each week?</summary><p>About as long as it takes to read one email and do one fix.</p></details>
+
+<div class="founders">
+ <h2>Start with Bella's free week</h2>
+ <p>Hear what your callers would hear, then add the Huddle when you're ready.</p>
+ <div class="cta"><a class="btn p" href="/#start">Start my free week</a><a class="btn s" href="tel:+15418330643">Call Bella · 541-833-0643</a></div>
+</div>
+
+<div class="notes"><p><a href="/">Home</a> · <a href="/compare/">Compare</a> · <a href="/calculator/">Missed Call Math</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p></div>
+</div>
+</div>
+</body>
+</html>
