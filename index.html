@@ -400,6 +400,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
 .trade button.btn{width:100%;cursor:pointer}
 .demo-note{position:fixed;left:12px;right:12px;bottom:calc(var(--bar-h) + 12px + env(safe-area-inset-bottom));z-index:45;max-width:420px;margin:0 auto;padding:12px 14px;border:1px solid var(--gold);border-radius:var(--r);background:var(--n2);color:var(--ink);font-size:var(--t-s);display:none}
 .demo-note.on{display:block}
+.demo-note a{color:var(--gold);text-decoration:underline}
 body.demo-open .callbar{display:none}
 body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
 .start{margin-top:var(--sp5);padding:var(--sp5) var(--sp4);border:1px solid var(--line);border-radius:14px;background:var(--n1)}
@@ -674,7 +675,17 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
   }
   /* On-site demo: one ElevenLabs widget, swapped per trade, script loaded on first tap only. */
   var note=document.getElementById("demo-note");
+  function micOK(){return !!(window.isSecureContext&&navigator.mediaDevices&&navigator.mediaDevices.getUserMedia);}
   function openDemo(t){
+   if(!micOK()){
+    /* In-app browsers (X, Facebook, Instagram) hide the mic, so the voice demo can't start. Offer the phone line and Safari instead. */
+    if(note){
+     var here=location.href.replace(/^https?:\/\//,"");
+     note.innerHTML='This app\'s built-in browser blocks the microphone, so the on-page demo can\'t start here. <a href="tel:+15418330643">Call Bella at 541-833-0643</a> instead, or <a href="x-safari-https://'+here.split('#')[0]+'#trades">open this page in Safari</a> (or use the share menu, then Open in Browser).';
+     note.classList.add("on");clearTimeout(note._t);note._t=setTimeout(function(){note.classList.remove("on")},20000);
+    }
+    return;
+   }
    var old=document.getElementById("demo-widget");if(old&&old.parentNode)old.parentNode.removeChild(old);
    var w=document.createElement("elevenlabs-convai");
    w.id="demo-widget";
