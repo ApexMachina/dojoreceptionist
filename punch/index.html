@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dojo Punch: a Wallet punch card for your shop | Dojo Receptionist</title>
+<meta name="description" content="A punch card your customers never lose. It lives in Apple Wallet, fills in seconds, and reminds them to come back. Try the live demo.">
+<link rel="canonical" href="https://dojoreceptionist.com/punch/">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta property="og:title" content="Dojo Punch">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      /* ---------- Simulator layout ---------- */
+      .x-sim { display: grid; justify-items: center; gap: 16px; }
+      .x-skins {
+        display: flex; gap: 8px; overflow-x: auto; max-width: 100%;
+        padding: 2px 2px 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+      }
+      .x-skins::-webkit-scrollbar { display: none; }
+      @media (min-width: 761px) { .x-skins { flex-wrap: wrap; justify-content: center; } }
+      .x-skin {
+        flex: none; min-height: var(--tap); padding: 0 16px; border-radius: var(--r-pill);
+        border: 1px solid var(--stroke-primary); background: var(--fill-primary-on);
+        color: var(--text-primary); font: var(--type-label); cursor: pointer;
+        display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+        transition: background var(--dur-quick) ease, color var(--dur-quick) ease;
+      }
+      .x-skin i { width: 12px; height: 12px; border-radius: 50%; background: var(--sw); box-shadow: 0 0 0 1px var(--stroke-primary); }
+      .x-skin[aria-pressed="true"] { background: var(--fill-primary); color: var(--text-primary-on); border-color: var(--fill-primary); }
+
+      /* ---------- Phone ---------- */
+      .x-phone {
+        width: min(360px, 100%); padding: 11px; border-radius: 56px;
+        background: linear-gradient(145deg, #3a3a3c, #121214 40%, #2c2c2e);
+        box-shadow: 0 0 0 1.5px #5a5a5e, var(--hark-shadow), 0 30px 60px -20px rgb(0 0 0 / 0.45);
+      }
+      .x-screen {
+        position: relative; overflow: hidden; border-radius: 46px; background: #f2f2f7; color: #1d1d1f;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--sans);
+        padding: 54px 14px 30px; min-height: 620px; display: flex; flex-direction: column;
+      }
+      .x-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 108px; height: 32px; border-radius: 20px; background: #000; z-index: 4; }
+      .x-status { position: absolute; top: 15px; left: 30px; right: 26px; display: flex; justify-content: space-between; align-items: center; font: 600 15px/1 -apple-system, var(--sans); z-index: 3; }
+      .x-status__r { display: flex; gap: 5px; align-items: center; }
+      .x-batt { font: 600 12px/1 -apple-system, var(--sans); background: #1d1d1f; color: #fff; border-radius: 4px; padding: 2px 4px; }
+      .x-more { align-self: flex-end; width: 28px; height: 28px; border-radius: 50%; background: #1d1d1f; color: #fff; display: grid; place-items: center; margin-bottom: 12px; }
+      .x-home { position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%); width: 120px; height: 5px; border-radius: 3px; background: #1d1d1f; }
+
+      /* ---------- Banner ---------- */
+      .x-banner {
+        position: absolute; top: 8px; left: 8px; right: 8px; z-index: 5;
+        display: grid; grid-template-columns: 38px 1fr auto; gap: 10px; align-items: center;
+        padding: 11px 13px; border-radius: 22px;
+        background: rgb(246 246 248 / 0.86); -webkit-backdrop-filter: blur(24px) saturate(1.8); backdrop-filter: blur(24px) saturate(1.8);
+        box-shadow: 0 10px 30px rgb(0 0 0 / 0.18);
+        transform: translateY(-140%); opacity: 0;
+        transition: transform 0.5s var(--ease-out), opacity 0.3s ease;
+      }
+      .x-banner.is-on { transform: translateY(0); opacity: 1; }
+      .x-banner .x-badge { width: 38px; height: 38px; border-radius: 10px; }
+      .x-banner__t { font: 600 14px/1.25 -apple-system, var(--sans); }
+      .x-banner__m { font: 400 14px/1.3 -apple-system, var(--sans); }
+      .x-banner__now { align-self: start; font: 400 12px/1.3 -apple-system, var(--sans); color: #5c5c60; }
+
+      /* ---------- Card (skins set the variables) ---------- */
+      .x-flip { perspective: 1400px; cursor: pointer; -webkit-tap-highlight-color: transparent; border-radius: 14px; }
+      .x-card {
+        display: grid; transform-style: preserve-3d; transition: transform 0.7s var(--ease-out);
+      }
+      .x-flip.is-back .x-card { transform: rotateY(180deg); }
+      .x-face {
+        grid-area: 1 / 1; position: relative; overflow: hidden; border-radius: 14px;
+        background: var(--card); color: var(--text);
+        -webkit-backface-visibility: hidden; backface-visibility: hidden;
+        box-shadow: 0 6px 18px rgb(0 0 0 / 0.22);
+        display: flex; flex-direction: column; min-height: 440px;
+      }
+      .x-face--back { transform: rotateY(180deg); padding: 18px 16px; gap: 14px; }
+      .x-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--head, transparent); }
+      .x-name { font: 700 19px/1.15 -apple-system, var(--sans); letter-spacing: -0.01em; color: #fff; }
+      .x-badge {
+        flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+        background: var(--badge-bg); color: var(--badge-icon); box-shadow: inset 0 0 0 2px var(--badge-ring);
+      }
+      .x-badge svg { width: 60%; height: 60%; }
+      .x-strip {
+        display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px 12px; padding: 12px 14px;
+        background: var(--strip); border-block: 2px solid var(--line);
+        transition: opacity 0.6s ease;
+      }
+      .x-strip.is-fading { opacity: 0; }
+      .x-dot {
+        position: relative; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
+        box-shadow: inset 0 0 0 2px var(--ring);
+      }
+      .x-dot svg { width: 58%; height: 58%; }
+      .x-dot.is-on { background: var(--stamp-bg); color: var(--icon); box-shadow: 0 1px 2px rgb(0 0 0 / 0.3); }
+      .x-dot.is-gift { background: rgb(150 150 150 / 0.5); color: rgb(255 255 255 / 0.5); box-shadow: none; --gap: rgb(150 150 150 / 0.5); }
+      .x-dot.is-gift.is-on { background: var(--stamp-bg); color: var(--gift); --gap: var(--stamp-bg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.3); }
+      .x-dot.is-pop { animation: x-ink 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+      .x-dot.is-glow { animation: x-ink 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) both, x-glow 1.4s ease-in-out 0.4s 3; }
+      .x-check {
+        position: absolute; right: -3px; top: -3px; width: 18px; height: 18px; border-radius: 50%;
+        background: var(--fill-system-green); color: #fff; display: grid; place-items: center;
+        box-shadow: 0 0 0 2px var(--card);
+      }
+      .x-check svg { width: 11px; height: 11px; }
+      @keyframes x-ink {
+        0% { transform: scale(1.7) rotate(-18deg); opacity: 0; }
+        55% { transform: scale(0.9) rotate(5deg); opacity: 1; }
+        100% { transform: scale(1) rotate(0); }
+      }
+      @keyframes x-glow {
+        0%, 100% { box-shadow: 0 0 0 0 var(--glow); }
+        50% { box-shadow: 0 0 0 4px var(--glow), 0 0 18px 6px var(--glow); }
+      }
+      .x-field { padding: 12px 14px 0; }
+      .x-label { font: 500 12px/1.2 -apple-system, var(--sans); letter-spacing: 0.04em; text-transform: uppercase; color: var(--label); }
+      .x-count { display: inline-block; font: 400 28px/1.15 -apple-system, var(--sans); color: var(--text); }
+      .x-count.is-tick { animation: x-tick 0.4s var(--ease-out); }
+      @keyframes x-tick { 0% { transform: translateY(8px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+      .x-code { margin: auto auto 16px; padding: 8px 12px 6px; background: #fff; border-radius: 6px; width: 76%; text-align: center; color: #000; }
+      .x-code svg { display: block; width: 100%; height: auto; }
+      .x-code p { font: 500 13px/1.3 -apple-system, var(--sans); letter-spacing: 0.04em; margin-top: 3px; }
+      .x-field { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+      .x-ribbon {
+        position: relative; padding: 7px 14px 7px 12px; background: var(--gift-ribbon); color: var(--ribbon-text);
+        font: 700 12px/1.2 -apple-system, var(--sans); letter-spacing: 0.08em; box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+        clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%);
+        opacity: 0; transform: translateX(12px); transition: opacity 0.4s ease, transform 0.5s var(--ease-out); pointer-events: none;
+      }
+      .x-face.is-ready .x-ribbon { opacity: 1; transform: none; }
+      .x-face--back { pointer-events: none; }
+      .x-flip.is-back .x-face--back { pointer-events: auto; }
+      .x-back__h { display: flex; align-items: center; gap: 10px; }
+      .x-back__k { font: 500 12px/1.2 -apple-system, var(--sans); letter-spacing: 0.04em; text-transform: uppercase; color: var(--label); margin-bottom: 4px; }
+      .x-back__v { font: 400 15px/1.35 -apple-system, var(--sans); color: #fff; }
+      .x-back__v + .x-back__v { margin-top: 2px; }
+      .x-back a { color: #fff; text-decoration: underline; text-underline-offset: 3px; display: inline-flex; min-height: var(--tap); align-items: center; font-weight: 600; font-size: 17px; }
+      .x-back__div { height: 1px; background: rgb(255 255 255 / 0.18); }
+      .x-back__foot { margin-top: auto; font: 500 12px/1.3 -apple-system, var(--sans); color: var(--label); text-align: center; }
+      .x-hint { font: var(--type-caption); color: var(--text-secondary); text-align: center; }
+
+      /* ---------- Controls ---------- */
+      .x-ctrls { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 10px; width: min(360px, 100%); }
+      .x-ctrl {
+        min-height: 56px; border-radius: var(--r-pill); border: 1px solid var(--stroke-primary);
+        background: var(--fill-primary-on); color: var(--text-primary); font: var(--type-body-strong);
+        cursor: pointer; -webkit-tap-highlight-color: transparent;
+        transition: transform var(--dur-quick) ease, box-shadow var(--dur-quick) ease;
+      }
+      .x-ctrl:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-ctrl:active { transform: scale(0.96); }
+      .x-ctrl--primary { background: var(--fill-primary); color: var(--text-primary-on); border-color: var(--fill-primary); font-size: 17px; }
+      .x-ctrl--primary:hover { box-shadow: inset 0 0 0 100px var(--hover-wash-primary-on); }
+      .x-rewards { font: var(--type-small); color: var(--text-secondary); text-align: center; max-width: 360px; }
+      .x-rewards b { color: var(--text-primary); font-weight: var(--weight-medium); }
+
+      /* ---------- Real iPhone strip ---------- */
+      .x-shots { display: grid; grid-template-columns: repeat(2, minmax(0, 240px)); gap: 16px; margin: 24px 0 0; }
+      .x-shots figure { margin: 0; display: grid; gap: 8px; }
+      .x-shots img { border-radius: var(--r-l); width: 100%; height: auto; }
+      .x-shots figcaption { font: var(--type-caption); color: var(--text-secondary); }
+      .x-shots-h { font: var(--type-label); margin-top: 32px; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .x-card, .x-banner, .x-strip { transition: none; }
+        .x-dot.is-pop, .x-dot.is-glow, .x-count.is-tick { animation: none; }
+      }
+
+      /* ---------- Skins ---------- */
+      .x-sim[data-skin="barber"] {
+        --card: #1b1b1b; --text: #fff; --label: #e9e1c9; --line: #b8954a; --ring: #b8954a;
+        --strip: repeating-radial-gradient(circle at 20% 30%, rgb(255 255 255 / 0.035) 0 1px, transparent 1px 3px), repeating-linear-gradient(115deg, rgb(255 255 255 / 0.025) 0 2px, transparent 2px 7px), linear-gradient(160deg, #2b2b2b, #1f1f1f);
+        --stamp-bg: #f1e8cc; --icon: #a7843a; --gift: #b88d36; --glow: rgb(214 175 90 / 0.65);
+        --badge-bg: radial-gradient(circle at 35% 30%, #f3d58b, #b68a34 65%, #8c6420); --badge-icon: #2a2112; --badge-ring: #e8c878;
+        --gift-ribbon: #c9a24a; --ribbon-text: #1b1b1b;
+      }
+      .x-sim[data-skin="auto"] {
+        --card: #8f171c; --text: #fff; --label: #fbe9ea; --line: #7c7f84; --ring: #fff;
+        --strip: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.14) 0 1px, rgb(0 0 0 / 0.05) 1px 2px, transparent 2px 4px), linear-gradient(180deg, #d3d5d8, #a2a6ab 50%, #c8cacd);
+        --stamp-bg: #fff; --icon: #9b1a20; --gift: #a3161c; --glow: rgb(255 80 80 / 0.55);
+        --badge-bg: radial-gradient(circle at 35% 30%, #f2f3f4, #a9adb2); --badge-icon: #9b1a20; --badge-ring: #ffffff;
+        --gift-ribbon: #e9eaec; --ribbon-text: #8f171c;
+      }
+      .x-sim[data-skin="coffee"] {
+        --card: #3b2417; --text: #fff; --label: #f1e3c6; --line: #d9c39b; --ring: #f1e3c6;
+        --strip: repeating-linear-gradient(45deg, rgb(255 255 255 / 0.035) 0 2px, transparent 2px 6px), radial-gradient(circle at 70% 20%, #3f281b, #23140c);
+        --stamp-bg: #f4e8d0; --icon: #6a3f25; --gift: #8a4f2b; --glow: rgb(241 227 198 / 0.6);
+        --badge-bg: #f1e3c6; --badge-icon: #5b3520; --badge-ring: #fff6e6;
+        --gift-ribbon: #f1e3c6; --ribbon-text: #3b2417;
+      }
+      .x-sim[data-skin="groom"] {
+        --card: #0f7a7e; --text: #fff; --label: #e2f6f6; --line: rgb(255 255 255 / 0.7); --ring: #fff;
+        --strip: radial-gradient(rgb(255 255 255 / 0.12) 1px, transparent 1.6px) 0 0 / 11px 11px, linear-gradient(160deg, #0d6a6e, #0a5a5e);
+        --stamp-bg: #fff; --icon: #0f7a7e; --gift: #0e8f94; --glow: rgb(255 255 255 / 0.6);
+        --badge-bg: #fff; --badge-icon: #0f7a7e; --badge-ring: #d6f1f1;
+        --gift-ribbon: #fff; --ribbon-text: #0f7a7e;
+      }
+      .x-sim[data-skin="dojo"] {
+        --card: #111a3d; --text: #fff; --label: #ffc58c; --line: #ff9a3c; --ring: #ff9a3c;
+        --strip: radial-gradient(rgb(255 154 60 / 0.14) 1px, transparent 1.6px) 0 0 / 12px 12px, linear-gradient(170deg, #0d1534, #0a1029);
+        --stamp-bg: #fff4e6; --icon: #2f5bd3; --gift: #f08425; --glow: rgb(255 154 60 / 0.65);
+        --badge-bg: radial-gradient(circle at 35% 30%, #ffc27a, #ff9a3c 60%, #e57a1c); --badge-icon: #2f5bd3; --badge-ring: #ffd2a1;
+        --gift-ribbon: #ff9a3c; --ribbon-text: #111a3d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="top">
+      <header class="nav glass" data-auto></header>
+      <main class="main">
+        <section class="hero">
+          <div class="hero__copy">
+            <p class="hero__eyebrow">Live demo · Apple Wallet</p>
+            <h1>Dojo Punch</h1>
+            <p class="hero__sub">A punch card your customers never lose. It lives in Apple Wallet, fills in seconds, and reminds them to come back.</p>
+          </div>
+          <aside class="callout" aria-label="Next step">
+            <p class="callout__head">Next step</p>
+            <p class="callout__lead"><strong>Want this for your shop?</strong> Call or text Dojo Studios.</p>
+            <a class="btn" href="tel:+15418330643">541-833-0643</a>
+          </aside>
+        </section>
+
+        <section class="section" id="demo" data-nav="Demo">
+          <div class="head">
+            <p class="head__eyebrow">Try it</p>
+            <h2>Tap +1 and watch the card fill up.</h2>
+            <p class="head__sub">Pick a shop, stamp a visit, redeem a reward. Tap the card to see the back.</p>
+          </div>
+
+          <div class="x-sim" id="sim" data-skin="barber">
+            <div class="x-skins" role="group" aria-label="Choose a shop" id="skins"></div>
+
+            <div class="x-phone">
+              <div class="x-screen">
+                <div class="x-island" aria-hidden="true"></div>
+                <div class="x-status" aria-hidden="true">
+                  <span>9:41</span>
+                  <span class="x-status__r">
+                    <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                    <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.2c2.4 0 4.6.9 6.2 2.5l1.3-1.4C13.5 1.3 10.9.2 8 .2S2.5 1.3.5 3.3l1.3 1.4C3.4 3.1 5.6 2.2 8 2.2zm0 3.6c1.4 0 2.7.5 3.7 1.4l1.3-1.4C11.7 4.6 9.9 3.8 8 3.8s-3.7.8-5 2l1.3 1.4c1-.9 2.3-1.4 3.7-1.4zM8 9.4c-.5 0-1 .2-1.4.5L8 11.4l1.4-1.5c-.4-.3-.9-.5-1.4-.5z"/></svg>
+                    <span class="x-batt">92</span>
+                  </span>
+                </div>
+
+                <div class="x-banner" id="banner" role="status" aria-live="polite">
+                  <span class="x-badge" id="bannerBadge"></span>
+                  <div>
+                    <p class="x-banner__t" id="bannerTitle"></p>
+                    <p class="x-banner__m" id="bannerMsg"></p>
+                  </div>
+                  <span class="x-banner__now">now</span>
+                </div>
+
+                <span class="x-more" aria-hidden="true"><svg width="14" height="4" viewBox="0 0 14 4" fill="currentColor"><circle cx="2" cy="2" r="1.6"/><circle cx="7" cy="2" r="1.6"/><circle cx="12" cy="2" r="1.6"/></svg></span>
+
+                <div class="x-flip" id="flip" role="button" tabindex="0" aria-label="Wallet card. Tap to flip.">
+                  <div class="x-card">
+                    <div class="x-face" id="front">
+                      <div class="x-head"><span class="x-badge" id="badge"></span><span class="x-name" id="name"></span></div>
+                      <div class="x-strip" id="strip"></div>
+                      <div class="x-field">
+                        <div>
+                          <p class="x-label" id="label"></p>
+                          <span class="x-count" id="count"></span>
+                        </div>
+                        <span class="x-ribbon">REWARD READY</span>
+                      </div>
+                      <div class="x-code"><div id="barcode"></div><p id="code"></p></div>
+                    </div>
+                    <div class="x-face x-face--back x-back" id="back">
+                      <div class="x-back__h"><span class="x-badge" id="badgeBack"></span><span class="x-name" id="nameBack"></span></div>
+                      <div class="x-back__div"></div>
+                      <div>
+                        <p class="x-back__k">Rewards</p>
+                        <p class="x-back__v" id="r5"></p>
+                        <p class="x-back__v" id="r10"></p>
+                      </div>
+                      <div>
+                        <p class="x-back__k">Rules</p>
+                        <p class="x-back__v">One stamp per visit</p>
+                      </div>
+                      <div>
+                        <p class="x-back__k">Questions? Call us</p>
+                        <a href="tel:+15418330643" id="backTel">541-833-0643</a>
+                      </div>
+                      <p class="x-back__foot">Powered by Dojo Punch</p>
+                    </div>
+                  </div>
+                </div>
+                <span class="x-home" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <p class="x-hint">Tap the card to flip it</p>
+
+            <div class="x-ctrls">
+              <button class="x-ctrl x-ctrl--primary" id="plus" type="button">+1 Stamp</button>
+              <button class="x-ctrl" id="redeem" type="button">Redeem</button>
+              <button class="x-ctrl" id="reset" type="button">Reset</button>
+            </div>
+            <p class="x-rewards" id="rewardsLine"></p>
+          </div>
+        </section>
+
+        <section class="section" id="how" data-nav="How it works">
+          <div class="head">
+            <p class="head__eyebrow">How it works</p>
+            <h2>Three taps, no app, no paper.</h2>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <div class="step__intro"><p class="step__num">01</p><p class="step__eyebrow">Customer</p></div>
+              <div>
+                <h3>Scan and add to Wallet</h3>
+                <p>The customer scans the QR on the counter and taps Add to Apple Wallet. No app, no account.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">02</p><p class="step__eyebrow">Checkout</p></div>
+              <div>
+                <h3>Staff tap +1</h3>
+                <p>Staff scan the card and tap +1 at checkout.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">03</p><p class="step__eyebrow">After</p></div>
+              <div>
+                <h3>The card nudges them back</h3>
+                <p>The card updates in seconds and nudges them back.</p>
+              </div>
+            </article>
+          </div>
+          <p class="x-shots-h">What it looks like on a real iPhone</p>
+          <div class="x-shots">
+            <figure>
+              <img src="punch-barber.jpg" alt="Northside Barber Co. punch card in Apple Wallet on an iPhone, 8 stamps" loading="lazy" />
+              <figcaption>Northside Barber Co.</figcaption>
+            </figure>
+            <figure>
+              <img src="punch-auto.jpg" alt="Iron Oak Auto Repair punch card in Apple Wallet on an iPhone, 6 oil changes" loading="lazy" />
+              <figcaption>Iron Oak Auto Repair</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section" id="yours" data-nav="Make it yours">
+          <div class="head">
+            <p class="head__eyebrow">Make it yours</p>
+            <h2>Each shop sets its own card.</h2>
+          </div>
+          <div class="cards">
+            <div>
+              <h3>The look</h3>
+              <ul>
+                <li>Logo and colors</li>
+                <li>Stamp icon</li>
+              </ul>
+            </div>
+            <div>
+              <h3>The rules</h3>
+              <ul>
+                <li>6, 8 or 10 stamps</li>
+                <li>Reward spots and reward text</li>
+                <li>One stamp per visit</li>
+              </ul>
+            </div>
+            <div>
+              <h3>The nudge</h3>
+              <ul>
+                <li>A lock-screen pop-up when customers are near the shop</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="bella" data-nav="Bella">
+          <div class="head">
+            <p class="head__eyebrow">Works with Bella</p>
+            <h2>Bella answers the call. Dojo Punch brings them back.</h2>
+          </div>
+          <div class="aside">
+            <h3>In the Monday Huddle email</h3>
+            <p class="fineprint">Each week the shop sees stamps this week, rewards redeemed, and customers one stamp from a reward.</p>
+          </div>
+        </section>
+
+        <section class="section" id="start" data-nav="Get it">
+          <div class="head">
+            <h2>Founding shops get free setup.</h2>
+          </div>
+          <aside class="callout" aria-label="Get started">
+            <p class="callout__head">Dojo Studios</p>
+            <p class="callout__lead"><strong>Want this for your shop?</strong> Call or text 541-833-0643.</p>
+            <a class="btn" href="tel:+15418330643">Call or text 541-833-0643</a>
+          </aside>
+        </section>
+      </main>
+      <footer class="foot">
+        <p>Demo shown. Shop names are examples.</p>
+        <nav aria-label="Back to sections" data-auto></nav>
+        <a class="badge" href="/"><span>Dojo Receptionist home</span></a>
+      </footer>
+    </div>
+    <script src="hark.js"></script>
+    <script>
+      (function () {
+        var S = 'viewBox="0 0 24 24" aria-hidden="true"';
+        var ICONS = {
+          scissors: '<svg ' + S + ' fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></svg>',
+          wrench: '<svg ' + S + ' fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+          cup: '<svg ' + S + ' fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" fill="currentColor"/><path d="M6 2v3M10 2v3M14 2v3"/></svg>',
+          paw: '<svg ' + S + ' fill="currentColor"><ellipse cx="5.6" cy="10.2" rx="2.1" ry="2.7"/><ellipse cx="18.4" cy="10.2" rx="2.1" ry="2.7"/><ellipse cx="9.4" cy="5.6" rx="2.2" ry="2.8"/><ellipse cx="14.6" cy="5.6" rx="2.2" ry="2.8"/><path d="M12 11.2c-3 0-6.6 4.3-6.6 6.8 0 1.8 1.4 2.7 3 2.7 1.4 0 2.3-.8 3.6-.8s2.2.8 3.6.8c1.6 0 3-.9 3-2.7 0-2.5-3.6-6.8-6.6-6.8z"/></svg>',
+          dojo: '<svg ' + S + '><ellipse cx="8.6" cy="21" rx="2.4" ry="1.4" fill="currentColor"/><ellipse cx="15.4" cy="21" rx="2.4" ry="1.4" fill="currentColor"/><circle cx="12" cy="12.6" r="8.2" fill="currentColor"/><circle cx="9.3" cy="11.6" r="1.6" fill="#fff"/><circle cx="14.7" cy="11.6" r="1.6" fill="#fff"/></svg>',
+          gift: '<svg ' + S + '><path d="M7.6 8C5.4 8 5 4 7.4 3.6 9.6 3.2 11.4 6 12 8c.6-2 2.4-4.8 4.6-4.4C19 4 18.6 8 16.4 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="3" y="8" width="18" height="4.4" rx="1" fill="currentColor"/><rect x="4.6" y="13.4" width="14.8" height="7.6" rx="1" fill="currentColor"/><path d="M12 8v13" stroke="var(--gap)" stroke-width="2"/></svg>',
+          check: '<svg viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2 5 8.6l4.6-5"/></svg>'
+        };
+        var SKINS = [
+          { id: "barber", name: "Northside Barber Co.", short: "Barber", sw: "#1b1b1b", icon: "scissors", label: "Stamps", start: 8, code: "NB7K2Q", r5: "$5 off", r10: "free cut" },
+          { id: "auto", name: "Iron Oak Auto Repair", short: "Auto repair", sw: "#8f171c", icon: "wrench", label: "Oil changes", start: 6, code: "IO5R8M", r5: "free tire rotation", r10: "free oil change" },
+          { id: "coffee", name: "Morning Ember Coffee", short: "Coffee", sw: "#3b2417", icon: "cup", label: "Cups", start: 3, code: "ME3C9P", r5: "free pastry", r10: "free drink" },
+          { id: "groom", name: "Good Boy Grooming", short: "Grooming", sw: "#0f7a7e", icon: "paw", label: "Grooms", start: 4, code: "GB4P1T", r5: "free nail trim", r10: "free groom" },
+          { id: "dojo", name: "Dojo Studios", short: "Dojo Studios", sw: "#111a3d", icon: "dojo", label: "Visits", start: 2, code: "DJ2S0X", r5: "free sticker pack", r10: "free kit" }
+        ];
+        var $ = function (id) { return document.getElementById(id); };
+        var sim = $("sim"), strip = $("strip"), flip = $("flip"), front = $("front");
+        var skin = SKINS[0], count = 0, redeemed1 = false, bannerTimer = null;
+
+        function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+        function barcodeSVG(code) {
+          var seed = 7;
+          for (var i = 0; i < code.length; i++) seed = (seed * 31 + code.charCodeAt(i)) >>> 0;
+          function rnd() { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+          var H = 34, out = [];
+          var start = [3, 1, 1, 1, 1, 1, 1, 3], x = 0;
+          start.forEach(function (w, k) { if (k % 2 === 0) out.push('<rect x="' + x + '" y="0" width="' + w + '" height="' + H + '"/>'); x += w; });
+          x += 2;
+          var rows = 8, cols = 44, cw = 2, rh = H / rows;
+          for (var r = 0; r < rows; r++) {
+            for (var c = 0; c < cols; c++) {
+              if (rnd() > 0.5) out.push('<rect x="' + (x + c * cw) + '" y="' + (r * rh) + '" width="' + cw + '" height="' + rh + '"/>');
+            }
+          }
+          x += cols * cw + 2;
+          var end = [1, 1, 3, 1, 1, 2, 1, 1, 2];
+          end.forEach(function (w, k) { if (k % 2 === 0) out.push('<rect x="' + x + '" y="0" width="' + w + '" height="' + H + '"/>'); x += w; });
+          return '<svg viewBox="0 0 ' + x + ' ' + H + '" shape-rendering="crispEdges" fill="#000" aria-hidden="true">' + out.join("") + "</svg>";
+        }
+
+        function renderStrip(popIndex) {
+          var html = "";
+          for (var i = 1; i <= 10; i++) {
+            var gift = i === 5 || i === 10, on = i <= count, cls = "x-dot";
+            if (gift) cls += " is-gift";
+            if (on) cls += " is-on";
+            if (i === popIndex) cls += (gift ? " is-glow" : " is-pop");
+            var inner = gift ? ICONS.gift : (on ? ICONS[skin.icon] : "");
+            if (i === 5 && redeemed1 && on) inner += '<span class="x-check">' + ICONS.check + "</span>";
+            var lbl = "Spot " + i + (gift ? ", reward" : "") + (on ? ", stamped" : ", empty");
+            html += '<span class="' + cls + '" role="img" aria-label="' + lbl + '">' + inner + "</span>";
+          }
+          strip.innerHTML = html;
+          var c = $("count");
+          c.textContent = count;
+          front.classList.toggle("is-ready", count === 10);
+        }
+
+        function tick() {
+          var c = $("count");
+          c.classList.remove("is-tick"); void c.offsetWidth; c.classList.add("is-tick");
+        }
+
+        function banner(msg) {
+          $("bannerMsg").textContent = msg;
+          var b = $("banner");
+          b.classList.remove("is-on"); void b.offsetWidth; b.classList.add("is-on");
+          clearTimeout(bannerTimer);
+          bannerTimer = setTimeout(function () { b.classList.remove("is-on"); }, 3000);
+        }
+
+        function setSkin(s) {
+          skin = s;
+          sim.setAttribute("data-skin", s.id);
+          count = s.start; redeemed1 = false;
+          flip.classList.remove("is-back");
+          var badge = ICONS[s.icon];
+          ["badge", "badgeBack", "bannerBadge"].forEach(function (id) { $(id).innerHTML = badge; });
+          $("name").textContent = s.name; $("nameBack").textContent = s.name; $("bannerTitle").textContent = s.name;
+          $("label").textContent = s.label;
+          $("code").textContent = s.code;
+          $("barcode").innerHTML = barcodeSVG(s.code);
+          $("r5").textContent = "5 stamps: " + s.r5;
+          $("r10").textContent = "10 stamps: " + s.r10;
+          $("rewardsLine").innerHTML = "<b>Rewards:</b> 5 = " + s.r5 + ", 10 = " + s.r10;
+          document.querySelectorAll(".x-skin").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.id === s.id ? "true" : "false"); });
+          $("banner").classList.remove("is-on");
+          renderStrip(0);
+        }
+
+        var skinsEl = $("skins");
+        SKINS.forEach(function (s) {
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "x-skin"; b.dataset.id = s.id;
+          b.style.setProperty("--sw", s.sw);
+          b.innerHTML = "<i></i>" + s.short;
+          b.addEventListener("click", function () { setSkin(s); });
+          skinsEl.appendChild(b);
+        });
+
+        $("plus").addEventListener("click", function () {
+          flip.classList.remove("is-back");
+          if (count >= 10) { banner("Card is full. Tap Redeem for the " + skin.r10 + "."); return; }
+          count++;
+          renderStrip(count); tick();
+          var msg;
+          if (count === 4) msg = "One more for your first reward!";
+          else if (count === 5) msg = "Reward unlocked: " + cap(skin.r5);
+          else if (count === 10) msg = "REWARD READY: " + cap(skin.r10);
+          else msg = count + " of 10. " + (10 - count) + " more for your reward.";
+          banner(msg);
+        });
+
+        $("redeem").addEventListener("click", function () {
+          flip.classList.remove("is-back");
+          if (count === 10) {
+            banner("Reward redeemed. Card starts fresh.");
+            strip.classList.add("is-fading");
+            setTimeout(function () {
+              count = 0; redeemed1 = false;
+              renderStrip(0); tick();
+              strip.classList.remove("is-fading");
+            }, 600);
+          } else if (count >= 5) {
+            if (redeemed1) { banner("Reward 1 already redeemed."); return; }
+            redeemed1 = true; renderStrip(0);
+            banner("Reward 1 redeemed");
+          } else {
+            banner("Nothing to redeem yet.");
+          }
+        });
+
+        $("reset").addEventListener("click", function () { setSkin(skin); });
+
+        function toggleFlip() { flip.classList.toggle("is-back"); }
+        flip.addEventListener("click", function (e) { if (e.target.closest("a")) return; toggleFlip(); });
+        flip.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFlip(); } });
+
+        setSkin(SKINS[0]);
+      })();
+    </script>
+  </body>
+</html>
