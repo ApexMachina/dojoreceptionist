@@ -447,6 +447,38 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
 @keyframes meter-pop{0%{transform:scaleY(1)}40%{transform:scaleY(1.9)}100%{transform:scaleY(1)}}
 @keyframes ready-nudge{0%,100%{transform:none}20%{transform:translateY(-3px)}40%{transform:none}55%{transform:translateY(-2px)}70%{transform:none}}
 @media (prefers-reduced-motion:reduce){.slip,.slip.press{transition:none;transform:none}.slip li em.ink,.slip li.done i,.meter-bars b.on,.start form.ready button.btn{animation:none}.slip.sent .slip-stamp{transition:none}}
+/* Dojo Punch teaser */
+#punch-teaser .pt-grid{display:grid;gap:var(--sp6);align-items:center}
+.pt-em{font-style:normal;color:var(--gold2)}
+.pt-hook{margin-top:var(--sp4);padding:var(--sp4);border-left:3px solid var(--gold);background:var(--n1);border-radius:0 var(--r) var(--r) 0;color:var(--ink2);font-size:var(--t-s)}
+.pt-hook b{color:var(--ink)}
+.pt-skins{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--sp4)}
+.pt-skins button{min-height:44px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--n2);color:var(--ink2);font:700 var(--t-s)/1 var(--sans);cursor:pointer}
+.pt-skins button[aria-selected="true"]{border-color:var(--gold);background:var(--gold);color:var(--on-gold)}
+.pt-cta{margin-top:var(--sp5)}
+.pt-card{--c1:#1b1b1f;--c2:#2c2c33;--acc:#e8b53b;max-width:420px;width:100%;justify-self:center;padding:var(--sp5);border-radius:18px;background:linear-gradient(160deg,var(--c2),var(--c1));border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 50px rgba(0,0,0,.45);transition:background .3s}
+.pt-top{display:flex;align-items:center;gap:12px}
+.pt-top div{flex:1;min-width:0}
+.pt-top b{display:block;color:#fff;font:700 var(--t-m)/1.2 var(--sans)}
+.pt-top span{color:rgba(255,255,255,.7);font-size:var(--t-xs)}
+.pt-logo{display:grid;place-items:center;width:44px;height:44px;border-radius:10px;background:var(--acc);color:#111;font-size:22px;flex:none}
+.pt-count{text-align:right}
+.pt-count small{display:block;font:700 10px/1 var(--sans);letter-spacing:.1em;color:rgba(255,255,255,.6)}
+.pt-count b{font-size:1.75rem;color:var(--acc)}
+.pt-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:var(--sp5)}
+.pt-dot{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;border:2px dashed rgba(255,255,255,.25);color:rgba(255,255,255,.3);font-size:20px;transition:transform .2s,background .2s}
+.pt-dot.on{border:2px solid var(--acc);background:var(--acc);color:#111}
+.pt-dot.gift{border-style:solid;border-color:rgba(255,255,255,.35)}
+.pt-dot.gift.on{background:#fff;border-color:#fff}
+.pt-dot.pop{transform:scale(1.18)}
+.pt-reward{margin-top:var(--sp4);color:rgba(255,255,255,.8);font-size:var(--t-s);text-align:center}
+.pt-tap{width:100%;justify-content:center;margin-top:var(--sp4)}
+.pt-say{margin-top:var(--sp3);min-height:2.6em;text-align:center;color:var(--gold2);font-size:var(--t-s);font-weight:700}
+@media (min-width:900px){#punch-teaser .pt-grid{grid-template-columns:1.1fr .9fr}}
+@media (prefers-reduced-motion:reduce){.pt-dot{transition:none}.pt-dot.pop{transform:none}}
+.chip.chip2{border-style:dashed}
+.pt-check{display:flex!important;flex-direction:row!important;align-items:center;gap:10px;font-weight:600}
+.pt-check input{width:22px;height:22px;min-height:0;flex:none}
 </style>
 </head>
 <body>
@@ -500,6 +532,7 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
     </div>
     <!-- Price chip: one line, reword here only. Full plan terms are in #price. -->
     <a class="chip" href="#price"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg>Founding shops: first week free, $129/mo, no setup fee</a>
+    <a class="chip chip2" href="#punch-teaser"><svg class="i" aria-hidden="true"><use href="#i-fist"/></svg>New: Dojo Punch, a Wallet punch card for walk-ins</a>
    </div>
 
    <!-- Desktop only: what callers hear on the demo line (first message of the live main-line agent). -->
@@ -759,6 +792,38 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
  <p class="yours"><b>You stay in charge:</b> you confirm every appointment and approve every job.</p>
 </section>
 
+
+<!-- ===== Dojo Punch teaser (add-on). Skins/shops are fictional examples; rewards are each shop's choice. No price shown. ===== -->
+<section id="punch-teaser" aria-labelledby="punch-h">
+ <div class="pt-grid">
+  <div class="sec-head">
+   <p class="eyebrow">Bonus round · Add-on</p>
+   <h2 id="punch-h">Bella catches the call. <em class="pt-em">Dojo Punch</em> brings the walk-in back.</h2>
+   <p class="lead">A punch card that lives in your customer's Apple Wallet. No app, no paper to lose. They scan a QR on your counter, and every visit fills a stamp.</p>
+   <p class="pt-hook"><b>Think your shop isn't a punch-card shop?</b> Then punch something else. A plumber can stamp referrals. A tax office can stamp returning clients. Pick a shop and tap the card.</p>
+   <div class="pt-skins" role="tablist" aria-label="Example shops">
+    <button type="button" role="tab" aria-selected="true" data-skin="0">Barber</button>
+    <button type="button" role="tab" aria-selected="false" data-skin="1">Auto shop</button>
+    <button type="button" role="tab" aria-selected="false" data-skin="2">Plumber</button>
+    <button type="button" role="tab" aria-selected="false" data-skin="3">Tax office</button>
+   </div>
+   <div class="cta pt-cta">
+    <a class="btn g" href="/punch/"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>See the Wallet demo</a>
+    <a class="btn o" href="#start" id="pt-add"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg>Add it to my free week</a>
+   </div>
+   <p class="fine" style="margin-top:10px">Founding shops get free setup. Ask Jeremy for pricing. Shops and rewards shown are examples; you pick your own.</p>
+  </div>
+
+  <div class="pt-card" id="pt-card" aria-live="polite">
+   <div class="pt-top"><span class="pt-logo" id="pt-logo">✂</span><div><b id="pt-name">Northside Fade Co.</b><span id="pt-what">Every cut is a stamp</span></div><span class="pt-count"><small>STAMPS</small><b id="pt-n">3</b></span></div>
+   <div class="pt-strip" id="pt-strip"></div>
+   <p class="pt-reward" id="pt-reward">5th stamp: free beard trim · 10th: free cut</p>
+   <button type="button" class="btn g pt-tap" id="pt-tap"><svg class="i" aria-hidden="true"><use href="#i-fist"/></svg>Tap to punch</button>
+   <p class="pt-say" id="pt-say">That's a customer walking back in. Tap again.</p>
+  </div>
+ </div>
+</section>
+
 <!-- ===== how we start ===== -->
 <section id="how" aria-labelledby="how-h">
  <div class="sec-head">
@@ -902,6 +967,7 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
    <label>Trade<select name="trade" id="start-trade" required><option value="">Pick one</option></select></label>
    <label>Phone<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
    <label>Best time to call<input name="best_time" placeholder="e.g. weekdays after 3" required></label>
+   <label class="pt-check"><input type="checkbox" name="add_dojo_punch" value="yes" id="start-punch">Add Dojo Punch, the Wallet punch card (founding shops: free setup)</label>
    <button class="btn g" type="submit"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Send it to Jeremy</button>
   </form>
   <div class="form-msg" id="start-msg" role="status" aria-live="polite"></div>
@@ -1060,5 +1126,32 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
  <a class="btn g" href="tel:+15418330643"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Call Bella · 541-833-0643</a>
  <a class="btn o" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop" aria-label="Email Jeremy"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></a>
 </nav>
+<script>
+/* Dojo Punch teaser: example skins only (fictional shops). */
+(function(){
+ var S=[
+  {logo:"✂",name:"Northside Fade Co.",what:"Every cut is a stamp",ic:"✂",reward:"5th stamp: free beard trim · 10th: free cut",c1:"#1b1b1f",c2:"#2c2c33",acc:"#e8b53b",start:3},
+  {logo:"🔧",name:"Iron Oak Auto",what:"Every oil change is a stamp",ic:"🛢",reward:"5th: free tire rotation · 10th: free oil change",c1:"#0f1f17",c2:"#1f3b2b",acc:"#8fd18b",start:2},
+  {logo:"🚰",name:"Ridgeline Plumbing",what:"Every neighbor you send is a stamp",ic:"🏠",reward:"5 referrals: $50 off your next visit · 10: $125 off",c1:"#0d1a2e",c2:"#163257",acc:"#6cc4ff",start:1},
+  {logo:"🧾",name:"Fernwood Tax & Books",what:"Every year you file with us is a stamp",ic:"📅",reward:"5th year: free extension filing · 10th: a year's prep at half off",c1:"#24140f",c2:"#45261a",acc:"#f0a35e",start:4}
+ ];
+ var LINES=["That's a customer walking back in. Tap again.","No paper card lost in a cup holder.","Wallet puts your shop on their lock screen.","Halfway. This is where they come back on purpose.","One more and the gift unlocks."];
+ var card=document.getElementById("pt-card");if(!card)return;
+ var strip=document.getElementById("pt-strip"),nEl=document.getElementById("pt-n"),say=document.getElementById("pt-say"),cur=0,n=0;
+ function draw(pop){strip.innerHTML="";var s=S[cur];for(var i=1;i<=10;i++){var d=document.createElement("span");d.className="pt-dot"+(i===5||i===10?" gift":"")+(i<=n?" on":"")+(pop&&i===n?" pop":"");d.textContent=(i===5||i===10)?"🎁":(i<=n?s.ic:"");d.setAttribute("aria-hidden","true");strip.appendChild(d);}nEl.textContent=n;strip.setAttribute("aria-label",n+" of 10 stamps");if(pop)setTimeout(function(){var p=strip.querySelector(".pop");if(p)p.classList.remove("pop")},220);}
+ function skin(i){cur=i;var s=S[i];card.style.setProperty("--c1",s.c1);card.style.setProperty("--c2",s.c2);card.style.setProperty("--acc",s.acc);document.getElementById("pt-logo").textContent=s.logo;document.getElementById("pt-name").textContent=s.name;document.getElementById("pt-what").textContent=s.what;document.getElementById("pt-reward").textContent=s.reward;n=s.start;say.textContent=i>=2?"Not a repeat-visit shop? Punch referrals or loyal years instead.":LINES[0];draw();
+  document.querySelectorAll(".pt-skins button").forEach(function(b){b.setAttribute("aria-selected",String(+b.dataset.skin===i))});}
+ document.querySelectorAll(".pt-skins button").forEach(function(b){b.addEventListener("click",function(){skin(+b.dataset.skin)})});
+ document.getElementById("pt-tap").addEventListener("click",function(){
+  if(n>=10){n=0;say.textContent="Card full, gift redeemed, and a fresh card starts. That's the loop.";draw();return;}
+  n++;draw(true);
+  if(n===5)say.textContent="🎁 Gift unlocked. Wallet tells them it's waiting.";
+  else if(n===10)say.textContent="🎁 Card full. They come in to claim it, and you get another visit.";
+  else say.textContent=LINES[n%LINES.length];
+ });
+ var add=document.getElementById("pt-add");if(add)add.addEventListener("click",function(){var c=document.getElementById("start-punch");if(c)c.checked=true;});
+ skin(0);
+})();
+</script>
 </body>
 </html>
