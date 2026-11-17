@@ -67,7 +67,7 @@ button.block{width:100%}
 .chip.on{border-color:var(--gold);color:var(--gold2)}
 .chip.bad{border-color:#7A3B3B;color:var(--bad)}
 .card{background:var(--navy2);border:1.5px solid var(--line);border-radius:var(--r);padding:14px;margin:14px 0}
-.card{scroll-margin-top:90px}
+.card,section[id],[id].anchor,h2[id],h3[id]{scroll-margin-top:90px}
 .card h3{margin:0 0 8px;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--gold)}
 .card textarea{background:var(--navy);min-height:170px}
 .warn{background:var(--warnbg);border:1.5px solid #8A6A1C;color:#FFE08A;border-radius:12px;padding:10px 12px;font-size:15px;margin-top:10px}
@@ -802,5 +802,10 @@ $('wipeBtn').onclick = () => {
 
 renderShopSelect();
 </script>
+<script>/* Hash links to a <details> (or anything inside one) open it, on load, on hashchange, and on click. */
+(function(){function det(id){if(!id)return null;var el=null;try{el=document.getElementById(decodeURIComponent(id));}catch(e){el=document.getElementById(id);}if(!el)return null;var d=el.tagName==="DETAILS"?el:(el.closest?el.closest("details"):null);var p=d;while(p){p.open=true;p=p.parentElement&&p.parentElement.closest?p.parentElement.closest("details"):null;}return d?el:null;}
+function go(){var el=det(location.hash.slice(1));if(el&&el.scrollIntoView)setTimeout(function(){el.scrollIntoView({block:"start"});},0);}
+document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest('a[href^="#"]'):null;if(a)det(a.getAttribute("href").slice(1));});
+window.addEventListener("hashchange",go);if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();})();</script>
 </body>
 </html>

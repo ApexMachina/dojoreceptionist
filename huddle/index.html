@@ -156,8 +156,13 @@ blockquote{margin:14px 0;padding:14px 18px;border-left:4px solid var(--gold);bac
  <div class="cta"><a class="btn p" href="/#start">Start my free week</a><a class="btn s" href="tel:+15418330643">Call Bella · 541-833-0643</a></div>
 </div>
 
-<div class="notes"><p><a href="/">Home</a> · <a href="/compare/">Compare</a> · <a href="/calculator/">Missed Call Math</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p></div>
+<div class="notes"><p><a href="/">Home</a> · <a href="/calculator/">Missed Call Math</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/huddle/" aria-current="page">Monday Huddle</a> · <a href="/punch/">Dojo Punch</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p></div>
 </div>
 </div>
+<script>/* Hash links to a <details> (or anything inside one) open it, on load, on hashchange, and on click. */
+(function(){function det(id){if(!id)return null;var el=null;try{el=document.getElementById(decodeURIComponent(id));}catch(e){el=document.getElementById(id);}if(!el)return null;var d=el.tagName==="DETAILS"?el:(el.closest?el.closest("details"):null);var p=d;while(p){p.open=true;p=p.parentElement&&p.parentElement.closest?p.parentElement.closest("details"):null;}return d?el:null;}
+function go(){var el=det(location.hash.slice(1));if(el&&el.scrollIntoView)setTimeout(function(){el.scrollIntoView({block:"start"});},0);}
+document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest('a[href^="#"]'):null;if(a)det(a.getAttribute("href").slice(1));});
+window.addEventListener("hashchange",go);if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();})();</script>
 </body>
 </html>

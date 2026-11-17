@@ -133,7 +133,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 </div>
 
 <div class="result" aria-live="polite">
- <div class="leak"><div class="k">Work that may be walking away</div><span class="leak-name" id="leak-name" aria-hidden="true">A steady leak</span></div>
+ <div class="leak"><div class="k">Work that may be walking away</div><span class="leak-name" id="leak-name" aria-hidden="true">Over 10× the $129 price</span></div>
  <div class="big" id="mo">$1,819</div>
  <p class="verdict" id="month-line" style="margin-top:0;font-weight:700">a month, by your numbers. <span id="jobs">5.2</span> jobs a month that never got a callback.</p>
  <div aria-hidden="true">
@@ -207,7 +207,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 <p style="margin-top:12px;font-size:16px"><a href="/missed-call-log/">7-Day Missed Call Log</a> is a free tally: mark each missed call for a week, on your phone or on paper, then see an estimate from your own job value and booking rate. Nothing you enter leaves the page.</p>
 </main>
 
-<footer><div class="wrap">Dojo Receptionist · Jeremy Alvarado. Every dollar figure on this page comes from numbers you typed; it's your estimate, not a promise. Nothing you type here leaves this page. Recording notice is given on every call. This isn't legal advice. <a href="/">Home</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div></footer>
+<footer><div class="wrap">Dojo Receptionist · Jeremy Alvarado. Every dollar figure on this page comes from numbers you typed; it's your estimate, not a promise. Nothing you type here leaves this page. Recording notice is given on every call. This isn't legal advice. <a href="/">Home</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/">Home</a> · <a href="/calculator/" aria-current="page">Missed Call Math</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/huddle/">Monday Huddle</a> · <a href="/punch/">Dojo Punch</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div></footer>
 
 <script>
 (function(){
@@ -329,14 +329,21 @@ function calc(){
 var RM=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 var PH='<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>';
 var shownMo=null, raf=0, lastTier=-1, lastIcons=0;
-var TIERS=[[0,"Nothing to count yet"],[0.001,"Barely a drip"],[1,"A slow leak"],[3,"A steady leak"],[10,"A burst pipe"],[25,"The floodgates"]];
+/* Badge = how the monthly estimate compares with the $129 price. Same number as the math line, no made-up drama. */
+var TIERS=[[0,"Nothing to count yet"],[0.001,"Under the $129 price"],[1,"Covers the $129 price"],[3,"Over 3× the $129 price"],[10,"Over 10× the $129 price"],[25,"Over 25× the $129 price"]];
 function tierOf(mo){var x=mo/129,t=0;for(var i=0;i<TIERS.length;i++)if(mo>0&&x>=TIERS[i][0])t=i;return mo>0?Math.max(1,t):0}
+/* The headline always lands on money(mo), the exact string the math line prints. The count-up is decoration only:
+   skipped for reduced motion, and a timer forces the final value even if animation frames never fire (background tab). */
+var finalT=0;
 function countTo(target){
- var el=$("mo");
- if(RM||shownMo===null){shownMo=target;el.textContent=money(target);return}
- cancelAnimationFrame(raf);
+ var el=$("mo"), finalText=money(target);
+ el.setAttribute("data-value",finalText);
+ cancelAnimationFrame(raf); clearTimeout(finalT);
+ function land(){cancelAnimationFrame(raf);clearTimeout(finalT);shownMo=target;el.textContent=finalText}
+ if(RM||shownMo===null||Math.round(shownMo)===Math.round(target)){land();return}
  var from=shownMo,t0=performance.now(),d=320;
- (function step(now){var k=Math.min(1,(now-t0)/d),e=1-Math.pow(1-k,3);shownMo=from+(target-from)*e;el.textContent=money(shownMo);if(k<1)raf=requestAnimationFrame(step);else{shownMo=target;el.textContent=money(target)}})(t0);
+ finalT=setTimeout(land,d+80);
+ raf=requestAnimationFrame(function step(now){var k=Math.min(1,Math.max(0,(now-t0)/d)),e=1-Math.pow(1-k,3);if(k>=1){land();return}shownMo=from+(target-from)*e;el.textContent=money(shownMo);raf=requestAnimationFrame(step)});
 }
 function leak(callsMo, jobsMo, mo, what){
  countTo(mo);

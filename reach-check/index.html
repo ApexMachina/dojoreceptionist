@@ -51,6 +51,8 @@ input[type=text]:focus{outline:3px solid var(--gold2);outline-offset:1px}
 .opts input:checked+span{background:var(--gold);border-color:var(--gold);color:var(--navy)}
 .opts input:focus-visible+span{outline:3px solid var(--gold2);outline-offset:2px}
 .qcheck{font-size:14px;margin-top:8px;display:inline-block;color:var(--gold2)}
+/* Anchored and scrolled-to blocks clear the sticky progress bar. */
+[id]:not(input):not(i):not(small){scroll-margin-top:72px}
 .progress{position:sticky;top:0;z-index:2;background:var(--navy);padding:10px 0 12px;margin:0 0 6px}
 .bar{height:8px;border-radius:8px;background:var(--navy2);overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}
@@ -121,6 +123,9 @@ ol.fixes a{color:var(--gold2);font-weight:700}
 
   <p class="fine"><b>Privacy:</b> nothing you type here is saved or sent by this page. It runs only in your browser and forgets everything when you close the tab. The email button only opens a draft in your own mail app; Jeremy uses what you send only to reply with your report. The score is a self-check from your own answers, not a measurement of your business. Bella is $129/mo, first week free, no setup fee, no contract, 150 calls a month. Built by Jeremy, a Marine vet. <a href="https://dojoreceptionist.com">dojoreceptionist.com</a></p>
 </main>
+<style>.dr-foot{max-width:1100px;margin:40px auto 0;padding:20px 20px calc(24px + env(safe-area-inset-bottom));border-top:1px solid rgba(128,128,128,.3);font:13px/1.9 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;opacity:.85}.dr-foot p+p{margin-top:4px}.dr-foot a{color:inherit;text-decoration:underline;text-underline-offset:3px}.dr-foot a[aria-current]{font-weight:700}</style>
+<footer class="dr-foot"><p><b><a href="/" style="text-decoration:none">Dojo Receptionist</a></b> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p><nav aria-label="Site"><p><a href="/calculator/">Missed Call Math</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/" aria-current="page">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/huddle/">Monday Huddle</a> · <a href="/punch/">Dojo Punch</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p></nav></footer>
+
 <script>
 (function(){
 "use strict";

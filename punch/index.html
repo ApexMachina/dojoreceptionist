@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -137,7 +137,8 @@
         clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%);
         opacity: 0; transform: translateX(12px); transition: opacity 0.4s ease, transform 0.5s var(--ease-out); pointer-events: none;
       }
-      .x-face.is-ready .x-ribbon { opacity: 1; transform: none; }
+      .x-ribbon[hidden] { display: block; visibility: hidden; }
+      .x-face.is-ready .x-ribbon { opacity: 1; transform: none; visibility: visible; }
       .x-face--back { pointer-events: none; }
       .x-flip.is-back .x-face--back { pointer-events: auto; }
       .x-back__h { display: flex; align-items: center; gap: 10px; }
@@ -175,6 +176,20 @@
         .x-card, .x-banner, .x-strip { transition: none; }
         .x-dot.is-pop, .x-dot.is-glow, .x-count.is-tick { animation: none; }
       }
+
+      /* ---------- Page polish: sticky nav clearance, theme toggle label, hero contrast, call/text CTAs ---------- */
+      html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 88px); }
+      .section, [id] { scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 88px); }
+      #top { scroll-margin-top: 0; }
+      .theme-btn { width: auto; min-width: 36px; padding: 0 12px 0 10px; gap: 6px; display: inline-flex; align-items: center; font: var(--type-label); white-space: nowrap; }
+      @media (max-width: 599px) { .theme-btn { width: auto; min-width: var(--tap); } }
+      .hero::after, .hero:not(:has(.hero__img))::after { background: linear-gradient(to top, rgb(22 31 57 / 0.88) 0%, rgb(22 31 57 / 0.5) 55%, rgb(22 31 57 / 0.2) 100%), linear-gradient(to right, rgb(22 31 57 / 0.7) 0%, transparent 70%); }
+      .hero__sub { color: var(--hero-text); text-shadow: 0 1px 2px rgb(0 0 0 / 0.55), 0 0 16px rgb(22 31 57 / 0.75); }
+      .x-sitelinks { flex-basis: 100%; font-size: var(--size-meta); line-height: 1.9; color: var(--text-secondary); }
+      .x-sitelinks a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+      .x-sitelinks a[aria-current] { color: var(--text-primary); font-weight: var(--weight-medium); }
+      .x-cta { display: flex; flex-wrap: wrap; gap: 10px; }
+      .callout .x-cta .btn { justify-self: auto; }
 
       /* ---------- Skins ---------- */
       .x-sim[data-skin="barber"] {
@@ -226,8 +241,8 @@
           </div>
           <aside class="callout" aria-label="Next step">
             <p class="callout__head">Next step</p>
-            <p class="callout__lead"><strong>Want this for your shop?</strong> Call or text Dojo Studios.</p>
-            <a class="btn" href="tel:+15418330643">541-833-0643</a>
+            <p class="callout__lead"><strong>Want this for your shop?</strong> Call or text Dojo Studios at 541-833-0643.</p>
+            <div class="x-cta"><a class="btn" href="tel:+15418330643">Call 541-833-0643</a><a class="btn" href="sms:+15418330643">Text 541-833-0643</a></div>
           </aside>
         </section>
 
@@ -274,7 +289,7 @@
                           <p class="x-label" id="label"></p>
                           <span class="x-count" id="count"></span>
                         </div>
-                        <span class="x-ribbon">REWARD READY</span>
+                        <span class="x-ribbon" id="ribbon" hidden aria-hidden="true">REWARD READY</span>
                       </div>
                       <div class="x-code"><div id="barcode"></div><p id="code"></p></div>
                     </div>
@@ -402,7 +417,7 @@
           <aside class="callout" aria-label="Get started">
             <p class="callout__head">Dojo Studios</p>
             <p class="callout__lead"><strong>Want this for your shop?</strong> Call or text 541-833-0643.</p>
-            <a class="btn" href="tel:+15418330643">Call or text 541-833-0643</a>
+            <div class="x-cta"><a class="btn" href="tel:+15418330643">Call 541-833-0643</a><a class="btn" href="sms:+15418330643">Text 541-833-0643</a></div>
           </aside>
         </section>
       </main>
@@ -410,6 +425,7 @@
         <p>Demo shown. Shop names are examples.</p>
         <nav aria-label="Back to sections" data-auto></nav>
         <a class="badge" href="/"><span>Dojo Receptionist home</span></a>
+        <p class="x-sitelinks"><span>Dojo Receptionist · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></span><br /><a href="/calculator/">Missed Call Math</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/huddle/">Monday Huddle</a> · <a href="/punch/" aria-current="page">Dojo Punch</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
       </footer>
     </div>
     <script src="hark.js"></script>
@@ -473,7 +489,10 @@
           strip.innerHTML = html;
           var c = $("count");
           c.textContent = count;
-          front.classList.toggle("is-ready", count === 10);
+          var ready = count >= 10;
+          front.classList.toggle("is-ready", ready);
+          var rb = $("ribbon");
+          if (rb) { if (ready) { rb.removeAttribute("hidden"); rb.setAttribute("aria-hidden", "false"); } else { rb.setAttribute("hidden", ""); rb.setAttribute("aria-hidden", "true"); } }
         }
 
         function tick() {

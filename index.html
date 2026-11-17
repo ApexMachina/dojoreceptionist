@@ -398,11 +398,15 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
 }
 /* ---------- demo widget, start form ---------- */
 .trade button.btn{width:100%;cursor:pointer}
-.demo-note{position:fixed;left:12px;right:12px;bottom:calc(var(--bar-h) + 12px + env(safe-area-inset-bottom));z-index:45;max-width:420px;margin:0 auto;padding:12px 14px;border:1px solid var(--gold);border-radius:var(--r);background:var(--n2);color:var(--ink);font-size:var(--t-s);display:none}
+.demo-note{position:fixed;left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:calc(var(--bar-h) + 12px + env(safe-area-inset-bottom));z-index:45;max-width:420px;margin:0 auto;padding:12px 44px 12px 14px;border:1px solid var(--gold);border-radius:var(--r);background:var(--n2);color:var(--ink);font-size:var(--t-s);line-height:1.4;box-shadow:0 10px 30px rgba(0,0,0,.45);display:none}
 .demo-note.on{display:block}
+.demo-note .demo-x{position:absolute;top:4px;right:4px;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--ink2);font:400 22px/1 var(--sans);cursor:pointer}
+.demo-note .demo-x:hover,.demo-note .demo-x:focus-visible{color:var(--ink);background:rgba(255,255,255,.08)}
+@media (min-width:960px){.demo-note{left:auto;right:24px;bottom:24px;margin:0;width:380px}}
 .demo-note a{color:var(--gold);text-decoration:underline}
 body.demo-open .callbar{display:none}
-body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
+body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
+@media (min-width:960px){body.demo-open .demo-note{right:24px;bottom:120px}}
 .start{margin-top:var(--sp5);padding:var(--sp5) var(--sp4);border:1px solid var(--line);border-radius:14px;background:var(--n1)}
 .start h3{font-size:var(--t-l)}
 .start form{display:grid;gap:var(--sp3);margin-top:var(--sp4)}
@@ -434,11 +438,11 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
 .slip li.done i{background:var(--gold);border-color:#b88a1e;transform:scale(1);animation:slip-tick .32s cubic-bezier(.3,1.6,.5,1)}
 .slip-stamp{position:absolute;right:44px;top:50%;margin-top:-6px;padding:6px 12px;border:3px solid #1d2a4f;border-radius:4px;background:rgba(255,255,255,.82);font:900 20px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#1d2a4f;transform:rotate(-8deg) scale(.6);opacity:0;pointer-events:none}
 .slip.sent .slip-stamp{opacity:.9;transform:rotate(-8deg) scale(1);transition:transform .25s cubic-bezier(.3,1.6,.5,1),opacity .15s}
-.meter{display:flex;align-items:center;gap:10px;margin-top:var(--sp3)}
-.meter-bars{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;flex:1}
+.meter{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;margin-top:calc(var(--sp4) + 8px);padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--n2)}
+.meter-bars{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;min-width:0}
 .meter-bars b{height:8px;border-radius:2px;background:var(--n3);transition:background .25s}
 .meter-bars b.on{background:var(--gold);animation:meter-pop .3s cubic-bezier(.3,1.6,.5,1)}
-.meter-name{font:800 11px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);white-space:nowrap}
+.meter-name{min-width:5.5em;text-align:right;font:800 11px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);white-space:nowrap}
 .meter-say{margin-top:6px;min-height:1.4em;font-size:var(--t-s);color:var(--ink2)}
 .start label.done>input,.start label.done>select{border-color:rgba(232,181,59,.55)}
 .start form.ready button.btn{animation:ready-nudge 1.6s ease-in-out 1}
@@ -610,7 +614,7 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
   <div class="stage" id="trade-stage"></div>
  </div>
  <p class="fine">Not listed? Email <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a> and I'll build one for the way your shop gets calls. Web demos run on ElevenLabs and may be recorded; see <a href="/privacy/">Privacy</a>.</p>
- <div class="demo-note" id="demo-note" role="status" aria-live="polite"></div>
+ <div class="demo-note" id="demo-note" role="status" aria-live="polite"><span class="demo-msg"></span><button type="button" class="demo-x" aria-label="Close this note">&times;</button></div>
  <script>
  (function(){
   /* Each trade with an agent id gets an on-site "Hear it" demo (ElevenLabs widget). Add a trade by appending one object. */
@@ -691,15 +695,43 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
   }
   /* On-site demo: one ElevenLabs widget, swapped per trade, script loaded on first tap only. */
   var note=document.getElementById("demo-note");
+  var noteMsg=note?note.querySelector(".demo-msg"):null;
+  var CALL_BELLA='<a href="tel:+15418330643">Call Bella: 541-833-0643</a>';
+  /* Toast: auto-dismisses (6s by default), has a close button, never sits over the sticky call bar. */
+  function hideNote(){if(!note)return;clearTimeout(note._t);note.classList.remove("on");}
+  function showNote(html,ms){
+   if(!note||!noteMsg)return;
+   noteMsg.innerHTML=html;note.classList.add("on");clearTimeout(note._t);
+   note._t=setTimeout(hideNote,ms||6000);
+  }
+  if(note){
+   note.querySelector(".demo-x").addEventListener("click",hideNote);
+   /* Keep it up while someone is reading or tapping it. */
+   note.addEventListener("mouseenter",function(){clearTimeout(note._t);});
+   note.addEventListener("mouseleave",function(){note._t=setTimeout(hideNote,3000);});
+   note.addEventListener("focusin",function(){clearTimeout(note._t);});
+   document.addEventListener("keydown",function(e){if(e.key==="Escape")hideNote();});
+  }
+  /* The ElevenLabs widget renders its bubble in a shadow root. If nothing visible shows up, offer the phone line instead. */
+  function widgetVisible(w){
+   if(!w||!w.isConnected)return false;
+   if(!window.customElements||!customElements.get("elevenlabs-convai"))return false;
+   var r=w.shadowRoot;if(!r)return false;
+   var els=r.querySelectorAll("*");
+   for(var i=0;i<els.length;i++){var b=els[i].getBoundingClientRect();if(b.width>20&&b.height>20)return true;}
+   return false;
+  }
+  function fallback(t){
+   /* Give the sticky call bar back, since the widget that replaced it never showed up. */
+   var w=document.getElementById("demo-widget");if(w&&!widgetVisible(w)){document.body.classList.remove("demo-open");}
+   showNote("The "+t.name+" demo can't load in this browser. Hear Bella on the phone instead: "+CALL_BELLA+".",15000);
+  }
   function micOK(){return !!(window.isSecureContext&&navigator.mediaDevices&&navigator.mediaDevices.getUserMedia);}
   function openDemo(t){
    if(!micOK()){
     /* In-app browsers (X, Facebook, Instagram) hide the mic, so the voice demo can't start. Offer the phone line and Safari instead. */
-    if(note){
-     var here=location.href.replace(/^https?:\/\//,"");
-     note.innerHTML='This app\'s built-in browser blocks the microphone, so the on-page demo can\'t start here. <a href="tel:+15418330643">Call Bella at 541-833-0643</a> instead, or <a href="x-safari-https://'+here.split('#')[0]+'#trades">open this page in Safari</a> (or use the share menu, then Open in Browser).';
-     note.classList.add("on");clearTimeout(note._t);note._t=setTimeout(function(){note.classList.remove("on")},20000);
-    }
+    var here=location.href.replace(/^https?:\/\//,"");
+    showNote('This app\'s built-in browser blocks the microphone, so the on-page demo can\'t start here. '+CALL_BELLA+' instead, or <a href="x-safari-https://'+here.split('#')[0]+'#trades">open this page in Safari</a> (or use the share menu, then Open in Browser).',20000);
     return;
    }
    var old=document.getElementById("demo-widget");if(old&&old.parentNode)old.parentNode.removeChild(old);
@@ -715,8 +747,15 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
    w.setAttribute("avatar-orb-color-2","#f6d27a");
    document.body.appendChild(w);
    document.body.classList.add("demo-open");
-   if(!document.getElementById("el-widget-js")){var sc=document.createElement("script");sc.id="el-widget-js";sc.async=true;sc.src="https://unpkg.com/@elevenlabs/convai-widget-embed";document.body.appendChild(sc);}
-   if(note){note.textContent=t.name+" demo is ready at the bottom right. Tap the phone button and allow the mic.";note.classList.add("on");clearTimeout(note._t);note._t=setTimeout(function(){note.classList.remove("on")},7000);}
+   var failed=false;
+   if(!document.getElementById("el-widget-js")){var sc=document.createElement("script");sc.id="el-widget-js";sc.async=true;sc.src="https://unpkg.com/@elevenlabs/convai-widget-embed";sc.onerror=function(){failed=true;if(sc.parentNode)sc.parentNode.removeChild(sc);fallback(t);};document.body.appendChild(sc);}
+   showNote(t.name+" demo is loading at the bottom right. Tap the phone button and allow the mic. No sound? "+CALL_BELLA+".",6000);
+   /* Check twice; slow phones can take a few seconds to draw the bubble. */
+   clearTimeout(openDemo._chk);
+   openDemo._chk=setTimeout(function(){
+    if(failed||widgetVisible(w))return;
+    openDemo._chk=setTimeout(function(){if(!failed&&!widgetVisible(w))fallback(t);},4000);
+   },4000);
   }
   function show(id){
    stage.querySelectorAll(".trade").forEach(function(card){
@@ -1102,5 +1141,10 @@ body.demo-open .demo-note{bottom:calc(96px + env(safe-area-inset-bottom))}
  <a class="btn o" href="mailto:jeremy@dojoreceptionist.com?subject=Free%20week%20of%20Dojo%20Receptionist%20for%20my%20shop" aria-label="Email Jeremy"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg></a>
 </nav>
 <script>(function(){var a=document.getElementById("pt-add");if(a)a.addEventListener("click",function(){var c=document.getElementById("start-punch");if(c)c.checked=true;});})();</script>
+<script>/* Hash links to a <details> (or anything inside one) open it, on load, on hashchange, and on click. */
+(function(){function det(id){if(!id)return null;var el=null;try{el=document.getElementById(decodeURIComponent(id));}catch(e){el=document.getElementById(id);}if(!el)return null;var d=el.tagName==="DETAILS"?el:(el.closest?el.closest("details"):null);var p=d;while(p){p.open=true;p=p.parentElement&&p.parentElement.closest?p.parentElement.closest("details"):null;}return d?el:null;}
+function go(){var el=det(location.hash.slice(1));if(el&&el.scrollIntoView)setTimeout(function(){el.scrollIntoView({block:"start"});},0);}
+document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest('a[href^="#"]'):null;if(a)det(a.getAttribute("href").slice(1));});
+window.addEventListener("hashchange",go);if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();})();</script>
 </body>
 </html>
