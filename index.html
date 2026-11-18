@@ -464,6 +464,8 @@ body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
 .pt-fig figcaption{margin-top:8px;text-align:center;color:var(--mute);font-size:var(--t-xs)}
 @media (min-width:900px){#punch-teaser .pt-grid{grid-template-columns:1.1fr .9fr}}
 .chip.chip2{border-style:dashed}
+.chip.chip-es{background:rgba(232,181,59,.12)}
+.chip.chip-es b{color:var(--gold)}
 .pt-check{display:flex!important;flex-direction:row!important;align-items:center;gap:10px;font-weight:600}
 .pt-check input{width:22px;height:22px;min-height:0;flex:none}
 </style>
@@ -493,6 +495,7 @@ body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
   <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h8"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></symbol>
   <symbol id="i-fist" viewBox="0 0 24 24"><path d="M6 11V7a2 2 0 0 1 4 0v3M10 10V6a2 2 0 0 1 4 0v4M14 10V7a2 2 0 0 1 4 0v6a8 8 0 0 1-8 8H9a5 5 0 0 1-5-5v-2a2 2 0 0 1 2-2h3"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
  </defs>
 </svg>
@@ -519,6 +522,7 @@ body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
     </div>
     <!-- Price chip: one line, reword here only. Full plan terms are in #price. -->
     <a class="chip" href="#price"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg>Founding shops: first week free, $129/mo, no setup fee</a>
+    <a class="chip chip-es" href="#price" lang="es"><svg class="i" aria-hidden="true"><use href="#i-chat"/></svg><span><b>Habla español.</b> <span lang="en">Bella answers in English or Spanish, at no extra cost.</span></span></a>
     <a class="chip chip2" href="#punch-teaser"><svg class="i" aria-hidden="true"><use href="#i-fist"/></svg>New: Dojo Punch, a digital stamp card in Apple Wallet</a>
    </div>
 
@@ -894,6 +898,7 @@ body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Free pause, up to 3 months a year.</b> One text or email; calls forward straight back to you; no restart fee.</span></li>
     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Cancel the same day,</b> with no last-month charge.</span></li>
     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>You keep your number.</b> I set up the forwarding with you.</span></li>
+    <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>English or Spanish, included.</b> Bella answers callers in either language at no extra cost.</span></li>
    </ul>
    <p class="bonus"><b>Free bonus:</b> we claim your business in ChatGPT for you during your free week. <a href="#faq-chatgpt">What that means</a></p>
    <a class="btn g" href="#start"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Start my free week</a>
@@ -913,6 +918,7 @@ body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
     <p class="lede">Bella answers only when you're closed: nights, weekends, and any other hours you don't pick up.</p>
     <ul>
      <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>60 calls a month.</b> Spam, robocalls and hang-ups under 15 seconds don't count.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>English or Spanish, included.</b> At no extra cost.</span></li>
      <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>No overage charges, ever.</b> Run over two months in a row and I'll call you to talk it through.</span></li>
      <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>First week free.</b> No setup fee. Free pause, up to 3 months a year. Cancel the same day, with no last-month charge.</span></li>
      <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Same three nevers:</b> she never quotes a price, never diagnoses, and never takes payment.</span></li>
