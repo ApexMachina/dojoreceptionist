@@ -113,7 +113,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
 <span class="tag" style="display:block;width:max-content">Missed Call Math</span>
 <h1>What missed calls <span>cost your shop</span></h1>
 <p class="lede" id="lede">Four numbers from your own week. Ten seconds. See what the calls nobody picked up could be worth, using only your numbers.</p>
-<p class="ai"><b>Straight talk:</b> <span id="straight-body">the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices, never diagnoses and never takes payment. It takes the message; you make the call.</span></p>
+<p class="ai"><b>Straight talk:</b> <span id="straight-body">the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices and never diagnoses. It takes the message; you make the call.</span></p>
 </div>
 </header>
 
@@ -178,7 +178,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
  <li>Gets the address or city and what they need</li>
  <li id="does-menu" hidden>Answers hours and directions and explains the 21-and-over rule</li>
  <li>Emails you a summary and transcript so you can call back.</li>
- <li class="no" id="does-never">Never quotes prices, never diagnoses, never takes payment</li>
+ <li class="no" id="does-never">Never quotes prices, never diagnoses</li>
 </ul>
 
 <h2>Who sets it up</h2>
@@ -215,8 +215,8 @@ var W=4.33, $=function(i){return document.getElementById(i)};
 var trade="auto repair";
 var STD_LEDE="Four numbers from your own week. Ten seconds. See what the calls nobody picked up could be worth, using only your numbers.";
 var APPT_LEDE="These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who'd book is an estimate.";
-var STD_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices, never diagnoses and never takes payment. It takes the message; you make the call.";
-var DISP_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It answers hours and directions and explains the 21-and-over rule. It never quotes prices, never gives medical advice and never takes payment. It takes the message; you make the call.";
+var STD_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It never quotes prices and never diagnoses. It takes the message; you make the call.";
+var DISP_STRAIGHT="the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It answers hours and directions and explains the 21-and-over rule. It never quotes prices and never gives medical advice. It takes the message; you make the call.";
 var BOOK_HINT="Of those missed callers, how many would have booked? 20% is an estimate.";
 var PRESETS={
  dispensary:{day:12,miss:30,book:20,ticket:46,booked:"bought",verb:"buy",result:"Purchases",
@@ -227,16 +227,16 @@ var PRESETS={
   lede:"These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who would've bought is an estimate.",
   straight:DISP_STRAIGHT,
   extra:"Answers hours and directions and explains the 21-and-over rule",
-  never:"Never quotes prices, never gives medical advice, never takes payment"},
+  never:"Never quotes prices, never gives medical advice"},
  restaurant:{day:10,miss:30,book:20,ticket:20,booked:"ordered or booked",verb:"order or book",result:"Orders",
   dayHint:"Incoming calls on a typical day. 10 is an estimate for a small-town cafe.",
   missHint:"A conservative starting point you can change.",
   bookHint:"Of those missed callers, how many would have ordered or booked? 20% is an estimate.",
   ticketHint:"Toast's casual full-service range is about $15 to $30 a person. $20 is toward the low end, for one guest.",
   lede:"These four numbers are a starting point you can change. 30% of calls missed is conservative, and 20% who'd order or book is an estimate.",
-  straight:"the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It answers hours, the menu, specials, and directions. Takeout, catering, and large parties are a message. It never takes payment.",
+  straight:"the receptionist is an AI. It tells every caller it's an AI and that the call may be recorded. It answers hours, the menu, specials, and directions. Takeout, catering, and large parties are a message.",
   extra:"Answers hours, the menu, specials, and directions. Takeout, catering, and a large party are a message for you.",
-  never:"Never takes payment. You confirm the order or the table."},
+  never:"You confirm the order or the table."},
  salon:{day:8,miss:30,book:20,ticket:43,booked:"booked",verb:"book",result:"Appointments",
   dayHint:"Incoming calls on a typical day. 8 is an estimate for a small shop.",
   missHint:"Conservative. Zenoti reports about 37% of salon and spa calls go unanswered.",
@@ -244,7 +244,7 @@ var PRESETS={
   ticketHint:"Zenoti's 2024 benchmark: $43 average ticket at an average-earning salon.",
   lede:APPT_LEDE,straight:STD_STRAIGHT,
   extra:"Asks the service and which days work. You confirm every booking.",
-  never:"Never quotes a price or takes payment. You confirm every booking."},
+  never:"Never quotes a price. You confirm every booking."},
  barber:{day:6,miss:30,book:20,ticket:31,booked:"booked",verb:"book",result:"Appointments",
   dayHint:"Incoming calls on a typical day. 6 is an estimate. A lot of clients walk in.",
   missHint:"30% is an estimate, kept under Zenoti's 37% salon-and-spa unanswered rate.",
@@ -252,7 +252,7 @@ var PRESETS={
   ticketHint:"Zenoti's 2024 benchmark: $31 at an average-earning barbershop.",
   lede:APPT_LEDE,straight:STD_STRAIGHT,
   extra:"Asks the cut and which days work. You confirm every booking.",
-  never:"Never quotes a price or takes payment. You confirm every booking."},
+  never:"Never quotes a price. You confirm every booking."},
  "pet grooming":{day:5,miss:30,book:20,ticket:75,booked:"booked",verb:"book",result:"Appointments",
   dayHint:"Incoming calls on a typical day. 5 is an estimate for a small grooming shop.",
   missHint:"A conservative estimate. 411 Locals/Numa report about 62% of small business calls go unanswered.",
@@ -260,7 +260,7 @@ var PRESETS={
   ticketHint:"Gingr uses $75 as the average ticket in its dog-grooming example.",
   lede:APPT_LEDE,straight:STD_STRAIGHT,
   extra:"Asks the pet's breed, size, and service. It never quotes a price. You confirm every booking.",
-  never:"Never quotes a price or takes payment. You confirm every booking."}
+  never:"Never quotes a price. You confirm every booking."}
 };
 function money(n){return "$"+Math.round(n).toLocaleString("en-US")}
 function num(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0}
@@ -291,7 +291,7 @@ function calc(){
  var p=PRESETS[trade], d=!!p;
  $("std-fields").hidden=d; $("disp-fields").hidden=!d;
  $("does-menu").hidden=!d;
- $("does-never").textContent=d?p.never:"Never quotes prices, never diagnoses, never takes payment";
+ $("does-never").textContent=d?p.never:"Never quotes prices, never diagnoses";
  $("straight-body").textContent=d?p.straight:STD_STRAIGHT;
  $("lede").textContent=d?p.lede:STD_LEDE;
  $("tname").textContent=trade;
