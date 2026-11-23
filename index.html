@@ -52,7 +52,7 @@
    "provider": {
     "@id": "https://dojoreceptionist.com/#org"
    },
-   "description": "Bella answers the calls an owner-run shop misses, says she's an AI, and emails the owner who called and what they need. She never quotes prices and never diagnoses.",
+   "description": "Bella answers the calls an owner-run shop misses, says she's an AI, and emails the owner who called and what they need. She never quotes prices and never diagnoses, and never takes payment.",
    "offers": [
     {
      "@type": "Offer",
@@ -94,7 +94,7 @@
        "unitCode": "MON"
       }
      },
-     "description": "$49 a month. Bella answers only when you're closed: nights, weekends, and any other hours you don't pick up. First week free. No setup fee. 60 calls a month. No overage charges. Cancel the same day. She never quotes a price and never diagnoses.",
+     "description": "$49 a month. Bella answers only when you're closed: nights, weekends, and any other hours you don't pick up. First week free. No setup fee. 60 calls a month. No overage charges. Cancel the same day. She never quotes a price and never diagnoses, and never takes payment.",
      "availability": "https://schema.org/InStock",
      "seller": {
       "@id": "https://dojoreceptionist.com/#org"
@@ -385,6 +385,7 @@ footer p+p{margin-top:6px;font-size:var(--t-xs)}
  .faq .qs details:first-child{margin-top:0}
  .who{grid-template-columns:320px 1fr;gap:var(--sp7)}
  .price-wrap{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp7);align-items:start}
+ .never{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:959px){
  .featured{display:grid;grid-auto-flow:column;grid-auto-columns:86%;gap:var(--sp3);margin:var(--sp5) -20px 0;padding:0 20px 8px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
@@ -807,12 +808,13 @@ body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
 <section id="never" aria-labelledby="never-h">
  <div class="sec-head">
   <p class="eyebrow">Straight talk</p>
-  <h2 id="never-h">Two things Bella never does.</h2>
+  <h2 id="never-h">Three things Bella never does.</h2>
   <p class="lead">Every caller hears that she's an AI and that the call may be recorded. She takes the message; you make the call.</p>
  </div>
  <ul class="never">
   <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-tag-x"/></svg></span><div><b>Never quotes a price</b><span>Pushed for a number, she says you'll give the real one when you call back.</span></div></li>
   <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-wrench-x"/></svg></span><div><b>Never diagnoses</b><span>No "sounds like your igniter." She writes down what the caller sees and hears.</span></div></li>
+  <li><span class="ic"><svg class="i" aria-hidden="true"><use href="#i-card-x"/></svg></span><div><b>Never takes payment</b><span>No card numbers over the phone. She takes the message; you handle the money.</span></div></li>
  </ul>
  <p class="yours"><b>You stay in charge:</b> you confirm every appointment and approve every job.</p>
 </section>
@@ -920,7 +922,7 @@ body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
      <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>English or Spanish, included.</b> At no extra cost.</span></li>
      <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>No overage charges, ever.</b> Run over two months in a row and I'll call you to talk it through.</span></li>
      <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>First week free.</b> No setup fee. Free pause, up to 3 months a year. Cancel the same day, with no last-month charge.</span></li>
-     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Same two nevers:</b> she never quotes a price and never diagnoses.</span></li>
+     <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Same three nevers:</b> she never quotes a price, never diagnoses, and never takes payment.</span></li>
      <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>You keep your number.</b> I set the after-hours forwarding with you.</span></li>
     </ul>
     <a class="btn o" href="#start"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>Start my free week</a>
@@ -1138,7 +1140,7 @@ body.demo-open .demo-note{bottom:calc(104px + env(safe-area-inset-bottom))}
 
 <footer><div class="wrap">
  <p><b style="color:var(--ink2)">Dojo Receptionist</b> · <a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a></p>
- <p>Example callers and the shops in the demos are made up. Not legal advice. <a href="/calculator/">Missed Call Math</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/huddle/">Monday Huddle</a> · <a href="/punch/">Dojo Punch</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
+ <p>Example callers and the shops in the demos are made up. Not legal advice. <a href="/calculator/">Missed Call Math</a> · <a href="/missed-call-log/">7-Day Missed Call Log</a> · <a href="/reach-check/">Reach Check</a> · <a href="/call-your-own-shop/">Call Your Own Shop</a> · <a href="/partners/">Partners</a> · <a href="/compare/">Compare</a> · <a href="/blog/">Blog</a> · <a href="/huddle/">Monday Huddle</a> · <a href="/punch/">Dojo Punch</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></p>
 </div></footer>
 
 <nav class="callbar" aria-label="Quick contact">
