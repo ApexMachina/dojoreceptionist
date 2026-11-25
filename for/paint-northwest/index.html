@@ -102,7 +102,7 @@ input[type=number]{width:110px;min-height:44px;font-size:18px;border-radius:10px
 .src a{color:var(--gold2)}
 ul.plain{padding-left:20px;margin:8px 0 0}
 ul.plain li{margin:6px 0}
-.footer{border-top:1px solid var(--line);margin:36px 0 0;padding:22px 0 40px;display:flex;justify-content:space-between;gap:16px;font-size:var(--t-s);color:var(--mute)}
+.footer{border-top:1px solid var(--line);margin:36px 0 0;padding:22px 0 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:var(--t-s);color:var(--mute)}
 .footer b{color:var(--ink)}
 .footer a{color:var(--ink2);text-decoration:none}
 @media (max-width:620px){
@@ -234,6 +234,20 @@ ul.plain li{margin:6px 0}
 <footer class="footer wrap">
   <div><b>Jeremy Alvarado</b><br>Local Veneta dad and Marine vet.</div>
   <div><a href="mailto:jeremy@dojoreceptionist.com">jeremy@dojoreceptionist.com</a><br><a href="https://dojoreceptionist.com/">dojoreceptionist.com</a></div>
+<div class="as-featured">
+<p class="as-featured-label">As featured on</p>
+<p class="as-featured-row">
+<a href="https://fazier.com" target="_blank" rel="noopener"><img src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=light" width=120 alt="Fazier badge" /></a>
+<a href="https://smollaunch.com" target="_blank" rel="noopener"><img src="https://smollaunch.com/badges/featured.svg" alt="Featured on Smol Launch" loading="lazy" width="250" height="60" /></a>
+</p>
+</div>
+<style>
+.as-featured{flex:none;width:100%;margin-top:16px;text-align:center}
+.as-featured .as-featured-label{display:block;margin:0 0 8px;color:#e8b53b;font-size:12px;line-height:1.4;letter-spacing:.04em;font-weight:700}
+.as-featured .as-featured-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:18px;margin:0}
+.as-featured a{display:inline-flex;align-items:center;min-height:0;line-height:0;text-decoration:none}
+.as-featured img[alt="Featured on Smol Launch"]{height:40px;width:auto}
+</style>
 </footer>
 
 <script>
